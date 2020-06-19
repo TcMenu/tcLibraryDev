@@ -1,0 +1,15 @@
+#include <mbed.h>
+#include "mbedMenu_menu.h"
+
+void setup() {
+    setupMenu();
+
+}
+
+int main() {
+    setup();
+    while(1) {
+        taskManager.runLoop();
+    }
+}
+
