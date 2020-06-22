@@ -11,6 +11,7 @@
 #include <IoAbstractionWire.h>
 #include <TaskManager.h>
 #include "LiquidCrystalIO.h"
+#include <SwitchInput.h>
 
 // set up the pins that you'll use with the i2cbackpack.
 // there's two common arrangement. RS RW EN and EN RW RS
@@ -42,6 +43,7 @@ const uint8_t smiley[8] = {
 };
 
 int oldPosition = 0;
+volatile int pressCount = 0;
 
 int main() {
     lcd.configureBacklightPin(3);
@@ -52,6 +54,21 @@ int main() {
     lcd.createChar(1, smiley);
     lcd.setCursor(0,0);
     lcd.print("Counter in seconds");
+
+    auto intIo = internalDigitalIo();
+
+    switches.initialiseInterrupt(internalDigitalIo(), true);
+    switches.addSwitch(PA_5, [](pinid_t, bool) {
+        pressCount++;
+    });
+    switches.addSwitch(USER_BUTTON, [](pinid_t, bool) {
+        pressCount--;
+    }, 25, true);
+
+    setupRotaryEncoderWithInterrupt(PA_6, PD_14, [] (int val) {
+
+    });
+    switches.getEncoder()->changePrecision(255, 128);
 
     //
     // when using this version of liquid crystal, it interacts (fairly) nicely with task manager.
@@ -73,7 +90,13 @@ int main() {
         lcd.setCursor(oldPosition % lcdWidth, 2);
         lcd.write(0x01);
         lcd.setCursor(0, 3);
-        lcd.print(oldPosition);
+        lcd.print("                  ");
+        lcd.setCursor(0, 3);
+        lcd.print(pressCount);
+        lcd.setCursor(7, 3);
+        lcd.print("Enc=");
+        lcd.print(switches.getEncoder()->getCurrentReading());
+
     });
 
     while(1) {
