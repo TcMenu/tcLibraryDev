@@ -1,10 +1,7 @@
 /*
-  LiquidCrystal Library - Hello World for mbed over i2c.
-
-  *** NOTE this example is only for mbed framework. Most other examples are Arduino ***
-
-  This assumes that an LCD display has been attached with a fairly regular I2C adapter
-  it will count up from 0 onto the display once per second.
+  Note this is not a general purpose example, it is purely used to test that most
+  items are working on mbed during IoAbstraction development. See the IoAbstraction
+  examples for better, easier to understand sketches.
 */
 
 #include <mbed.h>
@@ -12,6 +9,8 @@
 #include <TaskManager.h>
 #include "LiquidCrystalIO.h"
 #include <SwitchInput.h>
+#include <math.h>
+#include <AnalogDeviceAbstraction.h>
 
 // set up the pins that you'll use with the i2cbackpack.
 // there's two common arrangement. RS RW EN and EN RW RS
@@ -26,10 +25,14 @@ const int lcdHeight = 4;
 Serial console(USBTX, USBRX);
 MBedLogger LoggingPort(console);
 
+MBedAnalogDevice analogDevice;
+
 // here we create an I2C bus on the hardware port and then connect
 // an 8574 with the LiquidCrystal library
 I2C i2c(PF_0, PF_1);
 LiquidCrystal lcd(rs, en, d4, d5, d6, d7, ioFrom8574(0x40, 0xff, &i2c));
+
+IoAbstractionRef mcp23017 = ioFrom23017(0x4E, ACTIVE_LOW_OPEN, PF_12, &i2c);
 
 const uint8_t smiley[8] = {
         0b00000,
@@ -45,7 +48,24 @@ const uint8_t smiley[8] = {
 int oldPosition = 0;
 volatile int pressCount = 0;
 
+class RotationPlotter : public Executable {
+    float angle = 0.0;
+public:
+    void start() {
+        analogDevice.initPin(PB_11, DIR_PWM);
+    }
+    void exec() override {
+        angle += .0062F;
+        if(angle > (2 * M_PI)) angle = 0.0F;
+        auto amp = sin(angle);
+        analogDevice.setCurrentValue(PB_11, amp);
+    }
+} rotationPlotter;
+
+bool ledOn23017;
+
 int main() {
+    console.baud(115200);
     lcd.configureBacklightPin(3);
     lcd.setBacklight(true);
 
@@ -54,8 +74,6 @@ int main() {
     lcd.createChar(1, smiley);
     lcd.setCursor(0,0);
     lcd.print("Counter in seconds");
-
-    auto intIo = internalDigitalIo();
 
     switches.initialiseInterrupt(internalDigitalIo(), true);
     switches.addSwitch(PA_5, [](pinid_t, bool) {
@@ -66,17 +84,23 @@ int main() {
     }, 25, true);
 
     setupRotaryEncoderWithInterrupt(PA_6, PD_14, [] (int val) {
-
     });
     switches.getEncoder()->changePrecision(255, 128);
 
-    //
-    // when using this version of liquid crystal, it interacts (fairly) nicely with task manager.
-    // instead of doing stuff in loop, we can schedule things to be done. But just be aware than
-    // only one task can draw to the display. Never draw to the display in two tasks.
-    //
-    // You don't have to use the library with task manager like this, it's an option.
-    //
+    rotationPlotter.start();
+    taskManager.scheduleFixedRate(1, &rotationPlotter);
+
+    ioDevicePinMode(mcp23017, 0, OUTPUT);
+    ioDevicePinMode(mcp23017, 1, INPUT);
+
+    taskManager.scheduleFixedRate(500, [] {
+       ledOn23017 = !ledOn23017;
+       ioDeviceDigitalWriteS(mcp23017, 0, ledOn23017);
+       if(ioDeviceDigitalRead(mcp23017, 1) != 0) {
+           pressCount++;
+       }
+    });
+
     taskManager.scheduleFixedRate(200, [] {
         // set the cursor to column 0, line 1
         lcd.setCursor(0, 1);
