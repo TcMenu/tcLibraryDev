@@ -16,9 +16,9 @@
 #include <RuntimeMenuItem.h>
 #include <LiquidCrystalIO.h>
 #include <IoAbstractionWire.h>
-#include <JoystickSwitchInput.h>
 #include "MBedEthernetTransport.h"
 #include <RemoteConnector.h>
+#include <EditableLargeNumberMenuItem.h>
 #include "tcMenuLiquidCrystal.h"
 
 void setupMenu();  // forward reference of the menu setup function.
@@ -29,15 +29,20 @@ extern const PROGMEM ConnectorLocalInfo applicationInfo;  // defines the app inf
 extern I2C i2c;
 extern LiquidCrystal lcd;
 extern LiquidCrystalRenderer renderer;
-extern MBedAnalogDevice analogDevice;
 
 // Callback functions must always include CALLBACK_FUNCTION after the return type
 #define CALLBACK_FUNCTION
 
 // Global Menu Item exports
 
+extern EnumMenuItem menuSubMenuFoods;
+extern IpAddressMenuItem menuSubMenuEditIP;
+extern IpAddressMenuItem menuSubMenuIPAddress;
+extern EditableLargeNumberMenuItem menuSubMenuLargeNum;
+extern SubMenuItem menuSubMenu;
+extern FloatMenuItem menuA0Value;
 void CALLBACK_FUNCTION onUserButton(int id);
-extern BooleanMenuItem menuUserButton;
+extern BooleanMenuItem menuABoolean;
 extern AnalogMenuItem menuAnalogValue;
 extern DateFormattedMenuItem menuRTCDate;
 extern TimeFormattedMenuItem menuRTCTime;

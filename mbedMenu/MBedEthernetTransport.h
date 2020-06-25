@@ -128,6 +128,22 @@ public:
      * do not manually call, called by taskManager to poll the connection
      */
     void exec() override;
+
+    //
+    // mbed specific items
+    //
+
+    /**
+     * @return true if the server has now bound to an external address, IE. the network is connected and working
+     */
+     bool isBound() { return boundToAddr; }
+
+     /**
+      * Gets the network interface that's being used by this connector, only ever use this interface if isBound
+      * returns true, because otherwise it could be null or completely undefined.
+      * @return the network interface that can be used for other network operations.
+      */
+      NetworkInterface* networkInterface() { return defNetwork; }
 };
 
 /**

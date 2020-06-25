@@ -1,12 +1,12 @@
 {
   "lastEdited": {
-    "seconds": 1591900881,
+    "seconds": 1593091428,
     "nanos": 0
   },
   "codeOptions": {
     "applicationUUID": "98ea360b-fe08-444a-996b-2e94dda7a2eb",
     "applicationName": "MBed Test",
-    "lastInputUuid": "20409bb8-b8a1-4d1d-b632-2cf9b57353e3",
+    "lastInputUuid": "6dd87e7d-e751-4912-a70d-91793b1d3d87",
     "lastDisplayUuid": "d4c84106-fa87-4024-b91e-053e17a52b8f",
     "lastRemoteUuid": "27e7a502-330e-4570-9f8e-bd26ac88051f",
     "embeddedPlatform": "MBED_RTOS",
@@ -29,13 +29,18 @@
         "subsystem": "INPUT"
       },
       {
-        "name": "JOYSTICK_PIN",
-        "latestValue": "A0",
+        "name": "ENCODER_PIN_A",
+        "latestValue": "PA_6",
         "subsystem": "INPUT"
       },
       {
-        "name": "BUTTON_PIN",
-        "latestValue": "A1",
+        "name": "ENCODER_PIN_B",
+        "latestValue": "PD_14",
+        "subsystem": "INPUT"
+      },
+      {
+        "name": "ENCODER_PIN_OK",
+        "latestValue": "PA_5",
         "subsystem": "INPUT"
       },
       {
@@ -81,7 +86,7 @@
         "name": "RTC Time",
         "eepromAddress": -1,
         "id": 1,
-        "readOnly": false,
+        "readOnly": true,
         "localOnly": false,
         "visible": true,
         "itemType": "TIME_12H",
@@ -95,7 +100,7 @@
         "name": "RTC Date",
         "eepromAddress": -1,
         "id": 3,
-        "readOnly": false,
+        "readOnly": true,
         "localOnly": false,
         "visible": true,
         "itemType": "GREGORIAN_DATE",
@@ -122,7 +127,7 @@
       "parentId": 0,
       "type": "boolItem",
       "item": {
-        "name": "User button",
+        "name": "A Boolean",
         "eepromAddress": -1,
         "id": 4,
         "readOnly": false,
@@ -130,6 +135,95 @@
         "visible": true,
         "functionName": "onUserButton",
         "naming": "TRUE_FALSE"
+      }
+    },
+    {
+      "parentId": 0,
+      "type": "floatItem",
+      "item": {
+        "name": "A0 Value",
+        "eepromAddress": -1,
+        "id": 5,
+        "readOnly": false,
+        "localOnly": false,
+        "visible": true,
+        "functionName": "",
+        "numDecimalPlaces": 3
+      }
+    },
+    {
+      "parentId": 0,
+      "type": "subMenu",
+      "item": {
+        "name": "Sub Menu",
+        "eepromAddress": -1,
+        "id": 6,
+        "readOnly": false,
+        "localOnly": false,
+        "visible": true,
+        "secured": false
+      }
+    },
+    {
+      "parentId": 6,
+      "type": "largeNumItem",
+      "item": {
+        "name": "Large Num",
+        "eepromAddress": -1,
+        "id": 7,
+        "readOnly": false,
+        "localOnly": false,
+        "visible": true,
+        "decimalPlaces": 3,
+        "digitsAllowed": 7
+      }
+    },
+    {
+      "parentId": 6,
+      "type": "textItem",
+      "item": {
+        "name": "IP Address",
+        "eepromAddress": -1,
+        "id": 8,
+        "readOnly": true,
+        "localOnly": false,
+        "visible": true,
+        "itemType": "IP_ADDRESS",
+        "textLength": 10
+      }
+    },
+    {
+      "parentId": 6,
+      "type": "textItem",
+      "item": {
+        "name": "Edit IP",
+        "eepromAddress": -1,
+        "id": 9,
+        "readOnly": false,
+        "localOnly": false,
+        "visible": true,
+        "itemType": "IP_ADDRESS",
+        "textLength": 10
+      }
+    },
+    {
+      "parentId": 6,
+      "type": "enumItem",
+      "item": {
+        "name": "Foods",
+        "eepromAddress": -1,
+        "id": 10,
+        "readOnly": false,
+        "localOnly": false,
+        "visible": true,
+        "functionName": "",
+        "enumEntries": [
+          "Pizza",
+          "Pasta",
+          "Salad",
+          "Beef",
+          "Falafel"
+        ]
       }
     }
   ]
