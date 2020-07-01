@@ -6,63 +6,34 @@
 
     All the variables you may need access to are marked extern in this file for easy
     use elsewhere.
- */
+*/
 
 #ifndef MENU_GENERATED_CODE_H
 #define MENU_GENERATED_CODE_H
 
+#include <Arduino.h>
 #include <tcMenu.h>
-
 #include <LiquidCrystalIO.h>
-#include <IoAbstractionWire.h>
-#include <JoystickSwitchInput.h>
-#include <RuntimeMenuItem.h>
 #include "tcMenuLiquidCrystal.h"
 
-// all define statements needed
-#define LCD_WIDTH 20
-#define LCD_HEIGHT 4
-#define I2C_ADDRESS 0x40
-#define PIN_LAYOUT RS_RW_EN
-#define PULLUP_LOGIC true
-#define INTERRUPT_SWITCHES false
-#define SWITCH_IODEVICE io23017
-#define JOYSTICK_PIN A0
-#define BUTTON_PIN A1
+void setupMenu();  // forward reference of the menu setup function.
+extern const PROGMEM ConnectorLocalInfo applicationInfo;  // defines the app info to the linker.
 
-// all variables that need exporting
+// Global variables that need exporting
+
+extern IoAbstractionRef io23017;
 extern LiquidCrystal lcd;
 extern LiquidCrystalRenderer renderer;
-extern MBedAnalogDevice analogDevice;
-
-// all menu item forward references.
-extern IpAddressMenuItem menuConnectivityIPAddress;
-extern TextMenuItem menuConnectivityChangePin;
-extern BackMenuItem menuBackConnectivity;
-extern SubMenuItem menuConnectivity;
-extern ActionMenuItem menuSettingsSaveSettings;
-extern AnalogMenuItem menuSettingsPower;
-extern BooleanMenuItem menuSettingsEnabled;
-extern BackMenuItem menuBackSettings;
-extern SubMenuItem menuSettings;
-extern ActionMenuItem menuQuestionDialog;
-extern ActionMenuItem menuInfoDialog;
-extern TextMenuItem menuText;
-extern EnumMenuItem menuFood;
-extern ActionMenuItem menuTakeDisplay;
-extern TimeFormattedMenuItem menuTime;
-extern const ConnectorLocalInfo applicationInfo;
+extern IoAbstractionRef io23017;
 
 // Callback functions must always include CALLBACK_FUNCTION after the return type
 #define CALLBACK_FUNCTION
 
-void CALLBACK_FUNCTION onChangePin(int id);
-void CALLBACK_FUNCTION onFoodChoice(int id);
-void CALLBACK_FUNCTION onInfoDlg(int id);
-void CALLBACK_FUNCTION onQuestionDlg(int id);
-void CALLBACK_FUNCTION onSaveSettings(int id);
-void CALLBACK_FUNCTION onTakeOverDisplay(int id);
+// Global Menu Item exports
 
-void setupMenu();
+extern BooleanMenuItem menuSimhubConnected;
+extern AnalogMenuItem menuGear;
+extern AnalogMenuItem menuSpeed;
+extern AnalogMenuItem menuRPM;
 
 #endif // MENU_GENERATED_CODE_H

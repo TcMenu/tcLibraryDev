@@ -6,80 +6,37 @@
 
     All the variables you may need access to are marked extern in this file for easy
     use elsewhere.
- */
+*/
 
+#include <Arduino.h>
 #include <tcMenu.h>
 #include "menuArd_menu.h"
-#include "MBedEthernetTransport.h"
 
 // Global variable declarations
 
-LiquidCrystal lcd(0, 1, 2, 4, 5, 6, 7);
+const PROGMEM ConnectorLocalInfo applicationInfo = { "Car Dashboard", "7c4dea07-625c-44f2-9b28-9f387239a2f4" };
+LiquidCrystal lcd(8, 9, 10, 11, 12, 13);
 LiquidCrystalRenderer renderer(lcd, 20, 4);
-MBedAnalogDevice analogDevice;
 
 // Global Menu Item declarations
 
-RENDERING_CALLBACK_NAME_INVOKE(fnConnectivityIPAddressRtCall, ipAddressRenderFn, "IPAddress", 7, NULL)
-IpAddressMenuItem menuConnectivityIPAddress(fnConnectivityIPAddressRtCall, 12, NULL);
-RENDERING_CALLBACK_NAME_INVOKE(fnConnectivityChangePinRtCall, textItemRenderFn, "ChangePin", -1, onChangePin)
-TextMenuItem menuConnectivityChangePin(fnConnectivityChangePinRtCall, 14, 15, &menuConnectivityIPAddress);
-RENDERING_CALLBACK_NAME_INVOKE(fnConnectivityRtCall, backSubItemRenderFn, "Connectivity", -1, NULL)
-const PROGMEM SubMenuInfo minfoConnectivity = { "Connectivity", 11, 0xffff, 0, NO_CALLBACK };
-BackMenuItem menuBackConnectivity(fnConnectivityRtCall, &menuConnectivityChangePin);
-SubMenuItem menuConnectivity(&minfoConnectivity, &menuBackConnectivity, NULL);
-const PROGMEM AnyMenuInfo minfoSettingsSaveSettings = { "Save Settings", 6, 0xffff, 0, onSaveSettings };
-ActionMenuItem menuSettingsSaveSettings(&minfoSettingsSaveSettings, NULL);
-const PROGMEM AnalogMenuInfo minfoSettingsPower = { "Power", 5, 5, 250, NO_CALLBACK, 0, 10, "W" };
-AnalogMenuItem menuSettingsPower(&minfoSettingsPower, 0, &menuSettingsSaveSettings);
-const PROGMEM BooleanMenuInfo minfoSettingsEnabled = { "Enabled", 4, 2, 1, NO_CALLBACK, NAMING_TRUE_FALSE };
-BooleanMenuItem menuSettingsEnabled(&minfoSettingsEnabled, false, &menuSettingsPower);
-RENDERING_CALLBACK_NAME_INVOKE(fnSettingsRtCall, backSubItemRenderFn, "Settings", -1, NULL)
-const PROGMEM SubMenuInfo minfoSettings = { "Settings", 3, 0xffff, 0, NO_CALLBACK };
-BackMenuItem menuBackSettings(fnSettingsRtCall, &menuSettingsEnabled);
-SubMenuItem menuSettings(&minfoSettings, &menuBackSettings, &menuConnectivity);
-const PROGMEM AnyMenuInfo minfoQuestionDialog = { "Question Dialog", 9, 0xffff, 0, onQuestionDlg };
-ActionMenuItem menuQuestionDialog(&minfoQuestionDialog, &menuSettings);
-const PROGMEM AnyMenuInfo minfoInfoDialog = { "Info Dialog", 8, 0xffff, 0, onInfoDlg };
-ActionMenuItem menuInfoDialog(&minfoInfoDialog, &menuQuestionDialog);
-RENDERING_CALLBACK_NAME_INVOKE(fnTextRtCall, textItemRenderFn, "Text", -1, NULL)
-TextMenuItem menuText(fnTextRtCall, 7, 10, &menuInfoDialog);
-const char enumStrFood_0[] PROGMEM = "Pizza";
-const char enumStrFood_1[] PROGMEM = "Pasta";
-const char enumStrFood_2[] PROGMEM = "Salad";
-const char* const enumStrFood[] PROGMEM  = { enumStrFood_0, enumStrFood_1, enumStrFood_2 };
-const PROGMEM EnumMenuInfo minfoFood = { "Food", 2, 3, 2, onFoodChoice, enumStrFood };
-EnumMenuItem menuFood(&minfoFood, 0, &menuText);
-const PROGMEM AnyMenuInfo minfoTakeDisplay = { "Take Display", 1, 0xffff, 0, onTakeOverDisplay };
-ActionMenuItem menuTakeDisplay(&minfoTakeDisplay, &menuFood);
-RENDERING_CALLBACK_NAME_INVOKE(fnTimeRtCall, timeItemRenderFn, "Time", -1, NULL)
-TimeFormattedMenuItem menuTime(fnTimeRtCall, 13, (MultiEditWireType)3, &menuTakeDisplay);
-const PROGMEM ConnectorLocalInfo applicationInfo = { "Take Over Display", "40722ec4-e8bc-4889-b54e-d81b14cb429c" };
+const BooleanMenuInfo PROGMEM minfoSimhubConnected = { "Simhub Connected", 4, 0xFFFF, 1, NO_CALLBACK, NAMING_YES_NO };
+BooleanMenuItem menuSimhubConnected(&minfoSimhubConnected, false, NULL);
+const AnalogMenuInfo PROGMEM minfoGear = { "Gear", 3, 0xFFFF, 15, NO_CALLBACK, 0, 0, "" };
+AnalogMenuItem menuGear(&minfoGear, 0, &menuSimhubConnected);
+const AnalogMenuInfo PROGMEM minfoSpeed = { "Speed", 2, 0xFFFF, 1000, NO_CALLBACK, 0, 0, "MPH" };
+AnalogMenuItem menuSpeed(&minfoSpeed, 0, &menuGear);
+const AnalogMenuInfo PROGMEM minfoRPM = { "RPM", 1, 0xFFFF, 25000, NO_CALLBACK, 0, 0, "" };
+AnalogMenuItem menuRPM(&minfoRPM, 0, &menuSpeed);
+
 
 // Set up code
-extern IoAbstractionRef io8574;
 
 void setupMenu() {
-    lcd.setIoAbstraction(io8574);
+
+
+    lcd.setIoAbstraction(io23017);
     lcd.begin(20, 4);
-    lcd.configureBacklightPin(3);
-    lcd.backlight();
-    switches.initialise(internalDigitalIo(), true);
-    switches.addSwitch(A1, NULL);
-    switches.onRelease(A1, [](pinid_t /*key*/, bool held) {
-            menuMgr.onMenuSelect(held);
-        });
-    setupAnalogJoystickEncoder(&analogDevice, A0, [](int val) {
-            menuMgr.valueChanged(val);
-        });
-    menuMgr.initWithoutInput(&renderer, &menuTime);
-    remoteServer.begin(3333, &applicationInfo);
-
-    // Read only and local only function calls
-    menuText.setReadOnly(true);
-    menuSettingsSaveSettings.setLocalOnly(true);
-    menuInfoDialog.setLocalOnly(true);
-    menuConnectivity.setLocalOnly(true);
-    menuConnectivity.setSecured(true);
+    switches.initialise(io23017, true);
+    menuMgr.initForEncoder(&renderer, &menuRPM, 6, 7, 5);
 }
-
