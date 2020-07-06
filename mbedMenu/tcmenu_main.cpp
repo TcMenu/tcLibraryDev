@@ -17,13 +17,17 @@ void setup() {
     console.baud(115200);
     setupMenu();
 
+    prepareRealtimeClock();
+    monitorAnalogIn();
+
+    switches.addSwitch(USER_BUTTON, [](pinid_t, bool ) {
+        auto bval = menuABoolean.getBoolean();
+        menuABoolean.setBoolean(!bval);
+    }, 100, true);
 }
 
 int main() {
     setup();
-
-    prepareRealtimeClock();
-    monitorAnalogIn();
 
     while(1) {
         taskManager.runLoop();
