@@ -58,7 +58,7 @@ public:
         angle += .0062F;
         if(angle > (2 * M_PI)) angle = 0.0F;
         auto amp = sin(angle);
-        analogDevice.setCurrentValue(PB_11, amp);
+        analogDevice.setCurrentFloat(PB_11, amp);
     }
 } rotationPlotter;
 
@@ -87,6 +87,8 @@ int main() {
     });
     switches.getEncoder()->changePrecision(255, 128);
 
+    analogDevice.initPin(A0, DIR_IN);
+
     rotationPlotter.start();
     taskManager.scheduleFixedRate(1, &rotationPlotter);
 
@@ -104,10 +106,13 @@ int main() {
     taskManager.scheduleFixedRate(200, [] {
         // set the cursor to column 0, line 1
         lcd.setCursor(0, 1);
-
+        lcd.print("                  ");
+        lcd.setCursor(0, 1);
         // print the number of seconds since reset as a float:
         double fractionalMillis = (millis() / 1000.0) - 10000.0;
         lcd.print(fractionalMillis);
+        lcd.setCursor(12, 1);
+        lcd.print(analogDevice.getCurrentFloat(A0));
         lcd.setCursor(oldPosition % lcdWidth, 2);
         lcd.print(' ');
         oldPosition++;

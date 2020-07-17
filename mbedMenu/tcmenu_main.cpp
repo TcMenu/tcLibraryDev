@@ -36,8 +36,9 @@ int main() {
 
 void monitorAnalogIn() {
     analogDevice.initPin(A0, DIR_IN);
+    analogDevice.initPin(PB_11, DIR_PWM);
     taskManager.scheduleFixedRate(250, [] {
-        menuA0Value.setFloatValue(analogDevice.getCurrentFloat(A0));
+        menuA0Value.setFloatValue(analogDevice.getCurrentFloat(A0) * 100.0F);
     });
 }
 
@@ -77,4 +78,10 @@ void prepareRealtimeClock() {
 
 void CALLBACK_FUNCTION onUserButton(int id) {
     serdebugF2("On change called", id);
+}
+
+
+void CALLBACK_FUNCTION onAnalogChange(int id) {
+    auto currentPwm = menuAnalogValue.getCurrentValue() / 100.0F;
+    analogDevice.setCurrentFloat(PB_11, currentPwm);
 }

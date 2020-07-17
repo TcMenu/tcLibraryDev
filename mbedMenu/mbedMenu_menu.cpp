@@ -42,7 +42,7 @@ const FloatMenuInfo minfoA0Value = { "A0 Value", 5, 0xFFFF, 3, NO_CALLBACK };
 FloatMenuItem menuA0Value(&minfoA0Value, &menuSubMenu);
 const BooleanMenuInfo minfoABoolean = { "A Boolean", 4, 0xFFFF, 1, onUserButton, NAMING_TRUE_FALSE };
 BooleanMenuItem menuABoolean(&minfoABoolean, false, &menuA0Value);
-const AnalogMenuInfo minfoAnalogValue = { "Analog Value", 2, 0xFFFF, 100, NO_CALLBACK, 0, 0, "" };
+const AnalogMenuInfo minfoAnalogValue = { "Analog Value", 2, 0xFFFF, 100, onAnalogChange, 0, 0, "" };
 AnalogMenuItem menuAnalogValue(&minfoAnalogValue, 0, &menuABoolean);
 RENDERING_CALLBACK_NAME_INVOKE(fnRTCDateRtCall, dateItemRenderFn, "RTC Date", -1, NO_CALLBACK)
 DateFormattedMenuItem menuRTCDate(fnRTCDateRtCall, 3, &menuAnalogValue);

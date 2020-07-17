@@ -43,6 +43,7 @@ extern SubMenuItem menuSubMenu;
 extern FloatMenuItem menuA0Value;
 void CALLBACK_FUNCTION onUserButton(int id);
 extern BooleanMenuItem menuABoolean;
+void CALLBACK_FUNCTION onAnalogChange(int id);
 extern AnalogMenuItem menuAnalogValue;
 extern DateFormattedMenuItem menuRTCDate;
 extern TimeFormattedMenuItem menuRTCTime;

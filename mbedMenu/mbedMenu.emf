@@ -1,6 +1,6 @@
 {
   "lastEdited": {
-    "seconds": 1593091428,
+    "seconds": 1594996201,
     "nanos": 0
   },
   "codeOptions": {
@@ -117,6 +117,7 @@
         "readOnly": false,
         "localOnly": false,
         "visible": true,
+        "functionName": "onAnalogChange",
         "maxValue": 100,
         "offset": 0,
         "divisor": 0,
