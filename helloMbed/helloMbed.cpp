@@ -76,14 +76,14 @@ int main() {
     lcd.print("Counter in seconds");
 
     switches.initialiseInterrupt(internalDigitalIo(), true);
-    switches.addSwitch(PA_5, [](pinid_t, bool) {
+    switches.addSwitch(PE_5, [](pinid_t, bool) {
         pressCount++;
     });
     switches.addSwitch(USER_BUTTON, [](pinid_t, bool) {
         pressCount--;
     }, 25, true);
 
-    setupRotaryEncoderWithInterrupt(PA_6, PD_14, [] (int val) {
+    setupRotaryEncoderWithInterrupt(PE_2, PE_4, [] (int val) {
     });
     switches.getEncoder()->changePrecision(255, 128);
 

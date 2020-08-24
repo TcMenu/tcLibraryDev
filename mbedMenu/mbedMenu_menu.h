@@ -14,21 +14,20 @@
 #include <mbed.h>
 #include <tcMenu.h>
 #include <RuntimeMenuItem.h>
-#include <LiquidCrystalIO.h>
-#include <IoAbstractionWire.h>
+#include "tcMenuU8g2.h"
 #include "MBedEthernetTransport.h"
 #include <RemoteConnector.h>
 #include <EditableLargeNumberMenuItem.h>
-#include "tcMenuLiquidCrystal.h"
+#include "U8g2MbedHal.h"
 
 void setupMenu();  // forward reference of the menu setup function.
 extern const PROGMEM ConnectorLocalInfo applicationInfo;  // defines the app info to the linker.
 
 // Global variables that need exporting
 
-extern I2C i2c;
-extern LiquidCrystal lcd;
-extern LiquidCrystalRenderer renderer;
+extern U8g2MbedI2c_1306_128x64_i2c gfx;
+extern U8g2GfxMenuConfig gfxConfig;
+extern U8g2MenuRenderer renderer;
 
 // Callback functions must always include CALLBACK_FUNCTION after the return type
 #define CALLBACK_FUNCTION

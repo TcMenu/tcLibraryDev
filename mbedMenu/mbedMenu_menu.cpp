@@ -15,8 +15,8 @@
 // Global variable declarations
 
 const PROGMEM ConnectorLocalInfo applicationInfo = { "MBed Test", "98ea360b-fe08-444a-996b-2e94dda7a2eb" };
-LiquidCrystal lcd(0, 1, 2, 4, 5, 6, 7);
-LiquidCrystalRenderer renderer(lcd, 20, 4);
+U8g2GfxMenuConfig gfxConfig;
+U8g2MenuRenderer renderer;
 
 // Global Menu Item declarations
 
@@ -49,6 +49,9 @@ DateFormattedMenuItem menuRTCDate(fnRTCDateRtCall, 3, &menuAnalogValue);
 RENDERING_CALLBACK_NAME_INVOKE(fnRTCTimeRtCall, timeItemRenderFn, "RTC Time", -1, NO_CALLBACK)
 TimeFormattedMenuItem menuRTCTime(fnRTCTimeRtCall, 1, (MultiEditWireType)EDITMODE_TIME_12H, &menuRTCDate);
 
+// This is needed to provide the base Arduino compatibility layer
+IoAbstractionRef globalAbstraction = internalDigitalIo();
+
 
 // Set up code
 
@@ -57,10 +60,8 @@ void setupMenu() {
     menuRTCDate.setReadOnly(true);
     menuSubMenuIPAddress.setReadOnly(true);
 
-    lcd.setIoAbstraction(ioFrom8574(0x40, 0xff, &i2c));
-    lcd.begin(20, 4);
-    lcd.configureBacklightPin(3);
-    lcd.backlight();
+    prepareBasicU8x8Config(gfxConfig);
+    renderer.setGraphicsDevice(&gfx, &gfxConfig);
     switches.initialise(internalDigitalIo(), true);
     menuMgr.initForEncoder(&renderer, &menuRTCTime, PA_6, PD_14, PA_5);
     remoteServer.begin(3333, &applicationInfo);

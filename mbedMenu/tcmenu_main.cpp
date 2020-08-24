@@ -2,6 +2,7 @@
 #include <AnalogDeviceAbstraction.h>
 #include "mbedMenu_menu.h"
 #include "NTPTime.h"
+#include "U8g2lib.h"
 
 I2C i2c(PF_0, PF_1);
 
@@ -10,12 +11,20 @@ MBedLogger LoggingPort(console);
 
 MBedAnalogDevice analogDevice;
 
+U8g2MbedI2c_1306_128x64_i2c gfx(&i2c, U8G2_R0);
+
 void prepareRealtimeClock();
 void monitorAnalogIn();
 
 void setup() {
     console.baud(115200);
-    setupMenu();
+
+    gfx.begin();
+    taskManager.scheduleFixedRate(1000, [] {
+        gfx.print("A");
+        gfx.sendBuffer();
+    });
+/*    setupMenu();
 
     prepareRealtimeClock();
     monitorAnalogIn();
@@ -23,7 +32,9 @@ void setup() {
     switches.addSwitch(USER_BUTTON, [](pinid_t, bool ) {
         auto bval = menuABoolean.getBoolean();
         menuABoolean.setBoolean(!bval);
-    }, 100, true);
+    }, 100, true);*/
+
+
 }
 
 int main() {

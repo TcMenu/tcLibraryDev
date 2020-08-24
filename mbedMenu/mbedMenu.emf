@@ -1,13 +1,13 @@
 {
   "lastEdited": {
-    "seconds": 1594996201,
+    "seconds": 1595573672,
     "nanos": 0
   },
   "codeOptions": {
     "applicationUUID": "98ea360b-fe08-444a-996b-2e94dda7a2eb",
     "applicationName": "MBed Test",
     "lastInputUuid": "6dd87e7d-e751-4912-a70d-91793b1d3d87",
-    "lastDisplayUuid": "d4c84106-fa87-4024-b91e-053e17a52b8f",
+    "lastDisplayUuid": "8646497b-1427-415f-8020-1260a1fef57d",
     "lastRemoteUuid": "27e7a502-330e-4570-9f8e-bd26ac88051f",
     "embeddedPlatform": "MBED_RTOS",
     "namingRecursive": true,
@@ -44,28 +44,18 @@
         "subsystem": "INPUT"
       },
       {
-        "name": "LCD_WIDTH",
-        "latestValue": "20",
+        "name": "DISPLAY_VARIABLE",
+        "latestValue": "gfx",
         "subsystem": "DISPLAY"
       },
       {
-        "name": "LCD_HEIGHT",
-        "latestValue": "4",
+        "name": "DISPLAY_TYPE",
+        "latestValue": "U8G2_SSD1306_128X64_NONAME_F_SW_I2C",
         "subsystem": "DISPLAY"
       },
       {
-        "name": "I2C_ADDRESS",
-        "latestValue": "0x40",
-        "subsystem": "DISPLAY"
-      },
-      {
-        "name": "PIN_LAYOUT",
-        "latestValue": "RS_RW_EN",
-        "subsystem": "DISPLAY"
-      },
-      {
-        "name": "WIRE_VARIABLE",
-        "latestValue": "i2c",
+        "name": "DISPLAY_CONFIG",
+        "latestValue": "",
         "subsystem": "DISPLAY"
       },
       {
