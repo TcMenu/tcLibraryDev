@@ -13,7 +13,7 @@ void dumpTasks() {
 	while(task) {
 		Serial.print(" - Task schedule "); Serial.print(task->microsFromNow());
 		Serial.print(task->isRepeating() ? " Repeating ":" Once ");
-		Serial.print(task->isJobInMicros() ? " Micros " : task->isJobInSeconds() ? " Seconds " : " Millis ");
+		Serial.print(task->isMicrosSchedule() ? " Micros " : task->isSecondsSchedule() ? " Seconds " : " Millis ");
 		Serial.println(task->isInUse() ? " InUse":" Free");
 		if(task->getNext() == task) {
 			Serial.println("!!!Infinite loop found!!!");
@@ -40,7 +40,7 @@ void recordingJob2() {
 	count2++;
 	scheduled2ndJob = true;
 }
-void intHandler(uint8_t pin) {
+void intHandler(pintype_t pin) {
 	scheduled = true;
 	microsExecuted = micros();
 	count++;
@@ -101,7 +101,7 @@ void assertThatSecondJobRan(unsigned long minExpected, unsigned long allowanceOv
 void assertTasksSpacesTaken(int taken) {
     char sz[20];
     int count = 0;
-    char* taskData = taskManager.checkAvailableSlots(sz);
+    char* taskData = taskManager.checkAvailableSlots(sz, sizeof sz);
     while(*taskData) {
         if(*taskData != 'F') count++;
         ++taskData;
@@ -176,25 +176,25 @@ void testScheduleFixedRateTestCase() {
 
     TEST_ASSERT_NULL(taskManager.getFirstTask());
 
-	int taskId1 = taskManager.scheduleFixedRate(1, recordingJob, TIME_MILLIS);
-	int taskId2 = taskManager.scheduleFixedRate(100, recordingJob2, TIME_MICROS);
+	auto taskId1 = taskManager.scheduleFixedRate(1, recordingJob, TIME_MILLIS);
+	auto taskId2 = taskManager.scheduleFixedRate(100, recordingJob2, TIME_MICROS);
 
 
 	// now check the task registration in detail.
 	TEST_ASSERT_NOT_EQUAL(taskId1, TASKMGR_INVALIDID);
 	TimerTask* task = taskManager.getFirstTask();
     TEST_ASSERT_NOT_NULL(task);
-	TEST_ASSERT_FALSE(task->isJobInMillis());
-    TEST_ASSERT_TRUE(task->isJobInMicros());
-    TEST_ASSERT_FALSE(task->isJobInSeconds());
+	TEST_ASSERT_FALSE(task->isMillisSchedule());
+    TEST_ASSERT_TRUE(task->isMicrosSchedule());
+    TEST_ASSERT_FALSE(task->isSecondsSchedule());
 	
 	// now check the task registration in detail.
     TEST_ASSERT_NOT_EQUAL(taskId2, TASKMGR_INVALIDID);
 	task = task->getNext();
     TEST_ASSERT_NOT_NULL(task);
-    TEST_ASSERT_TRUE(task->isJobInMillis());
-    TEST_ASSERT_FALSE(task->isJobInMicros());
-    TEST_ASSERT_FALSE(task->isJobInSeconds());
+    TEST_ASSERT_TRUE(task->isMillisSchedule());
+    TEST_ASSERT_FALSE(task->isMicrosSchedule());
+    TEST_ASSERT_FALSE(task->isSecondsSchedule());
 
 	dumpTasks();
 
@@ -238,15 +238,15 @@ void testCancellingAJobAfterCreation() {
 
     TEST_ASSERT_NOT_NULL(taskManager.getFirstTask());
 
-	int taskId = taskManager.scheduleFixedRate(10, recordingJob, TIME_MILLIS);
+	auto taskId = taskManager.scheduleFixedRate(10, recordingJob, TIME_MILLIS);
 	
 	// now check the task registration in detail.
     TEST_ASSERT_NOT_EQUAL(taskId, TASKMGR_INVALIDID);
 	TimerTask* task = taskManager.getFirstTask();
     TEST_ASSERT_NOT_NULL(task);
-    TEST_ASSERT_TRUE(task->isJobInMillis());
-    TEST_ASSERT_FALSE(task->isJobInMicros());
-    TEST_ASSERT_FALSE(task->isJobInSeconds());
+    TEST_ASSERT_TRUE(task->isMillisSchedule());
+    TEST_ASSERT_FALSE(task->isMicrosSchedule());
+    TEST_ASSERT_FALSE(task->isSecondsSchedule());
 	TEST_ASSERT_GREATER_OR_EQUAL(8000UL, task->microsFromNow());
 
 	assertThatTaskRunsOnTime(10000, MILLIS_ALLOWANCE);
@@ -333,11 +333,11 @@ void clearCounts() {
 
 
 void testTaskManagerHighThroughput() {
-	char slotData[15];
+	char slotData[32];
     prepareTesting();
     clearCounts();
 
-	Serial.print("Dumping threads"); Serial.println(taskManager.checkAvailableSlots(slotData));
+	Serial.print("Dumping threads"); Serial.println(taskManager.checkAvailableSlots(slotData, sizeof slotData));
 
 	taskManager.scheduleFixedRate(10, testCall1);
 	taskManager.scheduleFixedRate(100, testCall2);
@@ -345,7 +345,7 @@ void testTaskManagerHighThroughput() {
 	taskManager.scheduleOnce(1, testCall4, TIME_SECONDS);
 	taskManager.scheduleOnce(10, testCall5, TIME_SECONDS);
 
-	Serial.print("Dumping threads"); Serial.println(taskManager.checkAvailableSlots(slotData));
+	Serial.print("Dumping threads"); Serial.println(taskManager.checkAvailableSlots(slotData, sizeof slotData));
 
 	unsigned long start = millis();
 	while(counts[5] < 10 && (millis() - start) < 25000) {
@@ -353,7 +353,7 @@ void testTaskManagerHighThroughput() {
 		assertTasksAreInOrder();
 	}
 
-	Serial.print("Dumping threads"); Serial.println(taskManager.checkAvailableSlots(slotData));
+	Serial.print("Dumping threads"); Serial.println(taskManager.checkAvailableSlots(slotData, sizeof slotData));
 
 	TEST_ASSERT_EQUAL(counts[5], 10);               // should be 10 runs as it's manually repeating
 	TEST_ASSERT_GREATER_OR_EQUAL(140, counts[1]);   // should be at least 140 runs, scheduled every 100 millis,
@@ -421,7 +421,7 @@ void testCancellingTasksWithinAnotherTask() {
 	// in this case we dump the queue, something is wrong.
 	if (counts[1] == storedCount1) {
 		dumpTasks();
-		Serial.print("Dumping threads"); Serial.println(taskManager.checkAvailableSlots(slotData));
+		Serial.print("Dumping threads"); Serial.println(taskManager.checkAvailableSlots(slotData, sizeof slotData));
 	}
 
     TEST_ASSERT_NOT_EQUAL(counts[1], storedCount1);
