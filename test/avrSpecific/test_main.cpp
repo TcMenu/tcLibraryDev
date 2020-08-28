@@ -11,77 +11,6 @@
 // Keep this test on it's own in this package. It messes around with the millisecond counter.
 
 #ifdef __AVR__
-#include <util/atomic.h>
-
-void setMillis(uint32_t ms)
-{
-  extern unsigned long timer0_millis;
-  ATOMIC_BLOCK(ATOMIC_RESTORESTATE) {
-    timer0_millis = ms;
-  }
-}
-
-void dumpTaskTiming() {
-    Serial.println("Showing task timings");
-    TimerTask* task = taskManager.getFirstTask();
-    while(task) {
-        Serial.print(" - Timing "); Serial.println(task->microsFromNow());
-        task = task->getNext();
-    }
-}
-
-int avrCount1 = 0;
-int avrCount2 = 0;
-
-void runLoop1() {
-    avrCount1++;
-}
-
-void runLoop2() {
-    avrCount2++;
-}
-
-//
-// this test only runs on AVR - it sets the timer near to overflow and schedules some tasks
-//
-
-void testAvrClockWrappingCase() {
-    avrCount1 = avrCount2 = 0;
-	
-	// set the clock so that it will roll
-	uint32_t oldMillis = millis();
-    setMillis(0xfffffe70UL);
-
-	taskManager.scheduleOnce(1, runLoop1, TIME_SECONDS);
-	taskManager.scheduleFixedRate(250, runLoop2, TIME_MICROS);
-	
-	// make sure it's still to wrap.
-    TEST_ASSERT_TRUE(millis() > 100000000UL);
-
-    // now run the loop
-	dumpTaskTiming();
-    unsigned long start = millis();
-    while(avrCount1 == 0 && (millis() - start) < 5000) {
-        taskManager.yieldForMicros(10000);
-    }
-
-	dumpTaskTiming();
-
-    // the one second task should have executed exactly once.
-    TEST_ASSERT_EQUAL(1, avrCount1);
-    TEST_ASSERT_GREATER_OR_EQUAL(1000, avrCount2);
-
-	// make sure millis has wrapped now.
-	TEST_ASSERT_TRUE(millis() < 10000UL);
-
-	// and make sure the microsecond job is still going..	
-	int avrCount2Then = avrCount2;
-	taskManager.yieldForMicros(10000);
-	TEST_ASSERT_TRUE(avrCount2Then != avrCount2);
-
-    // reset the millisecond timer where it was before.
-	setMillis(oldMillis);
-}
 
 const char * memToWrite = "This is a very large string to write into the rom to ensure it crosses memory boundaries in the rom";
 
@@ -129,7 +58,6 @@ void setup() {
     while(!Serial);
     delay(2000);
     UNITY_BEGIN();    // IMPORTANT LINE!
-    RUN_TEST(testAvrClockWrappingCase);
     RUN_TEST(avrEepromWrapperTestCase);
     RUN_TEST(eepromClassWrapperTestCase);
 }
