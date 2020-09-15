@@ -3,7 +3,7 @@
 
 I2C i2c(PF_0, PF_1);
 
-Serial console(USBTX, USBRX);
+BufferedSerial console(USBTX, USBRX);
 MBedLogger LoggingPort(console);
 
 void setup() {
