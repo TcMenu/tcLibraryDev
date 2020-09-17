@@ -45,7 +45,8 @@ public:
     ~MBedEthernetTransport() override;
 
     void setSocket(InternetSocket* sock) {
-        delete socket;
+        close();
+
         socket = sock;
         socket->set_blocking(false);
         lastReadAmt = readPos = writePos = 0;

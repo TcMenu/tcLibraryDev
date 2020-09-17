@@ -7,6 +7,7 @@ BufferedSerial console(USBTX, USBRX);
 MBedLogger LoggingPort(console);
 
 void setup() {
+    console.set_baud(115200);
     setupMenu();
 
 }
@@ -26,6 +27,35 @@ int main() {
 void CALLBACK_FUNCTION onUserButton(int id) {
     // TODO - your menu change code
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+void CALLBACK_FUNCTION onTakeDisplay(int id) {
+    // TODO - your menu change code
+}
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -1,6 +1,6 @@
 {
   "lastEdited": {
-    "seconds": 1595573672,
+    "seconds": 1600184431,
     "nanos": 0
   },
   "codeOptions": {
@@ -30,17 +30,17 @@
       },
       {
         "name": "ENCODER_PIN_A",
-        "latestValue": "PA_6",
+        "latestValue": "PE_2",
         "subsystem": "INPUT"
       },
       {
         "name": "ENCODER_PIN_B",
-        "latestValue": "PD_14",
+        "latestValue": "PE_5",
         "subsystem": "INPUT"
       },
       {
         "name": "ENCODER_PIN_OK",
-        "latestValue": "PA_5",
+        "latestValue": "PE_4",
         "subsystem": "INPUT"
       },
       {
@@ -166,7 +166,8 @@
         "localOnly": false,
         "visible": true,
         "decimalPlaces": 3,
-        "digitsAllowed": 7
+        "digitsAllowed": 7,
+        "negativeAllowed": true
       }
     },
     {

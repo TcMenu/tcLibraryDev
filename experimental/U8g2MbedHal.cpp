@@ -7,16 +7,17 @@
 #include <TaskManager.h>
 #include "U8g2MbedHal.h"
 
-BtreeList<long, U8g2MbedContainer> u8g2StructMapping;
+U8g2Mbed* U8g2Mbed::theInstance;
 
+IoAbstractionRef globalAbstraction = nullptr;
 
 extern "C" uint8_t u8x8_mbed_gpio_callback(u8x8_t *u8x8, uint8_t msg, uint8_t arg_int, U8X8_UNUSED void *arg_ptr) {
-    auto container = u8g2StructMapping.getByKey(long(u8x8));
+    auto container = U8g2Mbed::theInstance;
     if(container == nullptr) return 0;
-noInterrupts()
+
     switch (msg) {
         case U8X8_MSG_GPIO_AND_DELAY_INIT:
-            container->getPtr()->initGpio();
+            container->initGpio();
             break;
 
         case U8X8_MSG_DELAY_NANO:
@@ -37,7 +38,7 @@ noInterrupts()
             break;
         case U8X8_MSG_GPIO_I2C_CLOCK:
         case U8X8_MSG_GPIO_I2C_DATA: {
-            auto pin = (msg == U8X8_MSG_GPIO_I2C_DATA) ? container->getPtr()->getDataOut() : container->getPtr()->getClock();
+            auto pin = (msg == U8X8_MSG_GPIO_I2C_DATA) ? container->getDataOut() : container->getClock();
             if (arg_int == 0) {
                 pinMode(pin, OUTPUT);
                 digitalWrite(pin, 0);
@@ -53,12 +54,12 @@ noInterrupts()
 }
 
 extern "C" uint8_t u8x8_mbed_byte_callback(u8x8_t *u8x8, uint8_t msg, uint8_t arg_int, void* arg_ptr) {
-    auto container = (u8g2StructMapping.getByKey(long(u8x8)));
+    auto container = U8g2Mbed::theInstance;
     if(container == nullptr) return 0;
 
     switch (msg) {
         case U8X8_MSG_BYTE_SEND:
-            container->getPtr()->writeToBus((uint8_t *) arg_ptr, (size_t) arg_int);
+            container->writeToBus((uint8_t *) arg_ptr, (size_t) arg_int);
             break;
         case U8X8_MSG_BYTE_INIT:
         case U8X8_MSG_BYTE_SET_DC:
@@ -66,7 +67,7 @@ extern "C" uint8_t u8x8_mbed_byte_callback(u8x8_t *u8x8, uint8_t msg, uint8_t ar
             break;
         case U8X8_MSG_BYTE_START_TRANSFER:
         case U8X8_MSG_BYTE_END_TRANSFER:
-            container->getPtr()->commitIfNeeded();
+            container->commitIfNeeded();
             break;
         default:
             return 0;

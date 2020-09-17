@@ -1,6 +1,11 @@
 #include <mbed.h>
 #include "mbedMenuJava_menu.h"
 
+I2C i2c(PF_0, PF_1);
+
+BufferedSerial console(USBTX, USBRX);
+MBedLogger LoggingPort(console);
+
 void setup() {
     setupMenu();
 
@@ -21,5 +26,34 @@ int main() {
 void CALLBACK_FUNCTION onUserButton(int id) {
     // TODO - your menu change code
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+void CALLBACK_FUNCTION onTakeDisplay(int id) {
+    // TODO - your menu change code
+}
+
+
+
+
+
+
+
+
+
+
 
 

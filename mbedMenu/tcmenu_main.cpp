@@ -1,29 +1,35 @@
 #include <mbed.h>
 #include <AnalogDeviceAbstraction.h>
+#include <Adafruit_SSD1306.h>
 #include "mbedMenu_menu.h"
 #include "NTPTime.h"
-#include "U8g2lib.h"
 
 I2C i2c(PF_0, PF_1);
 
-Serial console(USBTX, USBRX);
+BufferedSerial console(USBTX, USBRX);
 MBedLogger LoggingPort(console);
 
 MBedAnalogDevice analogDevice;
 
-U8g2MbedI2c_1306_128x64_i2c gfx(&i2c, U8G2_R0);
+Adafruit_SSD1306_I2c gfx(i2c,NC,0x78,64,128);
 
 void prepareRealtimeClock();
 void monitorAnalogIn();
 
 void setup() {
-    console.baud(115200);
+    console.set_baud(115200);
+    i2c.start();
 
     gfx.begin();
-    taskManager.scheduleFixedRate(1000, [] {
-        gfx.print("A");
-        gfx.sendBuffer();
-    });
+    serdebugF("Print something");
+    gfx.setTextColor(WHITE);
+    serdebugF("Print something");
+
+    gfx.setTextCursor(10, 10);
+    serdebugF("Print something");
+
+    gfx.drawRect(50, 50, 50, 10, WHITE);
+    gfx.display();
 /*    setupMenu();
 
     prepareRealtimeClock();

@@ -13,11 +13,14 @@
 
 // Global variable declarations
 
-LiquidCrystal lcd(0, 1, 2, 4, 5, 6, 7);
-LiquidCrystalRenderer renderer(lcd, 20, 4);
+Adafruit_SSD1306_I2c gfx(i2c, NC, SSD_I2C_ADDRESS, 64, 132, SH_1106);
+//AdaColorGfxMenuConfig gfxConfig;
+//AdaFruitGfxMenuRenderer renderer;
 
 // Global Menu Item declarations
-
+/*
+const AnyMenuInfo minfoTakeDisplay = { "Take display", 11, 0xffff, 0, onTakeDisplay };
+ActionMenuItem menuTakeDisplay(&minfoTakeDisplay, NULL);
 const char enumStrSubMenuFoods_0[] = "Pizza";
 const char enumStrSubMenuFoods_1[] = "Pasta";
 const char enumStrSubMenuFoods_2[] = "Salad";
@@ -31,11 +34,11 @@ IpAddressMenuItem menuSubMenuEditIP(fnSubMenuEditIPRtCall, 9, &menuSubMenuFoods)
 RENDERING_CALLBACK_NAME_INVOKE(fnSubMenuIPAddressRtCall, ipAddressRenderFn, "IP Address", -1, NULL)
 IpAddressMenuItem menuSubMenuIPAddress(fnSubMenuIPAddressRtCall, 8, &menuSubMenuEditIP);
 RENDERING_CALLBACK_NAME_INVOKE(fnSubMenuLargeNumRtCall, largeNumItemRenderFn, "Large Num", -1, NULL)
-EditableLargeNumberMenuItem menuSubMenuLargeNum(fnSubMenuLargeNumRtCall, 7, 7, 3, &menuSubMenuIPAddress);
+EditableLargeNumberMenuItem menuSubMenuLargeNum(fnSubMenuLargeNumRtCall, 7, 7, 3, false, &menuSubMenuIPAddress);
 RENDERING_CALLBACK_NAME_INVOKE(fnSubMenuRtCall, backSubItemRenderFn, "Sub Menu", -1, NULL)
 const SubMenuInfo minfoSubMenu = { "Sub Menu", 6, 0xffff, 0, NO_CALLBACK };
 BackMenuItem menuBackSubMenu(fnSubMenuRtCall, &menuSubMenuLargeNum);
-SubMenuItem menuSubMenu(&minfoSubMenu, &menuBackSubMenu, NULL);
+SubMenuItem menuSubMenu(&minfoSubMenu, &menuBackSubMenu, &menuTakeDisplay);
 const FloatMenuInfo minfoA0Value = { "A0 Value", 5, 0xffff, 3, NO_CALLBACK };
 FloatMenuItem menuA0Value(&minfoA0Value, &menuSubMenu);
 const BooleanMenuInfo minfoABoolean = { "A Boolean", 4, 0xffff, 1, onUserButton, NAMING_TRUE_FALSE };
@@ -47,21 +50,19 @@ DateFormattedMenuItem menuRTCDate(fnRTCDateRtCall, 3, &menuAnalogValue);
 RENDERING_CALLBACK_NAME_INVOKE(fnRTCTimeRtCall, timeItemRenderFn, "RTC Time", -1, NULL)
 TimeFormattedMenuItem menuRTCTime(fnRTCTimeRtCall, 1, (MultiEditWireType)3, &menuRTCDate);
 const ConnectorLocalInfo applicationInfo = { "MBed Test", "98ea360b-fe08-444a-996b-2e94dda7a2eb" };
-
+*/
 // Set up code
 
 void setupMenu() {
-    lcd.setIoAbstraction(ioFrom8574(0x40, 0xff, &i2c));
-    lcd.begin(20, 4);
-    lcd.configureBacklightPin(3);
-    lcd.backlight();
-    switches.initialise(internalDigitalIo(), true);
-    menuMgr.initForEncoder(&renderer, &menuRTCTime, PA_6, PD_14, PA_5);
-    remoteServer.begin(3333, &applicationInfo);
+//    prepareAdaColorDefaultGfxConfig(&gfxConfig);
+//    renderer.setGraphicsDevice(&gfx, &gfxConfig);
+//    switches.initialise(internalDigitalIo(), true);
+//    menuMgr.initForEncoder(&renderer, &menuRTCTime, PE_2, PE_5, PE_4);
+//    remoteServer.begin(3333, &applicationInfo);
 
     // Read only and local only function calls
-    menuSubMenuIPAddress.setReadOnly(true);
-    menuRTCDate.setReadOnly(true);
-    menuRTCTime.setReadOnly(true);
+//    menuSubMenuIPAddress.setReadOnly(true);
+//    menuRTCTime.setReadOnly(true);
+//    menuRTCDate.setReadOnly(true);
 }
 
