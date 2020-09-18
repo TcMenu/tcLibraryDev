@@ -14,11 +14,11 @@
 // Global variable declarations
 
 Adafruit_SSD1306_I2c gfx(i2c, NC, SSD_I2C_ADDRESS, 64, 132, SH_1106);
-//AdaColorGfxMenuConfig gfxConfig;
-//AdaFruitGfxMenuRenderer renderer;
+AdaColorGfxMenuConfig gfxConfig;
+AdaFruitGfxMenuRenderer renderer;
 
 // Global Menu Item declarations
-/*
+
 const AnyMenuInfo minfoTakeDisplay = { "Take display", 11, 0xffff, 0, onTakeDisplay };
 ActionMenuItem menuTakeDisplay(&minfoTakeDisplay, NULL);
 const char enumStrSubMenuFoods_0[] = "Pizza";
@@ -41,28 +41,29 @@ BackMenuItem menuBackSubMenu(fnSubMenuRtCall, &menuSubMenuLargeNum);
 SubMenuItem menuSubMenu(&minfoSubMenu, &menuBackSubMenu, &menuTakeDisplay);
 const FloatMenuInfo minfoA0Value = { "A0 Value", 5, 0xffff, 3, NO_CALLBACK };
 FloatMenuItem menuA0Value(&minfoA0Value, &menuSubMenu);
-const BooleanMenuInfo minfoABoolean = { "A Boolean", 4, 0xffff, 1, onUserButton, NAMING_TRUE_FALSE };
-BooleanMenuItem menuABoolean(&minfoABoolean, false, &menuA0Value);
+const BooleanMenuInfo minfoUserButton = { "User Button", 4, 0xffff, 1, onUserButton, NAMING_ON_OFF };
+BooleanMenuItem menuUserButton(&minfoUserButton, false, &menuA0Value);
 const AnalogMenuInfo minfoAnalogValue = { "Analog Value", 2, 0xffff, 100, NO_CALLBACK, 0, 0, "" };
-AnalogMenuItem menuAnalogValue(&minfoAnalogValue, 0, &menuABoolean);
+AnalogMenuItem menuAnalogValue(&minfoAnalogValue, 0, &menuUserButton);
 RENDERING_CALLBACK_NAME_INVOKE(fnRTCDateRtCall, dateItemRenderFn, "RTC Date", -1, NULL)
 DateFormattedMenuItem menuRTCDate(fnRTCDateRtCall, 3, &menuAnalogValue);
 RENDERING_CALLBACK_NAME_INVOKE(fnRTCTimeRtCall, timeItemRenderFn, "RTC Time", -1, NULL)
 TimeFormattedMenuItem menuRTCTime(fnRTCTimeRtCall, 1, (MultiEditWireType)3, &menuRTCDate);
 const ConnectorLocalInfo applicationInfo = { "MBed Test", "98ea360b-fe08-444a-996b-2e94dda7a2eb" };
-*/
+
 // Set up code
 
 void setupMenu() {
-//    prepareAdaColorDefaultGfxConfig(&gfxConfig);
-//    renderer.setGraphicsDevice(&gfx, &gfxConfig);
-//    switches.initialise(internalDigitalIo(), true);
-//    menuMgr.initForEncoder(&renderer, &menuRTCTime, PE_2, PE_5, PE_4);
-//    remoteServer.begin(3333, &applicationInfo);
+    prepareAdaColorDefaultGfxConfig(&gfxConfig);
+    gfx.begin();
+    renderer.setGraphicsDevice(&gfx, &gfxConfig);
+    switches.initialise(internalDigitalIo(), true);
+    menuMgr.initForEncoder(&renderer, &menuRTCTime, PE_2, PE_5, PE_4);
+    remoteServer.begin(3333, &applicationInfo);
 
     // Read only and local only function calls
-//    menuSubMenuIPAddress.setReadOnly(true);
-//    menuRTCTime.setReadOnly(true);
-//    menuRTCDate.setReadOnly(true);
+    menuSubMenuIPAddress.setReadOnly(true);
+    menuRTCDate.setReadOnly(true);
+    menuRTCTime.setReadOnly(true);
 }
 

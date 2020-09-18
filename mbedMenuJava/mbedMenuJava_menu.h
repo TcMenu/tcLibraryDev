@@ -41,24 +41,25 @@
 #define LISTEN_PORT 3333
 
 // all variables that need exporting
+extern I2C i2c;
 extern Adafruit_SSD1306_I2c gfx;
-//extern AdaColorGfxMenuConfig gfxConfig;
-//extern AdaFruitGfxMenuRenderer renderer;
-//
-//// all menu item forward references.
-//extern ActionMenuItem menuTakeDisplay;
-//extern EnumMenuItem menuSubMenuFoods;
-//extern IpAddressMenuItem menuSubMenuEditIP;
-//extern IpAddressMenuItem menuSubMenuIPAddress;
-//extern EditableLargeNumberMenuItem menuSubMenuLargeNum;
-//extern BackMenuItem menuBackSubMenu;
-//extern SubMenuItem menuSubMenu;
-//extern FloatMenuItem menuA0Value;
-//extern BooleanMenuItem menuABoolean;
-//extern AnalogMenuItem menuAnalogValue;
-//extern DateFormattedMenuItem menuRTCDate;
-//extern TimeFormattedMenuItem menuRTCTime;
-//extern const ConnectorLocalInfo applicationInfo;
+extern AdaColorGfxMenuConfig gfxConfig;
+extern AdaFruitGfxMenuRenderer renderer;
+
+// all menu item forward references.
+extern ActionMenuItem menuTakeDisplay;
+extern EnumMenuItem menuSubMenuFoods;
+extern IpAddressMenuItem menuSubMenuEditIP;
+extern IpAddressMenuItem menuSubMenuIPAddress;
+extern EditableLargeNumberMenuItem menuSubMenuLargeNum;
+extern BackMenuItem menuBackSubMenu;
+extern SubMenuItem menuSubMenu;
+extern FloatMenuItem menuA0Value;
+extern BooleanMenuItem menuUserButton;
+extern AnalogMenuItem menuAnalogValue;
+extern DateFormattedMenuItem menuRTCDate;
+extern TimeFormattedMenuItem menuRTCTime;
+extern const ConnectorLocalInfo applicationInfo;
 
 // Callback functions must always include CALLBACK_FUNCTION after the return type
 #define CALLBACK_FUNCTION

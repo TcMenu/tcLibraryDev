@@ -35,6 +35,8 @@ BufferedSerial pc(USBTX, USBRX); // tx, rx
 FILE* serPort = fdopen(&pc, "w");
 MBedLogger LoggingPort(pc);
 
+//MbedAnalogAbstraction analog;
+
 // an I2C sub-class that provides a constructed default
 
 I2C i2c(PF_0,PF_1);
