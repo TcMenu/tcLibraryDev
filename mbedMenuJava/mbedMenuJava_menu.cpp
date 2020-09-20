@@ -54,7 +54,7 @@ const ConnectorLocalInfo applicationInfo = { "MBed Test", "98ea360b-fe08-444a-99
 // Set up code
 
 void setupMenu() {
-    prepareAdaColorDefaultGfxConfig(&gfxConfig);
+    prepareAdaMonoGfxConfigOled(&gfxConfig);
     gfx.begin();
     renderer.setGraphicsDevice(&gfx, &gfxConfig);
     switches.initialise(internalDigitalIo(), true);

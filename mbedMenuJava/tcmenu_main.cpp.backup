@@ -19,6 +19,10 @@ void setup() {
     setupMenu();
     prepareRealtimeClock();
     monitorAnalogIn();
+
+    switches.addSwitch(USER_BUTTON, [](pinid_t pin, bool held) {
+       menuUserButton.setBoolean(!menuUserButton.getBoolean());
+    }, 20);
 }
 
 int main() {
@@ -76,6 +80,24 @@ void CALLBACK_FUNCTION onUserButton(int id) {
 void CALLBACK_FUNCTION onTakeDisplay(int id) {
     // TODO - your menu change code
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
