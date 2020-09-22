@@ -6,64 +6,66 @@
 
     All the variables you may need access to are marked extern in this file for easy
     use elsewhere.
- */
+*/
 
+#include <mbed.h>
 #include <tcMenu.h>
 #include "mbedMenuJava_menu.h"
 
 // Global variable declarations
 
-Adafruit_SSD1306_I2c gfx(i2c, NC, SSD_I2C_ADDRESS, 64, 132, SH_1106);
+const PROGMEM ConnectorLocalInfo applicationInfo = { "MBed Test", "98ea360b-fe08-444a-996b-2e94dda7a2eb" };
+Adafruit_SSD1306_Spi gfx(spi, PD_15, PF_12, PF_13, 64, 128, SSD_1306);
+
 AdaColorGfxMenuConfig gfxConfig;
 AdaFruitGfxMenuRenderer renderer;
 
 // Global Menu Item declarations
 
-const AnyMenuInfo minfoTakeDisplay = { "Take display", 11, 0xffff, 0, onTakeDisplay };
+const AnyMenuInfo minfoTakeDisplay = { "Take display", 11, 0xFFFF, 0, onTakeDisplay };
 ActionMenuItem menuTakeDisplay(&minfoTakeDisplay, NULL);
-const char enumStrSubMenuFoods_0[] = "Pizza";
-const char enumStrSubMenuFoods_1[] = "Pasta";
-const char enumStrSubMenuFoods_2[] = "Salad";
-const char enumStrSubMenuFoods_3[] = "Beef";
-const char enumStrSubMenuFoods_4[] = "Falafel";
+const char enumStrSubMenuFoods_0[]  = "Pizza";
+const char enumStrSubMenuFoods_1[]  = "Pasta";
+const char enumStrSubMenuFoods_2[]  = "Salad";
+const char enumStrSubMenuFoods_3[]  = "Beef";
+const char enumStrSubMenuFoods_4[]  = "Falafel";
 const char* const enumStrSubMenuFoods[]  = { enumStrSubMenuFoods_0, enumStrSubMenuFoods_1, enumStrSubMenuFoods_2, enumStrSubMenuFoods_3, enumStrSubMenuFoods_4 };
-const EnumMenuInfo minfoSubMenuFoods = { "Foods", 10, 0xffff, 4, NO_CALLBACK, enumStrSubMenuFoods };
+const EnumMenuInfo minfoSubMenuFoods = { "Foods", 10, 0xFFFF, 4, NO_CALLBACK, enumStrSubMenuFoods };
 EnumMenuItem menuSubMenuFoods(&minfoSubMenuFoods, 0, NULL);
-RENDERING_CALLBACK_NAME_INVOKE(fnSubMenuEditIPRtCall, ipAddressRenderFn, "Edit IP", -1, NULL)
+RENDERING_CALLBACK_NAME_INVOKE(fnSubMenuEditIPRtCall, ipAddressRenderFn, "Edit IP", -1, NO_CALLBACK)
 IpAddressMenuItem menuSubMenuEditIP(fnSubMenuEditIPRtCall, 9, &menuSubMenuFoods);
-RENDERING_CALLBACK_NAME_INVOKE(fnSubMenuIPAddressRtCall, ipAddressRenderFn, "IP Address", -1, NULL)
+RENDERING_CALLBACK_NAME_INVOKE(fnSubMenuIPAddressRtCall, ipAddressRenderFn, "IP Address", -1, NO_CALLBACK)
 IpAddressMenuItem menuSubMenuIPAddress(fnSubMenuIPAddressRtCall, 8, &menuSubMenuEditIP);
-RENDERING_CALLBACK_NAME_INVOKE(fnSubMenuLargeNumRtCall, largeNumItemRenderFn, "Large Num", -1, NULL)
+RENDERING_CALLBACK_NAME_INVOKE(fnSubMenuLargeNumRtCall, largeNumItemRenderFn, "Large Num", -1, NO_CALLBACK)
 EditableLargeNumberMenuItem menuSubMenuLargeNum(fnSubMenuLargeNumRtCall, 7, 7, 3, false, &menuSubMenuIPAddress);
-RENDERING_CALLBACK_NAME_INVOKE(fnSubMenuRtCall, backSubItemRenderFn, "Sub Menu", -1, NULL)
-const SubMenuInfo minfoSubMenu = { "Sub Menu", 6, 0xffff, 0, NO_CALLBACK };
+const SubMenuInfo minfoSubMenu = { "Sub Menu", 6, 0xFFFF, 0, NO_CALLBACK };
+RENDERING_CALLBACK_NAME_INVOKE(fnSubMenuRtCall, backSubItemRenderFn, "Sub Menu", -1, NO_CALLBACK)
 BackMenuItem menuBackSubMenu(fnSubMenuRtCall, &menuSubMenuLargeNum);
 SubMenuItem menuSubMenu(&minfoSubMenu, &menuBackSubMenu, &menuTakeDisplay);
-const FloatMenuInfo minfoA0Value = { "A0 Value", 5, 0xffff, 3, NO_CALLBACK };
+const FloatMenuInfo minfoA0Value = { "A0 Value", 5, 0xFFFF, 3, NO_CALLBACK };
 FloatMenuItem menuA0Value(&minfoA0Value, &menuSubMenu);
-const BooleanMenuInfo minfoUserButton = { "User Button", 4, 0xffff, 1, onUserButton, NAMING_ON_OFF };
+const BooleanMenuInfo minfoUserButton = { "User Button", 4, 0xFFFF, 1, onUserButton, NAMING_ON_OFF };
 BooleanMenuItem menuUserButton(&minfoUserButton, false, &menuA0Value);
-const AnalogMenuInfo minfoAnalogValue = { "Analog Value", 2, 0xffff, 100, NO_CALLBACK, 0, 0, "" };
+const AnalogMenuInfo minfoAnalogValue = { "Analog Value", 2, 0xFFFF, 100, NO_CALLBACK, 0, 0, "" };
 AnalogMenuItem menuAnalogValue(&minfoAnalogValue, 0, &menuUserButton);
-RENDERING_CALLBACK_NAME_INVOKE(fnRTCDateRtCall, dateItemRenderFn, "RTC Date", -1, NULL)
+RENDERING_CALLBACK_NAME_INVOKE(fnRTCDateRtCall, dateItemRenderFn, "RTC Date", -1, NO_CALLBACK)
 DateFormattedMenuItem menuRTCDate(fnRTCDateRtCall, 3, &menuAnalogValue);
-RENDERING_CALLBACK_NAME_INVOKE(fnRTCTimeRtCall, timeItemRenderFn, "RTC Time", -1, NULL)
-TimeFormattedMenuItem menuRTCTime(fnRTCTimeRtCall, 1, (MultiEditWireType)3, &menuRTCDate);
-const ConnectorLocalInfo applicationInfo = { "MBed Test", "98ea360b-fe08-444a-996b-2e94dda7a2eb" };
+RENDERING_CALLBACK_NAME_INVOKE(fnRTCTimeRtCall, timeItemRenderFn, "RTC Time", -1, NO_CALLBACK)
+TimeFormattedMenuItem menuRTCTime(fnRTCTimeRtCall, 1, (MultiEditWireType)EDITMODE_TIME_12H, &menuRTCDate);
+
 
 // Set up code
 
 void setupMenu() {
+    menuRTCTime.setReadOnly(true);
+    menuRTCDate.setReadOnly(true);
+    menuSubMenuIPAddress.setReadOnly(true);
+
     prepareAdaMonoGfxConfigOled(&gfxConfig);
+    gfx.setRotation(0);
     gfx.begin();
     renderer.setGraphicsDevice(&gfx, &gfxConfig);
     switches.initialise(internalDigitalIo(), true);
     menuMgr.initForEncoder(&renderer, &menuRTCTime, PE_2, PE_5, PE_4);
     remoteServer.begin(3333, &applicationInfo);
-
-    // Read only and local only function calls
-    menuSubMenuIPAddress.setReadOnly(true);
-    menuRTCDate.setReadOnly(true);
-    menuRTCTime.setReadOnly(true);
 }
-

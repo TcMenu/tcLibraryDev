@@ -4,9 +4,10 @@
 #include <IoLogging.h>
 #include <AnalogDeviceAbstraction.h>
 #include <stockIcons/wifiAndConnectionIcons16x12.h>
-#include "FreeSerif9pt7b.h"
+#include "Fonts/FreeSans9pt7b.h"
 
-I2C i2c(PF_0, PF_1);
+//I2C i2c(PF_0, PF_1);
+SPI spi(PB_5, PB_4, PB_3);
 
 BufferedSerial console(USBTX, USBRX);
 MBedLogger LoggingPort(console);
@@ -25,7 +26,7 @@ TitleWidget ethernetConnectionWidget(iconsEthernetConnection, 2, 16, 12, nullptr
 void setup() {
     // set up the serial port and I2C
     console.set_baud(115200);
-    i2c.frequency(400000);
+    //i2c.frequency(400000);
 
     renderer.setFirstWidget(&ethernetConnectionWidget);
     taskManager.scheduleFixedRate(1000, [] {
@@ -35,7 +36,7 @@ void setup() {
     // Here we run the tcMenu core menu setup, part of every script.
     setupMenu();
 
-    gfxConfig.titleFont = &FreeSerif9pt7b;
+    gfxConfig.titleFont = &FreeSans9pt7b;
     makePadding(gfxConfig.titlePadding, 0, 4, 2, 3);
 
     // Now we can work with menu items as they are fully setup on the renderer
@@ -52,12 +53,12 @@ void setup() {
     // If you want to have another screen when the system is idle, you can get a call back when the renderer resets
     // after it's idle for some time.
     renderer.setResetCallback([] {
-        renderer.takeOverDisplay(myDisplayProc);
+       // renderer.takeOverDisplay(myDisplayProc);
     });
     //renderer.setResetIntervalTimeSeconds(seconds);
 
     // start in the screen saver
-    renderer.takeOverDisplay(myDisplayProc);
+    //renderer.takeOverDisplay(myDisplayProc);
 }
 
 int main() {
@@ -121,7 +122,7 @@ void myDisplayProc(unsigned int encoderVal, RenderPressMode press) {
         return;
     }
     gfx.clearDisplay();
-    gfx.setFont(&FreeSerif9pt7b);
+    gfx.setFont(&FreeSans9pt7b);
     gfx.setTextSize(1);
 
     if((renderTickCount % 100) == 0) {

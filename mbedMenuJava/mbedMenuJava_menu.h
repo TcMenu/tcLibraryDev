@@ -6,67 +6,47 @@
 
     All the variables you may need access to are marked extern in this file for easy
     use elsewhere.
- */
+*/
 
 #ifndef MENU_GENERATED_CODE_H
 #define MENU_GENERATED_CODE_H
 
 #include <mbed.h>
 #include <tcMenu.h>
-
+#include <RuntimeMenuItem.h>
 #include "Adafruit_SSD1306.h"
 #include "tcMenuAdaFruitGfx.h"
 #include "MBedEthernetTransport.h"
 #include <RemoteConnector.h>
-#include <RuntimeMenuItem.h>
 #include <EditableLargeNumberMenuItem.h>
 
-// all define statements needed
-#define SERIAL_BUS i2c
-#define DISPLAY_VARIABLE gfx
-#define DISPLAY_TYPE SH_1106
-#define DISPLAY_CONFIG 
-#define DISPLAY_WIDTH 132
-#define DISPLAY_HEIGHT 64
-#define BUS_TYPE I2C
-#define DISP_RESET_PIN NC
-#define DISP_CS_PIN NC
-#define DISP_RS_PIN NC
-#define PULLUP_LOGIC true
-#define INTERRUPT_SWITCHES false
-#define SWITCH_IODEVICE 
-#define ENCODER_PIN_A PE_2
-#define ENCODER_PIN_B PE_5
-#define ENCODER_PIN_OK PE_4
-#define LISTEN_PORT 3333
+void setupMenu();  // forward reference of the menu setup function.
+extern const PROGMEM ConnectorLocalInfo applicationInfo;  // defines the app info to the linker.
 
-// all variables that need exporting
-extern I2C i2c;
-extern Adafruit_SSD1306_I2c gfx;
+// Global variables that need exporting
+
+extern SPI spi;
+extern Adafruit_SSD1306_Spi gfx;
 extern AdaColorGfxMenuConfig gfxConfig;
 extern AdaFruitGfxMenuRenderer renderer;
 
-// all menu item forward references.
+// Callback functions must always include CALLBACK_FUNCTION after the return type
+#define CALLBACK_FUNCTION
+
+// Global Menu Item exports
+
+void CALLBACK_FUNCTION onTakeDisplay(int id);
 extern ActionMenuItem menuTakeDisplay;
 extern EnumMenuItem menuSubMenuFoods;
 extern IpAddressMenuItem menuSubMenuEditIP;
 extern IpAddressMenuItem menuSubMenuIPAddress;
 extern EditableLargeNumberMenuItem menuSubMenuLargeNum;
-extern BackMenuItem menuBackSubMenu;
 extern SubMenuItem menuSubMenu;
 extern FloatMenuItem menuA0Value;
+void CALLBACK_FUNCTION onUserButton(int id);
 extern BooleanMenuItem menuUserButton;
 extern AnalogMenuItem menuAnalogValue;
 extern DateFormattedMenuItem menuRTCDate;
 extern TimeFormattedMenuItem menuRTCTime;
-extern const ConnectorLocalInfo applicationInfo;
-
-// Callback functions must always include CALLBACK_FUNCTION after the return type
-#define CALLBACK_FUNCTION
-
-void CALLBACK_FUNCTION onTakeDisplay(int id);
-void CALLBACK_FUNCTION onUserButton(int id);
-
-void setupMenu();
 
 #endif // MENU_GENERATED_CODE_H
