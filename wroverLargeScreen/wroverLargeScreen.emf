@@ -1,0 +1,285 @@
+{
+  "lastEdited": {
+    "seconds": 1600876347,
+    "nanos": 0
+  },
+  "codeOptions": {
+    "applicationUUID": "52909ce2-3fd9-4c67-b914-def4b6e04671",
+    "applicationName": "Stereo Amplifier",
+    "lastInputUuid": "89cd7f70-0457-4884-97c2-0db904ccb0ba",
+    "lastDisplayUuid": "4dcb12ec-13d8-4466-b8b6-bd575eae4612",
+    "lastRemoteUuid": "46c30011-cac6-4598-a7b8-b0630d55daab",
+    "embeddedPlatform": "ARDUINO_ESP32",
+    "namingRecursive": true,
+    "saveToSrc": false,
+    "lastProperties": [
+      {
+        "name": "DISPLAY_VARIABLE",
+        "latestValue": "gfx",
+        "subsystem": "DISPLAY"
+      },
+      {
+        "name": "DISPLAY_TYPE",
+        "latestValue": "Adafruit_ILI9341",
+        "subsystem": "DISPLAY"
+      },
+      {
+        "name": "DISPLAY_CONFIG",
+        "latestValue": "",
+        "subsystem": "DISPLAY"
+      },
+      {
+        "name": "DISPLAY_WIDTH",
+        "latestValue": "320",
+        "subsystem": "DISPLAY"
+      },
+      {
+        "name": "DISPLAY_HEIGHT",
+        "latestValue": "240",
+        "subsystem": "DISPLAY"
+      },
+      {
+        "name": "DISPLAY_RESET_PIN",
+        "latestValue": "18",
+        "subsystem": "DISPLAY"
+      },
+      {
+        "name": "DISPLAY_CS_PIN",
+        "latestValue": "22",
+        "subsystem": "DISPLAY"
+      },
+      {
+        "name": "DISPLAY_RS_PIN",
+        "latestValue": "21",
+        "subsystem": "DISPLAY"
+      },
+      {
+        "name": "DISPLAY_DATA_PIN",
+        "latestValue": "-1",
+        "subsystem": "DISPLAY"
+      },
+      {
+        "name": "DISPLAY_CLOCK_PIN",
+        "latestValue": "-1",
+        "subsystem": "DISPLAY"
+      },
+      {
+        "name": "DISPLAY_ROTATION",
+        "latestValue": "1",
+        "subsystem": "DISPLAY"
+      },
+      {
+        "name": "LISTEN_PORT",
+        "latestValue": "3333",
+        "subsystem": "REMOTE"
+      }
+    ]
+  },
+  "projectName": "Change description",
+  "namingRecursive": true,
+  "version": "1.0",
+  "items": [
+    {
+      "parentId": 0,
+      "type": "analogItem",
+      "item": {
+        "name": "Volume",
+        "eepromAddress": 2,
+        "id": 1,
+        "readOnly": false,
+        "localOnly": false,
+        "visible": true,
+        "functionName": "onVolumeChanged",
+        "maxValue": 255,
+        "offset": -180,
+        "divisor": 2,
+        "unitName": "dB"
+      }
+    },
+    {
+      "parentId": 0,
+      "type": "enumItem",
+      "item": {
+        "name": "Channel",
+        "eepromAddress": 4,
+        "id": 2,
+        "readOnly": false,
+        "localOnly": false,
+        "visible": true,
+        "functionName": "onChannelChanged",
+        "enumEntries": [
+          "Turntable",
+          "Computer",
+          "Auxillary"
+        ]
+      }
+    },
+    {
+      "parentId": 0,
+      "type": "boolItem",
+      "item": {
+        "name": "Mute all",
+        "eepromAddress": 6,
+        "id": 3,
+        "readOnly": false,
+        "localOnly": false,
+        "visible": true,
+        "naming": "ON_OFF"
+      }
+    },
+    {
+      "parentId": 0,
+      "type": "subMenu",
+      "item": {
+        "name": "Settings",
+        "eepromAddress": -1,
+        "id": 4,
+        "readOnly": false,
+        "localOnly": false,
+        "visible": true,
+        "secured": false
+      }
+    },
+    {
+      "parentId": 4,
+      "type": "analogItem",
+      "item": {
+        "name": "Max On Vol",
+        "eepromAddress": 7,
+        "id": 6,
+        "readOnly": false,
+        "localOnly": false,
+        "visible": true,
+        "maxValue": 255,
+        "offset": -180,
+        "divisor": 2,
+        "unitName": "dB"
+      }
+    },
+    {
+      "parentId": 4,
+      "type": "analogItem",
+      "item": {
+        "name": "In 1 Trim",
+        "eepromAddress": 9,
+        "id": 7,
+        "readOnly": false,
+        "localOnly": false,
+        "visible": true,
+        "functionName": "onTrimChange",
+        "maxValue": 20,
+        "offset": -10,
+        "divisor": 2,
+        "unitName": "dB"
+      }
+    },
+    {
+      "parentId": 4,
+      "type": "analogItem",
+      "item": {
+        "name": "In 2 Trim",
+        "eepromAddress": 11,
+        "id": 8,
+        "readOnly": false,
+        "localOnly": false,
+        "visible": true,
+        "functionName": "onTrimChange",
+        "maxValue": 20,
+        "offset": -10,
+        "divisor": 2,
+        "unitName": "dB"
+      }
+    },
+    {
+      "parentId": 4,
+      "type": "analogItem",
+      "item": {
+        "name": "In 3 Trim",
+        "eepromAddress": 13,
+        "id": 9,
+        "readOnly": false,
+        "localOnly": false,
+        "visible": true,
+        "functionName": "onTrimChange",
+        "maxValue": 20,
+        "offset": -10,
+        "divisor": 2,
+        "unitName": "dB"
+      }
+    },
+    {
+      "parentId": 4,
+      "type": "actionMenu",
+      "item": {
+        "name": "Save all",
+        "eepromAddress": -1,
+        "id": 10,
+        "readOnly": false,
+        "localOnly": false,
+        "visible": true,
+        "functionName": "onSave"
+      }
+    },
+    {
+      "parentId": 0,
+      "type": "subMenu",
+      "item": {
+        "name": "Status",
+        "eepromAddress": -1,
+        "id": 5,
+        "readOnly": false,
+        "localOnly": false,
+        "visible": true,
+        "secured": false
+      }
+    },
+    {
+      "parentId": 5,
+      "type": "analogItem",
+      "item": {
+        "name": "Left Level",
+        "eepromAddress": -1,
+        "id": 11,
+        "readOnly": false,
+        "localOnly": false,
+        "visible": true,
+        "maxValue": 4096,
+        "offset": 0,
+        "divisor": 1,
+        "unitName": "mV"
+      }
+    },
+    {
+      "parentId": 5,
+      "type": "analogItem",
+      "item": {
+        "name": "Right Level",
+        "eepromAddress": -1,
+        "id": 12,
+        "readOnly": false,
+        "localOnly": false,
+        "visible": true,
+        "maxValue": 4096,
+        "offset": 0,
+        "divisor": 1,
+        "unitName": "mV"
+      }
+    },
+    {
+      "parentId": 5,
+      "type": "analogItem",
+      "item": {
+        "name": "Heatsink Temp",
+        "eepromAddress": -1,
+        "id": 13,
+        "readOnly": true,
+        "localOnly": false,
+        "visible": true,
+        "maxValue": 255,
+        "offset": 0,
+        "divisor": 1,
+        "unitName": "C"
+      }
+    }
+  ]
+}
