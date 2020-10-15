@@ -1,6 +1,6 @@
 {
   "lastEdited": {
-    "seconds": 1600792386,
+    "seconds": 1601894532,
     "nanos": 0
   },
   "codeOptions": {
@@ -12,6 +12,7 @@
     "embeddedPlatform": "MBED_RTOS",
     "namingRecursive": true,
     "saveToSrc": false,
+    "useCppMain": true,
     "lastProperties": [
       {
         "name": "PULLUP_LOGIC",

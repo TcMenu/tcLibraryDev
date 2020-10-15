@@ -22,6 +22,18 @@ WiFiServer server(3333);
 
 // Global Menu Item declarations
 
+RENDERING_CALLBACK_NAME_INVOKE(fnConnectivityWiFiStatusRtCall, textItemRenderFn, "WiFi Status", -1, NO_CALLBACK)
+TextMenuItem menuConnectivityWiFiStatus(fnConnectivityWiFiStatusRtCall, 18, 10, NULL);
+RENDERING_CALLBACK_NAME_INVOKE(fnConnectivityDHCPIPRtCall, ipAddressRenderFn, "DHCP IP", -1, NO_CALLBACK)
+IpAddressMenuItem menuConnectivityDHCPIP(fnConnectivityDHCPIPRtCall, 15, &menuConnectivityWiFiStatus);
+RENDERING_CALLBACK_NAME_INVOKE(fnConnectivityPasswordRtCall, textItemRenderFn, "Password", 35, NO_CALLBACK)
+TextMenuItem menuConnectivityPassword(fnConnectivityPasswordRtCall, 17, 20, &menuConnectivityDHCPIP);
+RENDERING_CALLBACK_NAME_INVOKE(fnConnectivitySSIDRtCall, textItemRenderFn, "SSID", 15, NO_CALLBACK)
+TextMenuItem menuConnectivitySSID(fnConnectivitySSIDRtCall, 16, 20, &menuConnectivityPassword);
+const SubMenuInfo PROGMEM minfoConnectivity = { "Connectivity", 14, 0xFFFF, 0, NO_CALLBACK };
+RENDERING_CALLBACK_NAME_INVOKE(fnConnectivityRtCall, backSubItemRenderFn, "Connectivity", -1, NO_CALLBACK)
+BackMenuItem menuBackConnectivity(fnConnectivityRtCall, &menuConnectivitySSID);
+SubMenuItem menuConnectivity(&minfoConnectivity, &menuBackConnectivity, NULL);
 const AnalogMenuInfo PROGMEM minfoStatusHeatsinkTemp = { "Heatsink Temp", 13, 0xFFFF, 255, NO_CALLBACK, 0, 1, "C" };
 AnalogMenuItem menuStatusHeatsinkTemp(&minfoStatusHeatsinkTemp, 0, NULL);
 const AnalogMenuInfo PROGMEM minfoStatusRightLevel = { "Right Level", 12, 0xFFFF, 4096, NO_CALLBACK, 0, 1, "mV" };
@@ -31,7 +43,7 @@ AnalogMenuItem menuStatusLeftLevel(&minfoStatusLeftLevel, 0, &menuStatusRightLev
 const SubMenuInfo PROGMEM minfoStatus = { "Status", 5, 0xFFFF, 0, NO_CALLBACK };
 RENDERING_CALLBACK_NAME_INVOKE(fnStatusRtCall, backSubItemRenderFn, "Status", -1, NO_CALLBACK)
 BackMenuItem menuBackStatus(fnStatusRtCall, &menuStatusLeftLevel);
-SubMenuItem menuStatus(&minfoStatus, &menuBackStatus, NULL);
+SubMenuItem menuStatus(&minfoStatus, &menuBackStatus, &menuConnectivity);
 const AnyMenuInfo PROGMEM minfoSettingsSaveAll = { "Save all", 10, 0xFFFF, 0, onSave };
 ActionMenuItem menuSettingsSaveAll(&minfoSettingsSaveAll, NULL);
 const AnalogMenuInfo PROGMEM minfoSettingsIn3Trim = { "In 3 Trim", 9, 13, 20, onTrimChange, -10, 2, "dB" };
@@ -62,11 +74,14 @@ AnalogMenuItem menuVolume(&minfoVolume, 0, &menuChannel);
 
 void setupMenu() {
     menuStatusHeatsinkTemp.setReadOnly(true);
+    menuConnectivityDHCPIP.setReadOnly(true);
+    menuConnectivityWiFiStatus.setReadOnly(true);
 
     prepareAdaColorDefaultGfxConfig(&gfxConfig);
     gfx.begin();
     gfx.setRotation(1);
     renderer.setGraphicsDevice(&gfx, &gfxConfig);
-    menuMgr.initWithoutInput(&renderer, &menuVolume);
-    //remoteServer.begin(&server, &applicationInfo);
+    switches.initialise(internalDigitalIo(), true);
+    menuMgr.initForEncoder(&renderer, &menuVolume, 12, 14, 13);
+    remoteServer.begin(&server, &applicationInfo);
 }

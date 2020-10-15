@@ -69,18 +69,17 @@ int main() {
     }
 }
 
-void prepareRealtimeClock() {
-    if(remoteServer.isBound()) {
-        SocketAddress addr;
-        if(remoteServer.networkInterface()->get_ip_address(&addr) == NSAPI_ERROR_OK) {
-            menuSubMenuIPAddress.setIpAddress(addr.get_ip_address());
-        }
+class NTPTimeMenuSetup : public NTPTimeBaseEvent {
+public:
 
-        NTPTime ntp(remoteServer.networkInterface(), "2.pool.ntp.org", 123);
-        time_t timestamp = ntp.getTimeFromNTP();
+    NTPTimeMenuSetup(NetworkInterface *interface, const char *timeServer, int timePort)
+                    : NTPTimeBaseEvent(interface, timeServer, timePort) {
 
-        if (timestamp > 0) {
-            set_time(timestamp);
+    }
+
+    void exec() override {
+        if (theTime > 0) {
+            set_time(theTime);
 
             taskManager.scheduleFixedRate(1, [] {
                 auto timeNow = time(NULL);
@@ -97,10 +96,19 @@ void prepareRealtimeClock() {
                 menuRTCDate.setChanged(true);
 
             }, TIME_SECONDS);
+            setCompleted(true);
+        }
+    }
+};
 
+void prepareRealtimeClock() {
+    if(remoteServer.isBound()) {
+        SocketAddress addr;
+        if(remoteServer.networkInterface()->get_ip_address(&addr) == NSAPI_ERROR_OK) {
+            menuSubMenuIPAddress.setIpAddress(addr.get_ip_address());
+            taskManager.registerEvent(new NTPTimeMenuSetup(remoteServer.networkInterface(), "2.pool.ntp.org", 123),  true);
             return;
         }
-
     }
     serdebugF("Waiting for Interface / NTP");
     taskManager.scheduleOnce(5, prepareRealtimeClock, TIME_SECONDS);

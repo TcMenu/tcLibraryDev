@@ -16,7 +16,6 @@
 
 const PROGMEM ConnectorLocalInfo applicationInfo = { "MBed Test", "98ea360b-fe08-444a-996b-2e94dda7a2eb" };
 Adafruit_SSD1306_Spi gfx(spi, PD_15, PF_12, PF_13, 64, 128, SSD_1306);
-
 AdaColorGfxMenuConfig gfxConfig;
 AdaFruitGfxMenuRenderer renderer;
 

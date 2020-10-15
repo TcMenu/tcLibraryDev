@@ -1,18 +1,49 @@
 {
   "lastEdited": {
-    "seconds": 1600876347,
+    "seconds": 1601823276,
     "nanos": 0
   },
   "codeOptions": {
     "applicationUUID": "52909ce2-3fd9-4c67-b914-def4b6e04671",
     "applicationName": "Stereo Amplifier",
-    "lastInputUuid": "89cd7f70-0457-4884-97c2-0db904ccb0ba",
+    "lastInputUuid": "6dd87e7d-e751-4912-a70d-91793b1d3d87",
     "lastDisplayUuid": "4dcb12ec-13d8-4466-b8b6-bd575eae4612",
     "lastRemoteUuid": "46c30011-cac6-4598-a7b8-b0630d55daab",
     "embeddedPlatform": "ARDUINO_ESP32",
     "namingRecursive": true,
     "saveToSrc": false,
+    "useCppMain": false,
     "lastProperties": [
+      {
+        "name": "PULLUP_LOGIC",
+        "latestValue": "true",
+        "subsystem": "INPUT"
+      },
+      {
+        "name": "INTERRUPT_SWITCHES",
+        "latestValue": "false",
+        "subsystem": "INPUT"
+      },
+      {
+        "name": "SWITCH_IODEVICE",
+        "latestValue": "",
+        "subsystem": "INPUT"
+      },
+      {
+        "name": "ENCODER_PIN_A",
+        "latestValue": "12",
+        "subsystem": "INPUT"
+      },
+      {
+        "name": "ENCODER_PIN_B",
+        "latestValue": "14",
+        "subsystem": "INPUT"
+      },
+      {
+        "name": "ENCODER_PIN_OK",
+        "latestValue": "13",
+        "subsystem": "INPUT"
+      },
       {
         "name": "DISPLAY_VARIABLE",
         "latestValue": "gfx",
@@ -279,6 +310,75 @@
         "offset": 0,
         "divisor": 1,
         "unitName": "C"
+      }
+    },
+    {
+      "parentId": 0,
+      "type": "subMenu",
+      "item": {
+        "name": "Connectivity",
+        "eepromAddress": -1,
+        "id": 14,
+        "readOnly": false,
+        "localOnly": false,
+        "visible": true,
+        "secured": false
+      }
+    },
+    {
+      "parentId": 14,
+      "type": "textItem",
+      "item": {
+        "name": "SSID",
+        "eepromAddress": 15,
+        "id": 16,
+        "readOnly": false,
+        "localOnly": false,
+        "visible": true,
+        "itemType": "PLAIN_TEXT",
+        "textLength": 20
+      }
+    },
+    {
+      "parentId": 14,
+      "type": "textItem",
+      "item": {
+        "name": "Password",
+        "eepromAddress": 35,
+        "id": 17,
+        "readOnly": false,
+        "localOnly": false,
+        "visible": true,
+        "itemType": "PLAIN_TEXT",
+        "textLength": 20
+      }
+    },
+    {
+      "parentId": 14,
+      "type": "textItem",
+      "item": {
+        "name": "DHCP IP",
+        "eepromAddress": -1,
+        "id": 15,
+        "readOnly": true,
+        "localOnly": false,
+        "visible": true,
+        "itemType": "IP_ADDRESS",
+        "textLength": 10
+      }
+    },
+    {
+      "parentId": 14,
+      "type": "textItem",
+      "item": {
+        "name": "WiFi Status",
+        "eepromAddress": -1,
+        "id": 18,
+        "readOnly": true,
+        "localOnly": false,
+        "visible": true,
+        "itemType": "PLAIN_TEXT",
+        "textLength": 10
       }
     }
   ]

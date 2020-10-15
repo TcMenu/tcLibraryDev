@@ -13,6 +13,7 @@
 
 #include <Arduino.h>
 #include <tcMenu.h>
+#include <RuntimeMenuItem.h>
 #include "tcMenuAdaFruitGfx.h"
 #include "EthernetTransport.h"
 #include <RemoteConnector.h>
@@ -32,6 +33,11 @@ extern WiFiServer server;
 
 // Global Menu Item exports
 
+extern TextMenuItem menuConnectivityWiFiStatus;
+extern IpAddressMenuItem menuConnectivityDHCPIP;
+extern TextMenuItem menuConnectivityPassword;
+extern TextMenuItem menuConnectivitySSID;
+extern SubMenuItem menuConnectivity;
 extern AnalogMenuItem menuStatusHeatsinkTemp;
 extern AnalogMenuItem menuStatusRightLevel;
 extern AnalogMenuItem menuStatusLeftLevel;
