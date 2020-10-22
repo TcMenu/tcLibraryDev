@@ -1,6 +1,6 @@
 #include <mbed.h>
 #include "mbedMenuJava_menu.h"
-#include "NTPTime.h"
+#include "NTPTimeEvent.h"
 #include <IoLogging.h>
 #include <AnalogDeviceAbstraction.h>
 #include <stockIcons/wifiAndConnectionIcons16x12.h>
@@ -69,35 +69,33 @@ int main() {
     }
 }
 
-class NTPTimeMenuSetup : public NTPTimeBaseEvent {
+class NTPTimeMenuSetupEvent : public NTPTimeEvent {
 public:
 
-    NTPTimeMenuSetup(NetworkInterface *interface, const char *timeServer, int timePort)
-                    : NTPTimeBaseEvent(interface, timeServer, timePort) {
-
+    NTPTimeMenuSetupEvent(NetworkInterface *interface, const char *timeServer, int timePort)
+                    : NTPTimeEvent(interface, timeServer, timePort) {
     }
 
     void exec() override {
-        if (theTime > 0) {
-            set_time(theTime);
+        serdebugF("Time event has triggered");
+        set_time(_presentValue);
 
-            taskManager.scheduleFixedRate(1, [] {
-                auto timeNow = time(NULL);
-                auto tm = gmtime(&timeNow);
-                menuRTCDate.getUnderlyingData()->year = (tm->tm_year + 1900);
-                menuRTCDate.getUnderlyingData()->month = tm->tm_mon + 1;
-                menuRTCDate.getUnderlyingData()->day = tm->tm_mday;
-                menuRTCTime.getUnderlyingData()->hours = tm->tm_hour;
-                menuRTCTime.getUnderlyingData()->minutes = tm->tm_min;
-                menuRTCTime.getUnderlyingData()->seconds = tm->tm_sec;
-                menuRTCTime.setSendRemoteNeededAll();
-                menuRTCDate.setSendRemoteNeededAll();
-                menuRTCTime.setChanged(true);
-                menuRTCDate.setChanged(true);
+        taskManager.scheduleFixedRate(1, [] {
+            auto timeNow = time(nullptr);
+            auto tm = gmtime(&timeNow);
+            menuRTCDate.getUnderlyingData()->year = (tm->tm_year + 1900);
+            menuRTCDate.getUnderlyingData()->month = tm->tm_mon + 1;
+            menuRTCDate.getUnderlyingData()->day = tm->tm_mday;
+            menuRTCTime.getUnderlyingData()->hours = tm->tm_hour;
+            menuRTCTime.getUnderlyingData()->minutes = tm->tm_min;
+            menuRTCTime.getUnderlyingData()->seconds = tm->tm_sec;
+            menuRTCTime.setSendRemoteNeededAll();
+            menuRTCDate.setSendRemoteNeededAll();
+            menuRTCTime.setChanged(true);
+            menuRTCDate.setChanged(true);
 
-            }, TIME_SECONDS);
-            setCompleted(true);
-        }
+        }, TIME_SECONDS);
+        setCompleted(true);
     }
 };
 
@@ -106,11 +104,12 @@ void prepareRealtimeClock() {
         SocketAddress addr;
         if(remoteServer.networkInterface()->get_ip_address(&addr) == NSAPI_ERROR_OK) {
             menuSubMenuIPAddress.setIpAddress(addr.get_ip_address());
-            taskManager.registerEvent(new NTPTimeMenuSetup(remoteServer.networkInterface(), "2.pool.ntp.org", 123),  true);
+            taskManager.registerEvent(new NTPTimeMenuSetupEvent(
+                    remoteServer.networkInterface(),
+                    "2.pool.ntp.org", 123),  true);
             return;
         }
     }
-    serdebugF("Waiting for Interface / NTP");
     taskManager.scheduleOnce(5, prepareRealtimeClock, TIME_SECONDS);
 }
 

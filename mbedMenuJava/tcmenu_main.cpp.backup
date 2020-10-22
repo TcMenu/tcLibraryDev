@@ -1,6 +1,6 @@
 #include <mbed.h>
 #include "mbedMenuJava_menu.h"
-#include "NTPTime.h"
+#include "NTPTimeEvent.h"
 #include <IoLogging.h>
 #include <AnalogDeviceAbstraction.h>
 
@@ -35,7 +35,7 @@ int main() {
 void prepareRealtimeClock() {
     if(remoteServer.isBound()) {
 
-        NTPTime ntp(remoteServer.networkInterface(), "2.pool.ntp.org", 123);
+        NTPTimeEvent ntp(remoteServer.networkInterface(), "2.pool.ntp.org", 123);
         time_t timestamp = ntp.getTimeFromNTP();
 
         if (timestamp > 0) {
