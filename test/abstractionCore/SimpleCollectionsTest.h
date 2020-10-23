@@ -164,6 +164,17 @@ void testAddingWithSortAndResizeBy5() {
     TEST_ASSERT_EQUAL(btreeList.getByKey(8)->getItem(), 107);
     TEST_ASSERT_EQUAL(btreeList.getByKey(9)->getItem(), 108);
     TEST_ASSERT_EQUAL(btreeList.getByKey(10)->getItem(), 109);
+
+    // clear the tree and ensure it clears
+    btreeList.clear();
+    TEST_ASSERT_EQUAL(10, btreeList.capacity());
+    TEST_ASSERT_EQUAL(0, btreeList.count());
+
+    // now add an item back and make sure we find it.
+    TEST_ASSERT_TRUE(btreeList.add(storage9));
+    TEST_ASSERT_NOT_NULL(btreeList.getByKey(9));
+    TEST_ASSERT_EQUAL(btreeList.getByKey(9)->getItem(), 108);
+
 }
 
 #endif //IOABSTRACTION_SIMPLECOLLECTIONSTEST_H
