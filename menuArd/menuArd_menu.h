@@ -13,27 +13,55 @@
 
 #include <Arduino.h>
 #include <tcMenu.h>
-#include <LiquidCrystalIO.h>
-#include "tcMenuLiquidCrystal.h"
+#include <RuntimeMenuItem.h>
+#include "tcMenuU8g2.h"
+#include "EthernetTransport.h"
+#include <RemoteConnector.h>
+#include <ScrollChoiceMenuItem.h>
+#include <EditableLargeNumberMenuItem.h>
 
 void setupMenu();  // forward reference of the menu setup function.
 extern const PROGMEM ConnectorLocalInfo applicationInfo;  // defines the app info to the linker.
 
 // Global variables that need exporting
 
-extern IoAbstractionRef io23017;
-extern LiquidCrystal lcd;
-extern LiquidCrystalRenderer renderer;
-extern IoAbstractionRef io23017;
+extern U8G2_SH1106_128X64_NONAME_F_SW_I2C gfx;
+extern U8g2GfxMenuConfig gfxConfig;
+extern U8g2MenuRenderer renderer;
+extern WiFiServer server;
 
 // Callback functions must always include CALLBACK_FUNCTION after the return type
 #define CALLBACK_FUNCTION
 
 // Global Menu Item exports
 
-extern BooleanMenuItem menuSimhubConnected;
-extern AnalogMenuItem menuGear;
-extern AnalogMenuItem menuSpeed;
-extern AnalogMenuItem menuRPM;
+extern TextMenuItem menuText;
+extern AnalogMenuItem menuTenths;
+extern Rgb32MenuItem menuRGB;
+extern EditableLargeNumberMenuItem menuLgeNum;
+extern AnalogMenuItem menuVolume;
+extern SubMenuItem menuEditable;
+extern IpAddressMenuItem menuIpAddress;
+extern TextMenuItem menuPwd;
+extern TextMenuItem menuSSID;
+extern SubMenuItem menuConnectivity;
+void CALLBACK_FUNCTION onLoadFiles(int id);
+extern ActionMenuItem menuLoadFiles;
+void CALLBACK_FUNCTION onFileChoice(int id);
+extern ScrollChoiceMenuItem menuFile;
+extern BooleanMenuItem menuSecretEntry;
+void CALLBACK_FUNCTION onSaveAll(int id);
+extern ActionMenuItem menuSaveAll;
+void CALLBACK_FUNCTION onWindowOpening(int id);
+extern EnumMenuItem menuWinOpening;
+void CALLBACK_FUNCTION onHeaterPower(int id);
+extern EnumMenuItem menuHeaterPower;
+extern SubMenuItem menuSetup;
+void CALLBACK_FUNCTION onElectricHeater(int id);
+extern BooleanMenuItem menuElectricHeater;
+void CALLBACK_FUNCTION onWindowOpen(int id);
+extern BooleanMenuItem menuWindowOpen;
+extern AnalogMenuItem menuCucumberTemp;
+extern AnalogMenuItem menuTomatoTemp;
 
 #endif // MENU_GENERATED_CODE_H
