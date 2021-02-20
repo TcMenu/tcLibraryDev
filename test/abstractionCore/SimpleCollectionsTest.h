@@ -23,6 +23,13 @@ public:
         this->testKey = other.testKey;
     }
 
+    TestStorage& operator=(const TestStorage& other) {
+        if(this == &other) return *this;
+        this->testItem = other.testItem;
+        this->testKey = other.testKey;
+        return *this;
+    }
+
     int getKey() const {
         return testKey;
     }
