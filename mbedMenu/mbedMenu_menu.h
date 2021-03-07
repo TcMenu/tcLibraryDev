@@ -14,8 +14,7 @@
 #include <mbed.h>
 #include <tcMenu.h>
 #include <RuntimeMenuItem.h>
-#include "MBedEthernetTransport.h"
-#include <RemoteConnector.h>
+#include "tcMenuU8g2.h"
 #include <EditableLargeNumberMenuItem.h>
 
 void setupMenu();  // forward reference of the menu setup function.
@@ -23,13 +22,15 @@ extern const PROGMEM ConnectorLocalInfo applicationInfo;  // defines the app inf
 
 // Global variables that need exporting
 
-
+extern U8G2_SSD1306_128X64_NONAME_F_SW_I2C gfx;
+extern GraphicsDeviceRenderer renderer;
 
 // Callback functions must always include CALLBACK_FUNCTION after the return type
 #define CALLBACK_FUNCTION
 
 // Global Menu Item exports
 
+extern ActionMenuItem menuShowDialog;
 extern EnumMenuItem menuSubMenuFoods;
 extern IpAddressMenuItem menuSubMenuEditIP;
 extern IpAddressMenuItem menuSubMenuIPAddress;
@@ -40,7 +41,5 @@ void CALLBACK_FUNCTION onUserButton(int id);
 extern BooleanMenuItem menuABoolean;
 void CALLBACK_FUNCTION onAnalogChange(int id);
 extern AnalogMenuItem menuAnalogValue;
-extern DateFormattedMenuItem menuRTCDate;
-extern TimeFormattedMenuItem menuRTCTime;
 
 #endif // MENU_GENERATED_CODE_H

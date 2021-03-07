@@ -15,9 +15,12 @@
 // Global variable declarations
 
 const PROGMEM ConnectorLocalInfo applicationInfo = { "MBed Test", "98ea360b-fe08-444a-996b-2e94dda7a2eb" };
+GraphicsDeviceRenderer renderer(30, applicationInfo.name, &gfxDrawable);
 
 // Global Menu Item declarations
 
+const AnyMenuInfo minfoShowDialog = { "Show dialog", 11, 0xFFFF, 0, NO_CALLBACK };
+ActionMenuItem menuShowDialog(&minfoShowDialog, NULL);
 const char enumStrSubMenuFoods_0[]  = "Pizza";
 const char enumStrSubMenuFoods_1[]  = "Pasta";
 const char enumStrSubMenuFoods_2[]  = "Salad";
@@ -35,26 +38,21 @@ EditableLargeNumberMenuItem menuSubMenuLargeNum(fnSubMenuLargeNumRtCall, 7, 7, 3
 const SubMenuInfo minfoSubMenu = { "Sub Menu", 6, 0xFFFF, 0, NO_CALLBACK };
 RENDERING_CALLBACK_NAME_INVOKE(fnSubMenuRtCall, backSubItemRenderFn, "Sub Menu", -1, NO_CALLBACK)
 BackMenuItem menuBackSubMenu(fnSubMenuRtCall, &menuSubMenuLargeNum);
-SubMenuItem menuSubMenu(&minfoSubMenu, &menuBackSubMenu, NULL);
+SubMenuItem menuSubMenu(&minfoSubMenu, &menuBackSubMenu, &menuShowDialog);
 const FloatMenuInfo minfoA0Value = { "A0 Value", 5, 0xFFFF, 3, NO_CALLBACK };
 FloatMenuItem menuA0Value(&minfoA0Value, &menuSubMenu);
 const BooleanMenuInfo minfoABoolean = { "A Boolean", 4, 0xFFFF, 1, onUserButton, NAMING_TRUE_FALSE };
 BooleanMenuItem menuABoolean(&minfoABoolean, false, &menuA0Value);
-const AnalogMenuInfo minfoAnalogValue = { "Analog Value", 2, 0xFFFF, 100, onAnalogChange, 0, 0, "" };
+const AnalogMenuInfo minfoAnalogValue = { "Analog Value", 2, 0xFFFF, 100, onAnalogChange, 0, 1, "" };
 AnalogMenuItem menuAnalogValue(&minfoAnalogValue, 0, &menuABoolean);
-RENDERING_CALLBACK_NAME_INVOKE(fnRTCDateRtCall, dateItemRenderFn, "RTC Date", -1, NO_CALLBACK)
-DateFormattedMenuItem menuRTCDate(fnRTCDateRtCall, 3, &menuAnalogValue);
-RENDERING_CALLBACK_NAME_INVOKE(fnRTCTimeRtCall, timeItemRenderFn, "RTC Time", -1, NO_CALLBACK)
-TimeFormattedMenuItem menuRTCTime(fnRTCTimeRtCall, 1, (MultiEditWireType)EDITMODE_TIME_12H, &menuRTCDate);
 
 
 // Set up code
 
 void setupMenu() {
-    menuRTCTime.setReadOnly(true);
-    menuRTCDate.setReadOnly(true);
     menuSubMenuIPAddress.setReadOnly(true);
 
-    switches.initialise(internalDigitalIo(), true);
-    remoteServer.begin(3333, &applicationInfo);
+    renderer.setUpdatesPerSecond(10);
+    renderer.prepareDisplay(true, NULL, 1, NULL, 1, true);
+    menuMgr.initWithoutInput(&renderer, &menuAnalogValue);
 }

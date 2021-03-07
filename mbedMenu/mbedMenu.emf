@@ -1,48 +1,19 @@
 {
   "lastEdited": {
-    "seconds": 1600184431,
+    "seconds": 1615111304,
     "nanos": 0
   },
   "codeOptions": {
     "applicationUUID": "98ea360b-fe08-444a-996b-2e94dda7a2eb",
     "applicationName": "MBed Test",
-    "lastInputUuid": "6dd87e7d-e751-4912-a70d-91793b1d3d87",
+    "lastInputUuid": "89cd7f70-0457-4884-97c2-0db904ccb0ba",
     "lastDisplayUuid": "8646497b-1427-415f-8020-1260a1fef57d",
-    "lastRemoteUuid": "27e7a502-330e-4570-9f8e-bd26ac88051f",
+    "lastRemoteUuid": "2c101fec-1f7d-4ff3-8d2b-992ad41e7fcb",
     "embeddedPlatform": "MBED_RTOS",
     "namingRecursive": true,
     "saveToSrc": false,
+    "useCppMain": true,
     "lastProperties": [
-      {
-        "name": "PULLUP_LOGIC",
-        "latestValue": "true",
-        "subsystem": "INPUT"
-      },
-      {
-        "name": "INTERRUPT_SWITCHES",
-        "latestValue": "false",
-        "subsystem": "INPUT"
-      },
-      {
-        "name": "SWITCH_IODEVICE",
-        "latestValue": "",
-        "subsystem": "INPUT"
-      },
-      {
-        "name": "ENCODER_PIN_A",
-        "latestValue": "PE_2",
-        "subsystem": "INPUT"
-      },
-      {
-        "name": "ENCODER_PIN_B",
-        "latestValue": "PE_5",
-        "subsystem": "INPUT"
-      },
-      {
-        "name": "ENCODER_PIN_OK",
-        "latestValue": "PE_4",
-        "subsystem": "INPUT"
-      },
       {
         "name": "DISPLAY_VARIABLE",
         "latestValue": "gfx",
@@ -59,9 +30,19 @@
         "subsystem": "DISPLAY"
       },
       {
-        "name": "LISTEN_PORT",
-        "latestValue": "3333",
-        "subsystem": "REMOTE"
+        "name": "DISPLAY_TITLE_FONT",
+        "latestValue": "NULL",
+        "subsystem": "DISPLAY"
+      },
+      {
+        "name": "DISPLAY_ITEM_FONT",
+        "latestValue": "NULL",
+        "subsystem": "DISPLAY"
+      },
+      {
+        "name": "UPDATES_PER_SEC",
+        "latestValue": "10",
+        "subsystem": "DISPLAY"
       }
     ]
   },
@@ -69,34 +50,6 @@
   "namingRecursive": true,
   "version": "1.0",
   "items": [
-    {
-      "parentId": 0,
-      "type": "textItem",
-      "item": {
-        "name": "RTC Time",
-        "eepromAddress": -1,
-        "id": 1,
-        "readOnly": true,
-        "localOnly": false,
-        "visible": true,
-        "itemType": "TIME_12H",
-        "textLength": 10
-      }
-    },
-    {
-      "parentId": 0,
-      "type": "textItem",
-      "item": {
-        "name": "RTC Date",
-        "eepromAddress": -1,
-        "id": 3,
-        "readOnly": true,
-        "localOnly": false,
-        "visible": true,
-        "itemType": "GREGORIAN_DATE",
-        "textLength": 10
-      }
-    },
     {
       "parentId": 0,
       "type": "analogItem",
@@ -216,6 +169,20 @@
           "Beef",
           "Falafel"
         ]
+      }
+    },
+    {
+      "parentId": 0,
+      "type": "actionMenu",
+      "item": {
+        "name": "Show dialog",
+        "eepromAddress": -1,
+        "id": 11,
+        "readOnly": false,
+        "localOnly": false,
+        "visible": true,
+        "functionName": "",
+        "variableName": ""
       }
     }
   ]
