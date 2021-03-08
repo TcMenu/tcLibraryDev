@@ -14,7 +14,7 @@
 #include <mbed.h>
 #include <tcMenu.h>
 #include <RuntimeMenuItem.h>
-#include "tcMenuU8g2.h"
+#include "tcMenuStChromaArt.h"
 #include <EditableLargeNumberMenuItem.h>
 
 void setupMenu();  // forward reference of the menu setup function.
@@ -22,7 +22,6 @@ extern const PROGMEM ConnectorLocalInfo applicationInfo;  // defines the app inf
 
 // Global variables that need exporting
 
-extern U8G2_SSD1306_128X64_NONAME_F_SW_I2C gfx;
 extern GraphicsDeviceRenderer renderer;
 
 // Callback functions must always include CALLBACK_FUNCTION after the return type

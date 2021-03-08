@@ -12,10 +12,13 @@
 #include <tcMenu.h>
 #include "mbedMenu_menu.h"
 
+#include "FreeSans12pt7b.h"
+
 // Global variable declarations
 
 const PROGMEM ConnectorLocalInfo applicationInfo = { "MBed Test", "98ea360b-fe08-444a-996b-2e94dda7a2eb" };
-GraphicsDeviceRenderer renderer(30, applicationInfo.name, &gfxDrawable);
+StChromaArtDrawable bspDrawable;
+GraphicsDeviceRenderer renderer(30, applicationInfo.name, &bspDrawable);
 
 // Global Menu Item declarations
 
@@ -53,6 +56,6 @@ void setupMenu() {
     menuSubMenuIPAddress.setReadOnly(true);
 
     renderer.setUpdatesPerSecond(10);
-    renderer.prepareDisplay(true, NULL, 1, NULL, 1, true);
+    renderer.prepareDisplay(false, &FreeSans12pt7b, 1, &FreeSans12pt7b, 1, true);
     menuMgr.initWithoutInput(&renderer, &menuAnalogValue);
 }
