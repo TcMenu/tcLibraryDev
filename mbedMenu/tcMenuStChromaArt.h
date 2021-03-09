@@ -23,6 +23,7 @@
 #include <graphics/GraphicsDeviceRenderer.h>
 #include <BaseDialog.h>
 #include <tcUtil.h>
+#include <ResistiveTouchScreen.h>
 #include "Drivers/BSP/STM32F429I-Discovery/stm32f429i_discovery_lcd.h"
 
 //
@@ -98,5 +99,12 @@ public:
     int drawAdaFruitFontChar(int16_t x, int16_t y, uint8_t c, const GFXfont *gfxFont);
 };
 
+class StBspTouchInterrogator : public iotouch::TouchInterrogator {
+private:
+    int width, height;
+public:
+    StBspTouchInterrogator(int wid, int hei);
+    iotouch::TouchState internalProcessTouch(float *ptrX, float *ptrY, TouchRotation rotation) override;
+};
 
 #endif // TCMENU_ST_CHROMA_ART_H

@@ -10,6 +10,7 @@
 
 #include <mbed.h>
 #include <tcMenu.h>
+#include <graphics/MenuTouchScreenEncoder.h>
 #include "mbedMenu_menu.h"
 
 #include "FreeSans12pt7b.h"
@@ -19,6 +20,9 @@
 const PROGMEM ConnectorLocalInfo applicationInfo = { "MBed Test", "98ea360b-fe08-444a-996b-2e94dda7a2eb" };
 StChromaArtDrawable bspDrawable;
 GraphicsDeviceRenderer renderer(30, applicationInfo.name, &bspDrawable);
+
+StBspTouchInterrogator touchInterrogator(240, 320);
+MenuTouchScreenManager touchScreen(&touchInterrogator, &renderer, iotouch::TouchInterrogator::PORTRAIT);
 
 // Global Menu Item declarations
 
@@ -57,5 +61,6 @@ void setupMenu() {
 
     renderer.setUpdatesPerSecond(10);
     renderer.prepareDisplay(false, &FreeSans12pt7b, 1, &FreeSans12pt7b, 1, true);
+    touchScreen.start();
     menuMgr.initWithoutInput(&renderer, &menuAnalogValue);
 }

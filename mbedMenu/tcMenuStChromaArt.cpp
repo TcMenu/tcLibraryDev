@@ -15,6 +15,8 @@
 
 #include "tcMenuStChromaArt.h"
 #include "Utilities/Fonts/fonts.h"
+#include "Drivers/BSP/STM32F429I-Discovery/stm32f429i_discovery_ts.h"
+
 
 sFONT* safeGetFont(const void* fnt) {
     if(fnt) return (sFONT*)(fnt);
@@ -38,7 +40,7 @@ void StChromaArtDrawable::drawText(const Coord &where, const void *font, int mag
     }
     // otherwise mag==1 is adafruit proportional font
     int16_t xPos = where.x;
-    while(*text && xPos < BSP_LCD_GetXSize()) {
+    while(*text && xPos < (int16_t)BSP_LCD_GetXSize()) {
         int baseline = 0;
         auto exts = textExtents(font, mag, "(;y", &baseline);
         xPos += drawAdaFruitFontChar(xPos, where.y + (exts.y - baseline), *text, (const GFXfont*)font);
@@ -84,7 +86,7 @@ void StChromaArtDrawable::drawXBitmap(const Coord &where, const Coord &size, con
 int StChromaArtDrawable::drawAdaFruitFontChar(int16_t x, int16_t y, uint8_t c, const GFXfont* gfxFont) { // Custom font
     // make sure it's printable.
     if(c < gfxFont->first || c > gfxFont->last) return 0;
-    if(x > BSP_LCD_GetXSize()) return 0;
+    if(x > (int16_t)BSP_LCD_GetXSize()) return 0;
 
     c -= gfxFont->first;
     GFXglyph *glyph = gfxFont->glyph + c;
@@ -97,21 +99,21 @@ int StChromaArtDrawable::drawAdaFruitFontChar(int16_t x, int16_t y, uint8_t c, c
 
     for (yy = 0; yy < h; yy++) {
         int locY = max(0, y + yo + yy);
-        bool yOK = (locY < BSP_LCD_GetYSize());
+        bool yOK = (locY < (int16_t)BSP_LCD_GetYSize());
         for (xx = 0; xx < w; xx++) {
             if (!(bit++ & 7)) {
                 bits = bitmap[bo++];
             }
             if (bits & 0x80) {
                 int locX = max(0, x + xo + xx);
-                if(locX < BSP_LCD_GetXSize() && yOK) {
+                if(locX < (int16_t)BSP_LCD_GetXSize() && yOK) {
                     BSP_LCD_DrawPixel(locX, locY, drawColor);
                 }
             }
             bits <<= 1;
         }
     }
-    return w + xo;
+    return glyph->xAdvance;
 }
 
 void StChromaArtDrawable::drawBox(const Coord &where, const Coord &size, bool filled) {
@@ -166,8 +168,7 @@ Coord StChromaArtDrawable::textExtents(const void *maybeFont, int mag, const cha
         while(*current && (*current < font->last)) {
             auto glIdx = uint16_t(*current) - font->first;
             auto &g = font->glyph[glIdx];
-            width += g.width;
-            width += g.xOffset;
+            width += g.xAdvance;
             current++;
         }
 
@@ -183,4 +184,21 @@ Coord StChromaArtDrawable::textExtents(const void *maybeFont, int mag, const cha
         if(baseline) *baseline = bl;
         return Coord(width, height);
     }
+    return Coord(0,0);
+}
+
+iotouch::TouchState StBspTouchInterrogator::internalProcessTouch(float *ptrX, float *ptrY, iotouch::TouchInterrogator::TouchRotation rotation) {
+    TS_StateTypeDef tsState;
+    BSP_TS_GetState(&tsState);
+    if(!tsState.TouchDetected) return iotouch::NOT_TOUCHED;
+
+    *ptrX = (float)tsState.X / float(width);
+    *ptrY = float(height - tsState.Y) / float(height);
+    return iotouch::TOUCHED;
+}
+
+StBspTouchInterrogator::StBspTouchInterrogator(int w, int h) {
+    width = w;
+    height = h;
+    BSP_TS_Init(w, h);
 }
