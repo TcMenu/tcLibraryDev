@@ -8,11 +8,14 @@
 #include "switchesTests.h"
 #include "ioDeviceTests.h"
 #include "SimpleCollectionsTest.h"
+#include <Wire.h>
 
 const char memToWrite[110] = { "This is a very large string to write into the rom to ensure it crosses memory boundaries in the rom" };
 
 void testI2cEeepromOnGoodAddress() {
+    serdebug("Creating i2c rom");
     I2cAt24Eeprom eeprom(0x50, PAGESIZE_AT24C128);
+    serdebug("Run tests on i2c rom");
     eeprom.write8(700, 0xfe);
     eeprom.write16(701, 0xf00d);
     eeprom.write32(703, 0xbeeff00d);
@@ -32,6 +35,8 @@ void testI2cEeepromOnGoodAddress() {
     eeprom.write8(700, 0xaa);
     TEST_ASSERT_EQUAL(0xaa, eeprom.read8(700));
     TEST_ASSERT_FALSE(eeprom.hasErrorOccurred());
+
+    serdebug("I2C bad EEPROM.");
 
     I2cAt24Eeprom eepromBad(0x73, PAGESIZE_AT24C128);
     eepromBad.write8(800, 123);
