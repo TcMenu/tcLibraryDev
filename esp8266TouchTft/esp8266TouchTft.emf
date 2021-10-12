@@ -1,0 +1,311 @@
+{
+  "version": "1.00",
+  "projectName": "ESP8266 touch test project",
+  "author": "dave",
+  "items": [
+    {
+      "parentId": 0,
+      "type": "analogItem",
+      "item": {
+        "maxValue": 1000,
+        "offset": 0,
+        "divisor": 10,
+        "unitName": "T",
+        "name": "DecimalTens",
+        "variableName": "DecimalTens",
+        "id": 1,
+        "eepromAddress": 2,
+        "functionName": "onDecimalTens",
+        "readOnly": false,
+        "localOnly": false,
+        "visible": true
+      }
+    },
+    {
+      "parentId": 0,
+      "type": "analogItem",
+      "item": {
+        "maxValue": 100,
+        "offset": 0,
+        "divisor": 2,
+        "unitName": "H",
+        "name": "Halves",
+        "variableName": "Halves",
+        "id": 2,
+        "eepromAddress": 4,
+        "readOnly": false,
+        "localOnly": false,
+        "visible": true
+      }
+    },
+    {
+      "parentId": 0,
+      "type": "largeNumItem",
+      "item": {
+        "digitsAllowed": 8,
+        "decimalPlaces": 3,
+        "negativeAllowed": true,
+        "name": "Large Num",
+        "variableName": "LargeNum",
+        "id": 3,
+        "eepromAddress": 6,
+        "functionName": "onLargeNum",
+        "readOnly": false,
+        "localOnly": false,
+        "visible": true
+      }
+    },
+    {
+      "parentId": 0,
+      "type": "enumItem",
+      "item": {
+        "enumEntries": [
+          "Pizza",
+          "Pasta",
+          "Salad",
+          "Chips"
+        ],
+        "name": "Foods",
+        "variableName": "Foods",
+        "id": 4,
+        "eepromAddress": -1,
+        "readOnly": false,
+        "localOnly": false,
+        "visible": true
+      }
+    },
+    {
+      "parentId": 0,
+      "type": "subMenu",
+      "item": {
+        "secured": false,
+        "name": "More Items",
+        "variableName": "MoreItems",
+        "id": 5,
+        "eepromAddress": -1,
+        "readOnly": false,
+        "localOnly": false,
+        "visible": true
+      }
+    },
+    {
+      "parentId": 5,
+      "type": "boolItem",
+      "item": {
+        "naming": "YES_NO",
+        "name": "Bool1",
+        "variableName": "MoreItemsBool1",
+        "id": 6,
+        "eepromAddress": 14,
+        "readOnly": false,
+        "localOnly": false,
+        "visible": true
+      }
+    },
+    {
+      "parentId": 5,
+      "type": "actionMenu",
+      "item": {
+        "name": "PressMe",
+        "variableName": "MoreItemsPressMe",
+        "id": 7,
+        "eepromAddress": -1,
+        "functionName": "onPressMe",
+        "readOnly": false,
+        "localOnly": false,
+        "visible": true
+      }
+    },
+    {
+      "parentId": 5,
+      "type": "textItem",
+      "item": {
+        "textLength": 5,
+        "itemType": "GREGORIAN_DATE",
+        "name": "Date",
+        "variableName": "MoreItemsDate",
+        "id": 8,
+        "eepromAddress": 15,
+        "readOnly": false,
+        "localOnly": false,
+        "visible": true
+      }
+    },
+    {
+      "parentId": 5,
+      "type": "textItem",
+      "item": {
+        "textLength": 5,
+        "itemType": "TIME_12H",
+        "name": "New TextItem",
+        "variableName": "MoreItemsNewTextItem",
+        "id": 9,
+        "eepromAddress": 19,
+        "readOnly": false,
+        "localOnly": false,
+        "visible": true
+      }
+    },
+    {
+      "parentId": 5,
+      "type": "rgbItem",
+      "item": {
+        "includeAlphaChannel": false,
+        "name": "RGB",
+        "variableName": "MoreItemsRGB",
+        "id": 10,
+        "eepromAddress": -1,
+        "readOnly": false,
+        "localOnly": false,
+        "visible": true
+      }
+    },
+    {
+      "parentId": 5,
+      "type": "runtimeList",
+      "item": {
+        "initialRows": 0,
+        "name": "MyList",
+        "variableName": "MoreItemsMyList",
+        "id": 11,
+        "eepromAddress": -1,
+        "functionName": "",
+        "readOnly": false,
+        "localOnly": false,
+        "visible": true
+      }
+    },
+    {
+      "parentId": 0,
+      "type": "subMenu",
+      "item": {
+        "secured": false,
+        "name": "Connectivity",
+        "variableName": "Connectivity",
+        "id": 12,
+        "eepromAddress": -1,
+        "readOnly": false,
+        "localOnly": false,
+        "visible": true
+      }
+    },
+    {
+      "parentId": 12,
+      "type": "customBuildItem",
+      "item": {
+        "menuType": "REMOTE_IOT_MONITOR",
+        "name": "IoT Monitor",
+        "id": 13,
+        "eepromAddress": -1,
+        "readOnly": false,
+        "localOnly": false,
+        "visible": true
+      }
+    },
+    {
+      "parentId": 12,
+      "type": "customBuildItem",
+      "item": {
+        "menuType": "AUTHENTICATION",
+        "name": "Authenticator",
+        "id": 14,
+        "eepromAddress": -1,
+        "readOnly": false,
+        "localOnly": false,
+        "visible": true
+      }
+    }
+  ],
+  "codeOptions": {
+    "embeddedPlatform": "ARDUINO_ESP8266",
+    "lastDisplayUuid": "e6342680-6fab-4d1b-ac08-ce8dbfc0974c",
+    "lastInputUuid": "406a3089-6bc6-491e-9e3b-2cc2ec20a3cb",
+    "lastRemoteUuid": "2c101fec-1f7d-4ff3-8d2b-992ad41e7fcb",
+    "lastRemoteUuids": [
+      "2c101fec-1f7d-4ff3-8d2b-992ad41e7fcb"
+    ],
+    "lastThemeUuid": "850dc0a3-f534-47c2-94d8-1e64ff368a54",
+    "applicationUUID": "cc66fbc2-6557-42fa-a098-44466b48ac42",
+    "applicationName": "ESP8266 Touch",
+    "lastProperties": [
+      {
+        "name": "DISPLAY_VARIABLE",
+        "latestValue": "gfx",
+        "subsystem": "DISPLAY"
+      },
+      {
+        "name": "DISPLAY_ROTATION",
+        "latestValue": "3",
+        "subsystem": "DISPLAY"
+      },
+      {
+        "name": "DOUBLE_BUFFER_ROWS",
+        "latestValue": "0",
+        "subsystem": "DISPLAY"
+      },
+      {
+        "name": "UPDATES_PER_SEC",
+        "latestValue": "10",
+        "subsystem": "DISPLAY"
+      },
+      {
+        "name": "TOUCH_ROTATION",
+        "latestValue": "LANDSCAPE_INVERTED",
+        "subsystem": "INPUT"
+      },
+      {
+        "name": "TOUCH_LIBRARY",
+        "latestValue": "XPT2046_Touchscreen",
+        "subsystem": "INPUT"
+      },
+      {
+        "name": "TOUCH_INTERRUPT_PIN",
+        "latestValue": "0xFF",
+        "subsystem": "INPUT"
+      },
+      {
+        "name": "TOUCH_CS_PIN",
+        "latestValue": "PIN_D1",
+        "subsystem": "INPUT"
+      },
+      {
+        "name": "ITEM_FONT",
+        "latestValue": "num:,4",
+        "subsystem": "THEME"
+      },
+      {
+        "name": "TITLE_FONT",
+        "latestValue": "num:,4",
+        "subsystem": "THEME"
+      },
+      {
+        "name": "BORDER_FOR_ACTIONS",
+        "latestValue": "0",
+        "subsystem": "THEME"
+      },
+      {
+        "name": "TITLE_SHOW_MODE",
+        "latestValue": "TITLE_ALWAYS",
+        "subsystem": "THEME"
+      },
+      {
+        "name": "USE_SLIDER_ANALOG",
+        "latestValue": "true",
+        "subsystem": "THEME"
+      },
+      {
+        "name": "NEED_EDITING_ICONS",
+        "latestValue": "false",
+        "subsystem": "THEME"
+      }
+    ],
+    "namingRecursive": true,
+    "saveToSrc": false,
+    "useCppMain": false,
+    "eepromDefinition": "eeprom:",
+    "authenticatorDefinition": "rom:200:6",
+    "projectIoExpanders": [
+      "deviceIO:"
+    ]
+  }
+}
