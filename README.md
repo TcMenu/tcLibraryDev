@@ -1,6 +1,6 @@
 # TcMenu and IoAbstraction development and test project
 
-**NOTE that this project is not intended for users of tcMenu and IoAbstraction, it exists purely for testing and developing the libraries.**
+**NOTE that this project is not a fully working solution, it is an example of how to get started with library development in platformIO. It is not maintained.**
 
 This is for developers of tcMenu and IoAbstraction, it allows you to develop source and build both libraries within an IDE using platformIO.
 
