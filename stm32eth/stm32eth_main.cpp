@@ -16,6 +16,8 @@
  by sstaub
  */
 
+int servedPages = 0;
+
 #include <Wire.h>
 #include <LwIP.h>
 #include <STM32Ethernet.h>
@@ -49,6 +51,8 @@ void loop() {
     // listen for incoming clients
     EthernetClient client = server.available();
     if (client) {
+        servedPages++;
+
         Serial.println("new client");
         // an http request ends with a blank line
         bool currentLineIsBlank = true;
@@ -68,6 +72,9 @@ void loop() {
                     client.println();
                     client.println("<!DOCTYPE HTML>");
                     client.println("<html>");
+                    client.print("<h1>");
+                    client.print(servedPages);
+                    client.println("</h1>");
                     // output the value of each analog input pin
                     for(int i=0;i<100;i++) {
                         for (int analogChannel = 0; analogChannel < 6; analogChannel++) {
