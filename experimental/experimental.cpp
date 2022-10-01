@@ -1,47 +1,29 @@
-#include <TaskManagerIO.h>
-#include "IoLogging.h"
+// Test for minimum program size.
+// Edit AVRI2C_FASTMODE in SSD1306Ascii.h to change the default I2C frequency.
 
-class EventTesting : public BaseEvent {
-private:
-    uint32_t counter = 0;
-    const char* name;
-public:
-    explicit EventTesting(const char *name) : name(name) {}
+#include "SSD1306Ascii.h"
+#include "SSD1306AsciiAvrI2c.h"
 
-    void exec() override {
-        counter++;
-        serdebugF3("exec - counter is ", counter, name);
-    }
+// 0X3C+SA0 - 0x3C or 0x3D
+#define I2C_ADDRESS 0x3C
 
-    uint32_t timeOfNextCheck() override {
+// Define proper RST_PIN if required.
+#define RST_PIN -1
 
-        return 60UL * 1000000UL;
-    }
-};
-
-EventTesting testing1("test1");
-EventTesting testing2("test2");
-
-uint32_t thenTime1;
-uint32_t thenTime2;
-
+SSD1306AsciiAvrI2c oled;
+//------------------------------------------------------------------------------
 void setup() {
-    taskManager.registerEvent(&testing1);
-    taskManager.registerEvent(&testing2);
-    thenTime1 = millis();
-    thenTime2 = millis();
+
+#if RST_PIN >= 0
+    oled.begin(&Adafruit128x64, I2C_ADDRESS, RST_PIN);
+#else // RST_PIN >= 0
+    oled.begin(&Adafruit128x64, I2C_ADDRESS);
+#endif // RST_PIN >= 0
+    // Call oled.setI2cClock(frequency) to change from the default frequency.
+
+    oled.setFont(System5x7);
+    oled.clear();
+    oled.print("Hello world!");
 }
-
-void loop() {
-    taskManager.runLoop();
-
-    if((millis() -thenTime1) > 100) {
-        thenTime1 = millis();
-        testing1.markTriggeredAndNotify();
-    }
-
-//    if((millis() -thenTime2) > 500) {
-//        thenTime2 = millis();
-//        testing2.markTriggeredAndNotify();
-//    }
-}
+//------------------------------------------------------------------------------
+void loop() {}
