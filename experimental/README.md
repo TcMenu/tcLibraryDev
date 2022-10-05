@@ -11,3 +11,14 @@ https://github.com/stm32duino/Arduino_Core_STM32/
 https://github.com/stm32duino/Arduino_Core_STM32/discussions/1624
 https://github.com/fpistm/Arduino_Core_STM32/commit/62a306275720a48e8833fb1eb83b549e50630e5a#diff-6ba5daa261970b3ca8185ad8825d4e14R93
 https://www.stm32duino.com/viewtopic.php?t=759
+
+Required adjustment to variant_generic.h
+
+    //DJC adjustment - enable HAL_LTDC display
+    #define HAL_LTDC_MODULE_ENABLED
+    #define HAL_SDRAM_MODULE_ENABLED
+    //DJC adjustment - enable HAL_LTDC display
+
+in file
+    
+    .platformio\packages\framework-arduinoststm32\variants\STM32F4xx\F427Z(G-I)T_F429ZET_F429Z(G-I)(T-Y)_F437Z(G-I)T_F439Z(G-I)(T-Y)\variant_generic.h
