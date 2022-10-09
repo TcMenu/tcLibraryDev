@@ -7,6 +7,7 @@ StChromaArtDrawable chromaArtDrawable;
 extern LTDC_HandleTypeDef hLtdcHandler;
 
 void setup() {
+
     Serial.begin(115200);
     Serial.println("Starting up");
 
