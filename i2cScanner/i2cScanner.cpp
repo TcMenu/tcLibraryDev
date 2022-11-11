@@ -29,15 +29,19 @@
 
 #include <Arduino.h>
 #include <Wire.h>
+#include <IoLogging.h>
+#include <TaskManagerIO.h>
 
+IOLOG_MBED_PORT_IF_NEEDED(USBTX, USBRX)
 
-void setup()
-{
+void setup() {
+    IOLOG_START_SERIAL
+
+    Wire.setSDA(12);
+    Wire.setSCL(13);
     Wire.begin();
 
-    Serial.begin(115200);
-    while (!Serial);             // Leonardo: wait for serial monitor
-    Serial.println("\nI2C Scanner");
+    serdebugF("I2C Scanner");
 }
 
 
@@ -46,7 +50,7 @@ void loop()
     byte error, address;
     int nDevices;
 
-    Serial.println("Scanning...");
+    serdebugF("Scanning...");
 
     nDevices = 0;
     for(address = 1; address < 127; address++ )
@@ -59,26 +63,19 @@ void loop()
 
         if (error == 0)
         {
-            Serial.print("I2C device found at address 0x");
-            if (address<16)
-                Serial.print("0");
-            Serial.print(address,HEX);
-            Serial.println("  !");
-
+            serdebugFHex("I2C device found at address 0x", address);
             nDevices++;
         }
         else if (error==4)
         {
-            Serial.print("Unknown error at address 0x");
-            if (address<16)
-                Serial.print("0");
-            Serial.println(address,HEX);
+            serdebugFHex("Unknown error at address 0x", address);
         }
     }
-    if (nDevices == 0)
-        Serial.println("No I2C devices found\n");
-    else
-        Serial.println("done\n");
+    if (nDevices == 0) {
+        serdebugF("No I2C devices found\n");
+    } else {
+        serdebugF("done\n");
+    }
 
-    delay(5000);           // wait 5 seconds for next scan
+    taskManager.yieldForMicros(5000000UL);           // wait 5 seconds for next scan
 }
