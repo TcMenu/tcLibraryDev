@@ -1,0 +1,20 @@
+define pio_reset_halt_target
+    monitor reset
+    monitor halt
+end
+define pio_reset_run_target
+    monitor clrbp
+    monitor reset
+    monitor go
+end
+target extended-remote $DEBUG_PORT
+monitor clrbp
+monitor speed auto
+pio_reset_halt_target
+tbreak loop
+
+AfterTargetDownload() {
+}
+
+AfterTargetReset() {
+}

@@ -35,13 +35,15 @@
 IOLOG_MBED_PORT_IF_NEEDED(USBTX, USBRX)
 
 void setup() {
-    IOLOG_START_SERIAL
+    Serial.begin(115200);
+    while(!Serial);
+    serdebugF("I2C Scanner starting wire");
 
-    Wire.setSDA(12);
-    Wire.setSCL(13);
+    //Wire.setSDA(12);
+    //Wire.setSCL(13);
     Wire.begin();
 
-    serdebugF("I2C Scanner");
+    serdebugF("I2C Scanner running");
 }
 
 
