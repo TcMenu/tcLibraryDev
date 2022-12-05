@@ -1,0 +1,14 @@
+#include "adafruitDrawableTest_menu.h"
+
+void setup() {
+    SPI.setFrequency(20000000);
+    SPI.begin();
+
+    setupMenu();
+
+}
+
+void loop() {
+    taskManager.runLoop();
+
+}

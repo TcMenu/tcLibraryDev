@@ -1,5 +1,7 @@
 #include <Arduino.h>
 
+#define LED_BUILTIN 16
+
 void setup() {
     pinMode(LED_BUILTIN, OUTPUT);
 }
