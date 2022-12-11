@@ -47,7 +47,11 @@ using namespace tcgfx;
 
 extern const ConnectorLocalInfo applicationInfo;
 
-/// A GFX 2-bit canvas context for graphics
+/**
+ * A graphics canvas for drawing onto that can then be written to the screen using the optimized drawCookieCutBitmap2bpp
+ * function below. Each byte holds 4 pixels, so therefore, a 320 column display needs 80 bytes per line. All regular
+ * adafruit calls can be made onto this canvas.
+ */
 class TcGFXcanvas2 : public Adafruit_GFX {
 public:
     TcGFXcanvas2(uint16_t w, uint16_t h);
@@ -182,6 +186,10 @@ protected:
     UnicodeFontHandler *createFontHandler() override;
 };
 
+/**
+ * This class extends the basic AdafruitDrawable and provides a way for TFT based drawing to be done into a memory
+ * buffer first then written onto the display using an optimized method that gets quite close to faster libraries.
+ */
 class AdafruitCanvasDrawable2bpp : public AdafruitDrawable {
 private:
     AdafruitDrawable* root;

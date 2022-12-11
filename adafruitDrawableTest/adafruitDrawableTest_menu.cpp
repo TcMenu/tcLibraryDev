@@ -49,7 +49,8 @@ void setupMenu() {
     gfx.begin();
     gfx.setRotation(1);
     renderer.setUpdatesPerSecond(5);
-    menuMgr.initWithoutInput(&renderer, &menuAnalog);
+    switches.init(internalDigitalIo(), SWITCHES_POLL_EVERYTHING, true);
+    menuMgr.initForEncoder(&renderer, &menuAnalog, 16, 17, 21);
     renderer.setTitleMode(BaseGraphicalRenderer::TITLE_FIRST_ROW);
     renderer.setUseSliderForAnalog(true);
     renderer.enableTcUnicode();

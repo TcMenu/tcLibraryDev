@@ -501,7 +501,7 @@ DeviceDrawable *AdafruitDrawable::getSubDeviceFor(const Coord &where, const Coor
     return (canvasDrawable->initSprite(where, size, palette, paletteSize)) ? canvasDrawable : nullptr;
 }
 
-AdafruitCanvasDrawable2bpp::AdafruitCanvasDrawable2bpp(AdafruitDrawable *root,  int width, int height) : root(root), 
+AdafruitCanvasDrawable2bpp::AdafruitCanvasDrawable2bpp(AdafruitDrawable *root,  int width, int height) : root(root),
             sizeMax({width, height}), sizeCurrent(), palette{} {
     canvas = new TcGFXcanvas2(width, height);
     setGraphics(canvas);
