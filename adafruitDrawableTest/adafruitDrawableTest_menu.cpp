@@ -17,8 +17,8 @@
 // Global variable declarations
 const PROGMEM  ConnectorLocalInfo applicationInfo = { "adafruitDrawableTest", "0ad4bdde-34a4-4507-912e-b495b0eac2c1" };
 
-Adafruit_ILI9341 gfx(22, 21, -1);
-AdafruitDrawable gfxDrawable(&gfx, 32);
+Adafruit_ILI9341 gfx(20, 18, 19);
+AdafruitDrawable gfxDrawable(&gfx, 40);
 GraphicsDeviceRenderer renderer(30, applicationInfo.name, &gfxDrawable);
 
 // Global Menu Item declarations

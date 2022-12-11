@@ -51,15 +51,17 @@ extern const ConnectorLocalInfo applicationInfo;
 class TcGFXcanvas2 : public Adafruit_GFX {
 public:
     TcGFXcanvas2(uint16_t w, uint16_t h);
-    ~TcGFXcanvas2();
+    virtual ~TcGFXcanvas2();
+    bool reInitCanvas(int w, int h);
+
     /**
      * @return the size in bytes needed to store the pixels for this buffer
      */
     size_t getByteCount() { return (((_width + 3) / 4) * _height) * 2; };
-    void drawPixel(int16_t x, int16_t y, uint16_t color);
-    void fillScreen(uint16_t color);
-    void drawFastVLine(int16_t x, int16_t y, int16_t h, uint16_t color);
-    void drawFastHLine(int16_t x, int16_t y, int16_t w, uint16_t color);
+    void drawPixel(int16_t x, int16_t y, uint16_t color) override;
+    void fillScreen(uint16_t color) override;
+    void drawFastVLine(int16_t x, int16_t y, int16_t h, uint16_t color) override;
+    void drawFastHLine(int16_t x, int16_t y, int16_t w, uint16_t color) override;
     uint8_t getPixel(int16_t x, int16_t y) const;
     /**********************************************************************/
     /*!
@@ -67,8 +69,8 @@ public:
      @returns  A pointer to the allocated buffer
     */
     /**********************************************************************/
-    uint8_t *getBuffer(void) const { return buffer; }
-
+    uint8_t *getBuffer() const { return buffer; }
+    size_t getMaxBufferSize() const { return maxBytesAvailable; }
 protected:
     uint8_t getRawPixel(int16_t x, int16_t y) const;
     void drawFastRawVLine(int16_t x, int16_t y, int16_t h, uint16_t color);
@@ -76,6 +78,7 @@ protected:
 
 private:
     uint8_t *buffer;
+    size_t maxBytesAvailable = 0;
 };
 
 /**
@@ -98,7 +101,7 @@ private:
     @param    fgColor 16-bit 5-6-5 Color to draw pixels with
     @param    bgColor 16-bit 5-6-5 Color to draw background with
 */
-void drawCookieCutBitmap(Adafruit_GFX* gfx, int16_t x, int16_t y, const uint8_t *bitmap, int16_t w,
+void drawCookieCutBitmap(Adafruit_SPITFT* gfx, int16_t x, int16_t y, const uint8_t *bitmap, int16_t w,
                          int16_t h, int16_t totalWidth, int16_t xStart, int16_t yStart,
                          uint16_t fgColor, uint16_t bgColor);
 
@@ -121,7 +124,7 @@ void drawCookieCutBitmap(Adafruit_GFX* gfx, int16_t x, int16_t y, const uint8_t 
     @param    yStart Y position of the image in the data
     @param    palette array of 4 16-bit 5-6-5 Colors that map to pixel settings 0..3
 */
-void drawCookieCutBitmap2bpp(Adafruit_GFX* gfx, int16_t x, int16_t y, const uint8_t *bitmap, int16_t w,
+void drawCookieCutBitmap2bpp(Adafruit_SPITFT* gfx, int16_t x, int16_t y, const uint8_t *bitmap, int16_t w,
                              int16_t h, int16_t totalWidth, int16_t xStart, int16_t yStart,
                              const uint16_t* palette);
 
@@ -193,7 +196,7 @@ public:
         delete canvas;
     }
 
-    void initSprite(const Coord& spriteWhere, const Coord& spriteSize, const color_t* colPalette, size_t paletteSize);
+    bool initSprite(const Coord& spriteWhere, const Coord& spriteSize, const color_t* colPalette, size_t paletteSize);
     void transaction(bool isStarting, bool redrawNeeded) override;
     color_t getUnderlyingColor(color_t col) override;
     DeviceDrawable *getSubDeviceFor(const Coord &where, const Coord &size, const color_t *palette, int paletteSize) override;
