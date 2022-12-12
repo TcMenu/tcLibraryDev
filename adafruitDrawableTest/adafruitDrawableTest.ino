@@ -16,10 +16,18 @@ void setup() {
     taskManager.scheduleFixedRate(150, [] {
         menuFloat.setFloatValue((rand() % 100000) / 100.0F);
         menuAnalog.setCurrentValue((rand() % 1000));
-        widgetConnected.setCurrentState(rand() % 2);
+        YesNoWidget.setCurrentState(rand() % 2);
     });
+
+    switches.addSwitch(22, [](pinid_t, bool) { menuSettingsAction.triggerCallback(); });
+
+    renderer.setFirstWidget(&YesNoWidget);
 }
 
 void loop() {
     taskManager.runLoop();
+}
+
+void CALLBACK_FUNCTION onSettingsAction(int id) {
+    renderer.takeOverDisplay(); // start the dashboard now.
 }

@@ -46,5 +46,6 @@ void setupMenu();
 // Callback functions must always include CALLBACK_FUNCTION after the return type
 #define CALLBACK_FUNCTION
 
+void CALLBACK_FUNCTION onSettingsAction(int id);
 
 #endif // MENU_GENERATED_CODE_H

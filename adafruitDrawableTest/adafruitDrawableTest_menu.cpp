@@ -24,7 +24,7 @@ GraphicsDeviceRenderer renderer(30, applicationInfo.name, &gfxDrawable);
 // Global Menu Item declarations
 RENDERING_CALLBACK_NAME_INVOKE(fnSettingsRGBRtCall, rgbAlphaItemRenderFn, "RGB", -1, NO_CALLBACK)
 Rgb32MenuItem menuSettingsRGB(fnSettingsRGBRtCall, RgbColor32(0, 0, 0), 7, false, NULL);
-const PROGMEM AnyMenuInfo minfoSettingsAction = { "Action", 6, 0xffff, 0, NO_CALLBACK };
+const PROGMEM AnyMenuInfo minfoSettingsAction = { "Action", 6, 0xffff, 0, onSettingsAction };
 ActionMenuItem menuSettingsAction(&minfoSettingsAction, &menuSettingsRGB);
 RENDERING_CALLBACK_NAME_INVOKE(fnSettingsRtCall, backSubItemRenderFn, "Settings", -1, NO_CALLBACK)
 const PROGMEM SubMenuInfo minfoSettings = { "Settings", 5, 0xffff, 0, NO_CALLBACK };

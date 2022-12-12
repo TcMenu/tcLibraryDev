@@ -92,6 +92,7 @@
         "variableName": "SettingsAction",
         "id": 6,
         "eepromAddress": -1,
+        "functionName": "onSettingsAction",
         "readOnly": false,
         "localOnly": false,
         "visible": true
