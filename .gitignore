@@ -5,6 +5,8 @@
 
 .DS_Store
 
+**/.backup
+
 # User-specific files
 *.suo
 *.user
