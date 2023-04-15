@@ -21,11 +21,11 @@ U8g2Drawable gfxDrawable(&gfx, &Wire);
 GraphicsDeviceRenderer renderer(30, applicationInfo.name, &gfxDrawable);
 
 // Global Menu Item declarations
-const PROGMEM AnyMenuInfo minfo78 = { "78", 25, 0xffff, 0, NO_CALLBACK };
+const PROGMEM AnyMenuInfo minfo78 = { "78", 25, 0xffff, 0, onSpeed78 };
 ActionMenuItem menu78(&minfo78, NULL, INFO_LOCATION_PGM);
-const PROGMEM AnyMenuInfo minfo45 = { "45", 24, 0xffff, 0, NO_CALLBACK };
+const PROGMEM AnyMenuInfo minfo45 = { "45", 24, 0xffff, 0, onSpeed45 };
 ActionMenuItem menu45(&minfo45, &menu78, INFO_LOCATION_PGM);
-const PROGMEM AnyMenuInfo minfo33 = { "33", 23, 0xffff, 0, NO_CALLBACK };
+const PROGMEM AnyMenuInfo minfo33 = { "33", 23, 0xffff, 0, onSpeed33 };
 ActionMenuItem menu33(&minfo33, &menu45, INFO_LOCATION_PGM);
 const PROGMEM SubMenuInfo minfoSpeed = { "Speed", 22, 0xffff, 0, NO_CALLBACK };
 BackMenuItem menuBackSpeed(&minfoSpeed, &menu33, INFO_LOCATION_PGM);

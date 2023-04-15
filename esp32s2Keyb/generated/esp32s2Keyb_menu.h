@@ -57,6 +57,9 @@ void setupMenu();
 #define CALLBACK_FUNCTION
 
 int fnExtrasMyListRtCall(RuntimeMenuItem* item, uint8_t row, RenderFnMode mode, char* buffer, int bufferSize);
+void CALLBACK_FUNCTION onSpeed33(int id);
+void CALLBACK_FUNCTION onSpeed45(int id);
+void CALLBACK_FUNCTION onSpeed78(int id);
 void CALLBACK_FUNCTION pressMeActionRun(int id);
 
 #endif // MENU_GENERATED_CODE_H
