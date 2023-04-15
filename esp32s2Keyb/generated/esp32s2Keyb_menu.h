@@ -36,6 +36,7 @@ extern ActionMenuItem menu45;
 extern ActionMenuItem menu33;
 extern BackMenuItem menuBackSpeed;
 extern SubMenuItem menuSpeed;
+extern DateFormattedMenuItem menuExtrasDate;
 extern ListRuntimeMenuItem menuExtrasMyList;
 extern Rgb32MenuItem menuExtrasColor;
 extern TextMenuItem menuExtrasText;

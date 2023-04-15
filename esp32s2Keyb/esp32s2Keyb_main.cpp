@@ -100,7 +100,8 @@ void CALLBACK_FUNCTION onSpeed78(int id) {
 }
 
 void CALLBACK_FUNCTION onSpeed33(int id) {
-    // TODO - your menu change code
+    menu45.setVisible(false);
+    menuMgr.notifyStructureChanged();
 }
 
 

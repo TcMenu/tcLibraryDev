@@ -30,7 +30,9 @@ ActionMenuItem menu33(&minfo33, &menu45, INFO_LOCATION_PGM);
 const PROGMEM SubMenuInfo minfoSpeed = { "Speed", 22, 0xffff, 0, NO_CALLBACK };
 BackMenuItem menuBackSpeed(&minfoSpeed, &menu33, INFO_LOCATION_PGM);
 SubMenuItem menuSpeed(&minfoSpeed, &menuBackSpeed, NULL, INFO_LOCATION_PGM);
-ListRuntimeMenuItem menuExtrasMyList(13, 0, fnExtrasMyListRtCall, NULL);
+RENDERING_CALLBACK_NAME_INVOKE(fnExtrasDateRtCall, dateItemRenderFn, "Date", -1, NO_CALLBACK)
+DateFormattedMenuItem menuExtrasDate(fnExtrasDateRtCall, DateStorage(1, 1, 2020), 26, NULL);
+ListRuntimeMenuItem menuExtrasMyList(13, 0, fnExtrasMyListRtCall, &menuExtrasDate);
 RENDERING_CALLBACK_NAME_INVOKE(fnExtrasColorRtCall, rgbAlphaItemRenderFn, "Color", 16, NO_CALLBACK)
 Rgb32MenuItem menuExtrasColor(fnExtrasColorRtCall, RgbColor32(0, 0, 0), 12, false, &menuExtrasMyList);
 RENDERING_CALLBACK_NAME_INVOKE(fnExtrasTextRtCall, textItemRenderFn, "Text", 11, NO_CALLBACK)
