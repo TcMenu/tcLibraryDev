@@ -5,18 +5,13 @@
   "items": [
     {
       "parentId": 0,
-      "type": "analogItem",
-      "defaultValue": "0",
+      "type": "subMenu",
       "item": {
-        "maxValue": 100,
-        "offset": 0,
-        "divisor": 1,
-        "unitName": "%",
-        "step": 1,
-        "name": "Int Edit",
-        "variableName": "IntEdit",
-        "id": 1,
-        "eepromAddress": 2,
+        "secured": false,
+        "name": "Extras",
+        "variableName": "Extras",
+        "id": 10,
+        "eepromAddress": -1,
         "readOnly": false,
         "localOnly": false,
         "visible": true,
@@ -24,20 +19,66 @@
       }
     },
     {
-      "parentId": 0,
-      "type": "enumItem",
-      "defaultValue": "0",
+      "parentId": 10,
+      "type": "textItem",
+      "defaultValue": "",
       "item": {
-        "enumEntries": [
-          "Pizza",
-          "Pasta",
-          "Salad",
-          "Pie"
-        ],
-        "name": "Foods",
-        "variableName": "Foods",
-        "id": 4,
-        "eepromAddress": 8,
+        "textLength": 5,
+        "itemType": "PLAIN_TEXT",
+        "name": "Text",
+        "variableName": "ExtrasText",
+        "id": 11,
+        "eepromAddress": 11,
+        "readOnly": false,
+        "localOnly": false,
+        "visible": true,
+        "staticDataInRAM": false
+      }
+    },
+    {
+      "parentId": 10,
+      "type": "rgbItem",
+      "defaultValue": "#000000FF",
+      "item": {
+        "includeAlphaChannel": false,
+        "name": "Color",
+        "variableName": "ExtrasColor",
+        "id": 12,
+        "eepromAddress": 16,
+        "readOnly": false,
+        "localOnly": false,
+        "visible": true,
+        "staticDataInRAM": false
+      }
+    },
+    {
+      "parentId": 10,
+      "type": "runtimeList",
+      "item": {
+        "initialRows": 0,
+        "listCreationMode": "CUSTOM_RTCALL",
+        "name": "My List",
+        "variableName": "ExtrasMyList",
+        "id": 13,
+        "eepromAddress": -1,
+        "functionName": "",
+        "readOnly": false,
+        "localOnly": false,
+        "visible": true,
+        "staticDataInRAM": false
+      }
+    },
+    {
+      "parentId": 10,
+      "type": "textItem",
+      "defaultValue": "",
+      "item": {
+        "textLength": 5,
+        "itemType": "GREGORIAN_DATE",
+        "name": "Date",
+        "variableName": "ExtrasDate",
+        "id": 26,
+        "eepromAddress": -1,
         "readOnly": false,
         "localOnly": false,
         "visible": true,
@@ -108,13 +149,18 @@
     },
     {
       "parentId": 0,
-      "type": "subMenu",
+      "type": "analogItem",
+      "defaultValue": "0",
       "item": {
-        "secured": false,
-        "name": "Extras",
-        "variableName": "Extras",
-        "id": 10,
-        "eepromAddress": -1,
+        "maxValue": 100,
+        "offset": 0,
+        "divisor": 1,
+        "unitName": "%",
+        "step": 1,
+        "name": "Int Edit",
+        "variableName": "IntEdit",
+        "id": 1,
+        "eepromAddress": 2,
         "readOnly": false,
         "localOnly": false,
         "visible": true,
@@ -122,65 +168,20 @@
       }
     },
     {
-      "parentId": 10,
-      "type": "textItem",
-      "defaultValue": "",
+      "parentId": 0,
+      "type": "enumItem",
+      "defaultValue": "0",
       "item": {
-        "textLength": 5,
-        "itemType": "PLAIN_TEXT",
-        "name": "Text",
-        "variableName": "ExtrasText",
-        "id": 11,
-        "eepromAddress": 11,
-        "readOnly": false,
-        "localOnly": false,
-        "visible": true,
-        "staticDataInRAM": false
-      }
-    },
-    {
-      "parentId": 10,
-      "type": "rgbItem",
-      "defaultValue": "#000000FF",
-      "item": {
-        "includeAlphaChannel": false,
-        "name": "Color",
-        "variableName": "ExtrasColor",
-        "id": 12,
-        "eepromAddress": 16,
-        "readOnly": false,
-        "localOnly": false,
-        "visible": true,
-        "staticDataInRAM": false
-      }
-    },
-    {
-      "parentId": 10,
-      "type": "runtimeList",
-      "item": {
-        "initialRows": 0,
-        "name": "My List",
-        "variableName": "ExtrasMyList",
-        "id": 13,
-        "eepromAddress": -1,
-        "functionName": "",
-        "readOnly": false,
-        "localOnly": false,
-        "visible": true,
-        "staticDataInRAM": false
-      }
-    },
-    {
-      "parentId": 10,
-      "type": "textItem",
-      "defaultValue": "",
-      "item": {
-        "textLength": 5,
-        "itemType": "GREGORIAN_DATE",
-        "name": "Date",
-        "variableName": "ExtrasDate",
-        "id": 26,
-        "eepromAddress": -1,
+        "enumEntries": [
+          "Pizza",
+          "Pasta",
+          "Salad",
+          "Pie"
+        ],
+        "name": "Foods",
+        "variableName": "Foods",
+        "id": 4,
+        "eepromAddress": 8,
         "readOnly": false,
         "localOnly": false,
         "visible": true,
@@ -255,7 +256,7 @@
     "lastRemoteUuids": [
       "2c101fec-1f7d-4ff3-8d2b-992ad41e7fcb"
     ],
-    "lastThemeUuid": "0dd60ceb-7e0f-46e2-8d40-b264eb3aa7e0",
+    "lastThemeUuid": "815316bb-76c9-436a-8f83-be0bced963df",
     "applicationUUID": "b447b433-fe4f-4ce7-8746-d94bfeefc707",
     "applicationName": "ESP32-S2 Saola board",
     "lastProperties": [
@@ -370,8 +371,8 @@
         "subsystem": "THEME"
       },
       {
-        "name": "TITLE_HEADER_PADDING",
-        "latestValue": "2",
+        "name": "TITLE_BORDER_WIDTH",
+        "latestValue": "1",
         "subsystem": "THEME"
       },
       {
@@ -381,7 +382,7 @@
       },
       {
         "name": "TITLE_SHOW_MODE",
-        "latestValue": "TITLE_ALWAYS",
+        "latestValue": "NO_TITLE",
         "subsystem": "THEME"
       },
       {
@@ -404,5 +405,6 @@
     },
     "packageNamespace": "",
     "appIsModular": false
-  }
+  },
+  "stringLists": []
 }

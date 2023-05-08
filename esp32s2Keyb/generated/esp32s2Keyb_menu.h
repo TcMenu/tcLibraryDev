@@ -36,22 +36,22 @@ extern ActionMenuItem menu45;
 extern ActionMenuItem menu33;
 extern BackMenuItem menuBackSpeed;
 extern SubMenuItem menuSpeed;
+extern EnumMenuItem menuFoods;
+extern AnalogMenuItem menuIntEdit;
+extern BooleanMenuItem menuSelectMeNewBoolItem;
+extern ActionMenuItem menuSelectMePressMe;
+extern FloatMenuItem menuSelectMeFloat1;
+extern BackMenuItem menuBackSelectMe;
+extern SubMenuItem menuSelectMe;
 extern DateFormattedMenuItem menuExtrasDate;
 extern ListRuntimeMenuItem menuExtrasMyList;
 extern Rgb32MenuItem menuExtrasColor;
 extern TextMenuItem menuExtrasText;
 extern BackMenuItem menuBackExtras;
 extern SubMenuItem menuExtras;
-extern BooleanMenuItem menuSelectMeNewBoolItem;
-extern ActionMenuItem menuSelectMePressMe;
-extern FloatMenuItem menuSelectMeFloat1;
-extern BackMenuItem menuBackSelectMe;
-extern SubMenuItem menuSelectMe;
-extern EnumMenuItem menuFoods;
-extern AnalogMenuItem menuIntEdit;
 
 // Provide a wrapper to get hold of the root menu item and export setupMenu
-inline MenuItem& rootMenuItem() { return menuIntEdit; }
+inline MenuItem& rootMenuItem() { return menuExtras; }
 void setupMenu();
 
 // Callback functions must always include CALLBACK_FUNCTION after the return type

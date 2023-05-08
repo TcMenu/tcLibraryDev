@@ -30,6 +30,11 @@ void setup() {
     Wire.setClock(1000000);
     EEPROM.begin(512);
 
+    // here we enable card layout, this must be done before calling into setupMenu.
+    renderer.enableCardLayout(iconLeft, iconRight, nullptr, true);
+    renderer.setCardLayoutStatusForSubMenu(nullptr, true);    // enable for root
+    renderer.setCardLayoutStatusForSubMenu(&menuSpeed, true); // enable for speed menu
+
     setupMenu();
 
     // always call load after setupMenu, as the EEPROM you chose in initialised only after this setupMenu()
@@ -42,11 +47,6 @@ void setup() {
     setTitlePressedCallback([](int titleCb) {
         showVersionDialog(&applicationInfo);
     });
-
-    // for the speed menu enable card layout
-    renderer.enableCardLayout(iconLeft, iconRight, nullptr, true);
-    renderer.setCardLayoutStatusForSubMenu(nullptr, false);
-    renderer.setCardLayoutStatusForSubMenu(&menuSpeed, true);
 }
 
 void loop() {
