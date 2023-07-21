@@ -32,7 +32,7 @@
 #include <IoLogging.h>
 #include <TaskManagerIO.h>
 
-IOLOG_MBED_PORT_IF_NEEDED(USBTX, USBRX)
+//IOLOG_MBED_PORT_IF_NEEDED(USBTX, USBRX)
 
 void setup() {
     Serial.begin(115200);
