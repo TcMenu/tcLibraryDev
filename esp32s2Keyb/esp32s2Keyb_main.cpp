@@ -36,6 +36,8 @@ void setup() {
             .setMenuAsCard(menuSpeed, true)
             .apply(); // enable for speed menu
 
+    menuMgr.resetMenu(true); // force a complete reset after changing card settings.
+
     // always call load after setupMenu, as the EEPROM you chose in initialised only after this setupMenu()
     menuMgr.load();
 
