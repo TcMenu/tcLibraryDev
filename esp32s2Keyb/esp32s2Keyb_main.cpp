@@ -14,13 +14,10 @@
 #include <stockIcons/wifiAndConnectionIcons16x12.h>
 #include <tcUtil.h>
 #include "stockIcons/directionalIcons.h"
+#include <graphics/TcThemeBuilder.h>
 
 #define MENU_WIFIMODE_STATION 0
 const char pgmsListHeader[] PROGMEM = "List items";
-
-// first we need to define both a left and right button, we use the ones from stockIcons/directionalIcons.h
-DrawableIcon iconLeft(-1, Coord(11, 22), tcgfx::DrawableIcon::ICON_XBITMAP, ArrowHoriz11x22BitmapLeft, nullptr);
-DrawableIcon iconRight(-1, Coord(11, 22), tcgfx::DrawableIcon::ICON_XBITMAP, ArrowHoriz11x22BitmapRight, nullptr);
 
 void setup() {
     // before proceeding we must start wire and serial, then call setup menu.
@@ -30,12 +27,16 @@ void setup() {
     Wire.setClock(1000000);
     EEPROM.begin(512);
 
-    // here we enable card layout, this must be done before calling into setupMenu.
-    renderer.enableCardLayout(iconLeft, iconRight, nullptr, true);
-    renderer.setCardLayoutStatusForSubMenu(nullptr, true);    // enable for root
-    renderer.setCardLayoutStatusForSubMenu(&menuSpeed, true); // enable for speed menu
-
     setupMenu();
+
+    TcThemeBuilder themeBuilder(renderer);
+    themeBuilder
+            .enableCardLayoutWithXbmImages(Coord(11, 22), ArrowHoriz11x22BitmapLeft, ArrowHoriz11x22BitmapRight, true)
+            .setMenuAsCard(MenuManager::ROOT, true)
+            .setMenuAsCard(menuSpeed, true)
+            .apply(); // enable for speed menu
+
+    menuMgr.resetMenu(true); // force a complete reset after changing card settings.
 
     // always call load after setupMenu, as the EEPROM you chose in initialised only after this setupMenu()
     menuMgr.load();
@@ -96,7 +97,6 @@ void CALLBACK_FUNCTION pressMeActionRun(int id) {
 }
 
 void CALLBACK_FUNCTION onSpeed78(int id) {
-    menuMgr.activateMenuItem(&menu33);
 }
 
 void CALLBACK_FUNCTION onSpeed33(int id) {
