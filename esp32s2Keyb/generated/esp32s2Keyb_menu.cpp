@@ -10,7 +10,7 @@
 
 #include <tcMenu.h>
 #include "esp32s2Keyb_menu.h"
-#include "../ThemeMonoBordered.h"
+#include "../ThemeMonoBorderedBuilder.h"
 
 // Global variable declarations
 const PROGMEM  ConnectorLocalInfo applicationInfo = { "ESP32-S2 Saola board", "b447b433-fe4f-4ce7-8746-d94bfeefc707" };
@@ -71,8 +71,6 @@ void setupMenu() {
     renderer.setUpdatesPerSecond(10);
     switches.init(internalDigitalIo(), SWITCHES_POLL_EVERYTHING, true);
     menuMgr.initFor4WayJoystick(&renderer, &menuExtras, 18, 20, 21, 19, -1, 20);
-    renderer.setTitleMode(BaseGraphicalRenderer::NO_TITLE);
-    renderer.setUseSliderForAnalog(false);
-    installMonoBorderedTheme(renderer, MenuFontDef(nullptr, 1), MenuFontDef(nullptr, 1), true);
+    installMonoBorderTitleTheme(renderer, MenuFontDef(nullptr, 1), MenuFontDef(nullptr, 1), true, BaseGraphicalRenderer::NO_TITLE, false);
 }
 
