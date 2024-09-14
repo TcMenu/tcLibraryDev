@@ -1,6 +1,8 @@
 Danger Will Robinson. Danger.
 
-This is an experimental hack of ST provided code to try and get LTDC working with BSP functions within Arduino.
+This is an experimental folder with hacks and unfinished tests.
+
+Some ST provided code also here to try and get LTDC working with BSP functions within Arduino.
 
 Very heavily based on : https://github.com/STMicroelectronics/STM32CubeF4/
 
