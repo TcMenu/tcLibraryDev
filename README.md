@@ -9,7 +9,7 @@ Although mainly aimed at developers of tcMenu organisation and people building w
 ## To set up:
 
 1. Clone this repo
-2. Create a `lib` and `mbed_lib` directory at the top level
+2. Create a `lib` and `mbed_lib` directory under the `cmakeProject` directory (this makes it easy to host both options in one solution)
 3. Clone `IoAbstraction`, `LiquidCrystalIO`, `TaskManagerIO`, `tcMenu`, `SimpleCollections`, `TcMenuLog` and `tcUnicodeHelper` into the `lib` directory
 4. Clone `AdafruitGFXNativePort` into the `mbed_lib` directory 
 5. Set up either `platformio.ini` with the right parameters for your board, or configure Cmake and import the `cmakeProject` directory into an IDE.
