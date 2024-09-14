@@ -16,7 +16,7 @@ add_subdirectory(lib/IoAbstraction/cmake)
 add_subdirectory(lib/tcMenu/cmake)
 add_subdirectory(lib/tcUnicodeHelper/cmake)
 add_subdirectory(lib/LiquidCrystalIO/cmake)
-#add_subdirectory(mbed_lib/Adafruit-GFX-mbed-fork)
+add_subdirectory(mbed_lib/Adafruit-GFX-mbed-fork/cmake)
 
 IF(NOT DEFINED "ENV{TC_CMAKE_EXCLUDE_EXAMPLES}")
     add_subdirectory(nativeExamples/UsingCollections)
