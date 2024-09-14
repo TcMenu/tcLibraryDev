@@ -1,0 +1,569 @@
+{
+  "version": "1.00",
+  "projectName": "Project description",
+  "author": "dave",
+  "items": [
+    {
+      "parentId": 0,
+      "type": "analogItem",
+      "defaultValue": "0",
+      "item": {
+        "maxValue": 255,
+        "offset": 0,
+        "divisor": 1,
+        "unitName": "%menu.analog.unit",
+        "step": 1,
+        "name": "%menu.analog.name",
+        "variableName": "Analog",
+        "id": 1,
+        "eepromAddress": -1,
+        "readOnly": false,
+        "localOnly": false,
+        "visible": true,
+        "staticDataInRAM": false
+      }
+    },
+    {
+      "parentId": 0,
+      "type": "floatItem",
+      "defaultValue": "0.0",
+      "item": {
+        "numDecimalPlaces": 3,
+        "name": "%menu.float.name",
+        "variableName": "Float",
+        "id": 2,
+        "eepromAddress": -1,
+        "readOnly": false,
+        "localOnly": false,
+        "visible": true,
+        "staticDataInRAM": false
+      }
+    },
+    {
+      "parentId": 0,
+      "type": "largeNumItem",
+      "defaultValue": "0",
+      "item": {
+        "digitsAllowed": 9,
+        "decimalPlaces": 3,
+        "negativeAllowed": true,
+        "name": "%menu.large.name",
+        "variableName": "Large",
+        "id": 3,
+        "eepromAddress": -1,
+        "readOnly": false,
+        "localOnly": false,
+        "visible": true,
+        "staticDataInRAM": false
+      }
+    },
+    {
+      "parentId": 0,
+      "type": "actionMenu",
+      "item": {
+        "name": "Mute",
+        "variableName": "Mute",
+        "id": 19,
+        "eepromAddress": -1,
+        "readOnly": false,
+        "localOnly": false,
+        "visible": true,
+        "staticDataInRAM": false
+      }
+    },
+    {
+      "parentId": 0,
+      "type": "boolItem",
+      "defaultValue": "false",
+      "item": {
+        "naming": "TRUE_FALSE",
+        "name": "Direct",
+        "variableName": "Direct",
+        "id": 20,
+        "eepromAddress": -1,
+        "readOnly": false,
+        "localOnly": false,
+        "visible": true,
+        "staticDataInRAM": false
+      }
+    },
+    {
+      "parentId": 0,
+      "type": "boolItem",
+      "defaultValue": "false",
+      "item": {
+        "naming": "TRUE_FALSE",
+        "name": "Protect",
+        "variableName": "Protect",
+        "id": 21,
+        "eepromAddress": -1,
+        "readOnly": false,
+        "localOnly": false,
+        "visible": true,
+        "staticDataInRAM": false
+      }
+    },
+    {
+      "parentId": 0,
+      "type": "subMenu",
+      "item": {
+        "secured": false,
+        "name": "Runtime Items",
+        "variableName": "RuntimeItems",
+        "id": 4,
+        "eepromAddress": -1,
+        "readOnly": false,
+        "localOnly": false,
+        "visible": true,
+        "staticDataInRAM": false
+      }
+    },
+    {
+      "parentId": 4,
+      "type": "textItem",
+      "defaultValue": "",
+      "item": {
+        "textLength": 5,
+        "itemType": "PLAIN_TEXT",
+        "name": "%menu.text.name",
+        "variableName": "Text",
+        "id": 5,
+        "eepromAddress": -1,
+        "readOnly": false,
+        "localOnly": false,
+        "visible": true,
+        "staticDataInRAM": false
+      }
+    },
+    {
+      "parentId": 4,
+      "type": "textItem",
+      "defaultValue": "",
+      "item": {
+        "textLength": 5,
+        "itemType": "TIME_12H",
+        "name": "%menu.time.name",
+        "variableName": "Time",
+        "id": 6,
+        "eepromAddress": -1,
+        "readOnly": false,
+        "localOnly": false,
+        "visible": true,
+        "staticDataInRAM": false
+      }
+    },
+    {
+      "parentId": 4,
+      "type": "rgbItem",
+      "defaultValue": "#000000FF",
+      "item": {
+        "includeAlphaChannel": false,
+        "name": "RGB",
+        "variableName": "RGB",
+        "id": 7,
+        "eepromAddress": -1,
+        "readOnly": false,
+        "localOnly": false,
+        "visible": true,
+        "staticDataInRAM": false
+      }
+    },
+    {
+      "parentId": 0,
+      "type": "subMenu",
+      "item": {
+        "secured": false,
+        "name": "Connectivity",
+        "variableName": "Connectivity",
+        "id": 8,
+        "eepromAddress": -1,
+        "readOnly": false,
+        "localOnly": false,
+        "visible": true,
+        "staticDataInRAM": false
+      }
+    },
+    {
+      "parentId": 8,
+      "type": "textItem",
+      "defaultValue": "",
+      "item": {
+        "textLength": 5,
+        "itemType": "PLAIN_TEXT",
+        "name": "SSID",
+        "variableName": "SSID",
+        "id": 9,
+        "eepromAddress": -1,
+        "readOnly": false,
+        "localOnly": false,
+        "visible": true,
+        "staticDataInRAM": false
+      }
+    },
+    {
+      "parentId": 8,
+      "type": "textItem",
+      "defaultValue": "",
+      "item": {
+        "textLength": 5,
+        "itemType": "PLAIN_TEXT",
+        "name": "Pwd",
+        "variableName": "Password",
+        "id": 10,
+        "eepromAddress": -1,
+        "readOnly": false,
+        "localOnly": false,
+        "visible": true,
+        "staticDataInRAM": false
+      }
+    },
+    {
+      "parentId": 8,
+      "type": "textItem",
+      "defaultValue": "",
+      "item": {
+        "textLength": 5,
+        "itemType": "IP_ADDRESS",
+        "name": "IP",
+        "variableName": "IPAddr",
+        "id": 11,
+        "eepromAddress": -1,
+        "readOnly": false,
+        "localOnly": false,
+        "visible": true,
+        "staticDataInRAM": false
+      }
+    },
+    {
+      "parentId": 0,
+      "type": "subMenu",
+      "item": {
+        "secured": false,
+        "name": "Choices",
+        "variableName": "Choices",
+        "id": 14,
+        "eepromAddress": -1,
+        "readOnly": false,
+        "localOnly": false,
+        "visible": true,
+        "staticDataInRAM": false
+      }
+    },
+    {
+      "parentId": 14,
+      "type": "enumItem",
+      "defaultValue": "0",
+      "item": {
+        "enumEntries": [
+          "Pizza",
+          "Pasta",
+          "Salad",
+          "Soup",
+          "%menu.enum.chips"
+        ],
+        "name": "Foods",
+        "variableName": "Foods",
+        "id": 15,
+        "eepromAddress": -1,
+        "readOnly": false,
+        "localOnly": false,
+        "visible": true,
+        "staticDataInRAM": false
+      }
+    },
+    {
+      "parentId": 14,
+      "type": "boolItem",
+      "defaultValue": "false",
+      "item": {
+        "naming": "YES_NO",
+        "name": "Bool",
+        "variableName": "Bool",
+        "id": 16,
+        "eepromAddress": -1,
+        "readOnly": false,
+        "localOnly": false,
+        "visible": true,
+        "staticDataInRAM": false
+      }
+    },
+    {
+      "parentId": 14,
+      "type": "scrollItem",
+      "defaultValue": "0-",
+      "item": {
+        "itemWidth": 10,
+        "eepromOffset": 0,
+        "numEntries": 5,
+        "choiceMode": "ARRAY_IN_RAM",
+        "variable": "ramChoiceData",
+        "name": "Choices",
+        "variableName": "NewChoiceItem",
+        "id": 17,
+        "eepromAddress": -1,
+        "readOnly": false,
+        "localOnly": false,
+        "visible": true,
+        "staticDataInRAM": false
+      }
+    },
+    {
+      "parentId": 14,
+      "type": "runtimeList",
+      "item": {
+        "initialRows": 6,
+        "listCreationMode": "FLASH_ARRAY",
+        "name": "Cars",
+        "variableName": "Cars",
+        "id": 18,
+        "eepromAddress": -1,
+        "functionName": "",
+        "readOnly": false,
+        "localOnly": false,
+        "visible": true,
+        "staticDataInRAM": false
+      }
+    }
+  ],
+  "codeOptions": {
+    "embeddedPlatform": "PICO_SDK",
+    "lastDisplayUuid": "61159C5B-F23A-4050-980F-A8FE114E2965",
+    "lastInputUuid": "71DAF854-DF8D-4F0B-9039-23C5583C85B1",
+    "lastRemoteUuids": [
+      "2c101fec-1f7d-4ff3-8d2b-992ad41e7fcb"
+    ],
+    "lastThemeUuid": "b186c809-d9ef-4ca8-9d4b-e4780a041ccc",
+    "applicationUUID": "1213faad-5306-4948-8ce7-db045e79babb",
+    "applicationName": "ControlAppOledKeyboardWifi",
+    "lastProperties": [
+      {
+        "name": "BUS_TYPE",
+        "latestValue": "I2C",
+        "subsystem": "DISPLAY"
+      },
+      {
+        "name": "SERIAL_BUS",
+        "latestValue": "defaultWireTypePtr",
+        "subsystem": "DISPLAY"
+      },
+      {
+        "name": "DISPLAY_VARIABLE",
+        "latestValue": "gfx",
+        "subsystem": "DISPLAY"
+      },
+      {
+        "name": "DISPLAY_TYPE",
+        "latestValue": "SSD_1306",
+        "subsystem": "DISPLAY"
+      },
+      {
+        "name": "DISPLAY_WIDTH",
+        "latestValue": "128",
+        "subsystem": "DISPLAY"
+      },
+      {
+        "name": "DISPLAY_HEIGHT",
+        "latestValue": "64",
+        "subsystem": "DISPLAY"
+      },
+      {
+        "name": "DISPLAY_I2C_ADDR",
+        "latestValue": "0x3C",
+        "subsystem": "DISPLAY"
+      },
+      {
+        "name": "DISPLAY_RESET_PIN",
+        "latestValue": "0xFF",
+        "subsystem": "DISPLAY"
+      },
+      {
+        "name": "DISPLAY_CS_PIN",
+        "latestValue": "0xFF",
+        "subsystem": "DISPLAY"
+      },
+      {
+        "name": "DISPLAY_RS_PIN",
+        "latestValue": "0xFF",
+        "subsystem": "DISPLAY"
+      },
+      {
+        "name": "DISPLAY_SPI_FREQ",
+        "latestValue": "10000000",
+        "subsystem": "DISPLAY"
+      },
+      {
+        "name": "DISPLAY_ROTATION",
+        "latestValue": "0",
+        "subsystem": "DISPLAY"
+      },
+      {
+        "name": "UPDATES_PER_SEC",
+        "latestValue": "5",
+        "subsystem": "DISPLAY"
+      },
+      {
+        "name": "TEXT_ENCODING",
+        "latestValue": "ENCMODE_UTF8",
+        "subsystem": "DISPLAY"
+      },
+      {
+        "name": "MK_KEYBOARD_NEXT",
+        "latestValue": "B",
+        "subsystem": "INPUT"
+      },
+      {
+        "name": "MK_KEYBOARD_BACK",
+        "latestValue": "A",
+        "subsystem": "INPUT"
+      },
+      {
+        "name": "MK_KEYBOARD_ENTER",
+        "latestValue": "*",
+        "subsystem": "INPUT"
+      },
+      {
+        "name": "MK_KEYBOARD_DEL",
+        "latestValue": "#",
+        "subsystem": "INPUT"
+      },
+      {
+        "name": "MK_KEYBOARD_LAYOUT",
+        "latestValue": "LAYOUT_3X4",
+        "subsystem": "INPUT"
+      },
+      {
+        "name": "MK_ROW_PIN_0",
+        "latestValue": "22",
+        "subsystem": "INPUT"
+      },
+      {
+        "name": "MK_ROW_PIN_1",
+        "latestValue": "21",
+        "subsystem": "INPUT"
+      },
+      {
+        "name": "MK_ROW_PIN_2",
+        "latestValue": "20",
+        "subsystem": "INPUT"
+      },
+      {
+        "name": "MK_ROW_PIN_3",
+        "latestValue": "19",
+        "subsystem": "INPUT"
+      },
+      {
+        "name": "MK_COL_PIN_0",
+        "latestValue": "18",
+        "subsystem": "INPUT"
+      },
+      {
+        "name": "MK_COL_PIN_1",
+        "latestValue": "17",
+        "subsystem": "INPUT"
+      },
+      {
+        "name": "MK_COL_PIN_2",
+        "latestValue": "16",
+        "subsystem": "INPUT"
+      },
+      {
+        "name": "MK_COL_PIN_3",
+        "latestValue": "-1",
+        "subsystem": "INPUT"
+      },
+      {
+        "name": "MK_KEYBOARD_DEVICE",
+        "latestValue": "devicePins",
+        "subsystem": "INPUT"
+      },
+      {
+        "name": "MK_REPEAT_START",
+        "latestValue": "850",
+        "subsystem": "INPUT"
+      },
+      {
+        "name": "MK_REPEAT_INTERVAL",
+        "latestValue": "350",
+        "subsystem": "INPUT"
+      },
+      {
+        "name": "MK_KEYBOARD_INTERRUPTS",
+        "latestValue": "false",
+        "subsystem": "INPUT"
+      },
+      {
+        "name": "SEPARATOR",
+        "latestValue": "",
+        "subsystem": "INPUT"
+      },
+      {
+        "name": "MK_NEED_ENCODER",
+        "latestValue": "false",
+        "subsystem": "INPUT"
+      },
+      {
+        "name": "MK_USE_PULL_UP",
+        "latestValue": "true",
+        "subsystem": "INPUT"
+      },
+      {
+        "name": "MK_ENCODER_A",
+        "latestValue": "-1",
+        "subsystem": "INPUT"
+      },
+      {
+        "name": "MK_ENCODER_B",
+        "latestValue": "-1",
+        "subsystem": "INPUT"
+      },
+      {
+        "name": "MK_ENCODER_SEL",
+        "latestValue": "-1",
+        "subsystem": "INPUT"
+      },
+      {
+        "name": "MK_ENCODER_DEVICE",
+        "latestValue": "devicePins",
+        "subsystem": "INPUT"
+      },
+      {
+        "name": "MK_POLLING_MODE",
+        "latestValue": "SWITCHES_POLL_EVERYTHING",
+        "subsystem": "INPUT"
+      },
+      {
+        "name": "MK_ENCODER_TYPE",
+        "latestValue": "FULL_CYCLE",
+        "subsystem": "INPUT"
+      }
+    ],
+    "namingRecursive": false,
+    "useCppMain": true,
+    "saveLocation": "PROJECT_TO_CURRENT_WITH_GENERATED",
+    "usingSizedEEPROMStorage": true,
+    "eepromDefinition": "",
+    "authenticatorDefinition": "",
+    "projectIoExpanders": [
+      "deviceIO:"
+    ],
+    "menuInMenuCollection": {
+      "menuDefinitions": []
+    },
+    "packageNamespace": "",
+    "appIsModular": false,
+    "listOfEmbeddedForms": []
+  },
+  "stringLists": [
+    {
+      "id": 18,
+      "listItems": [
+        "Ford",
+        "BMW",
+        "Vauxhaul",
+        "Renault",
+        "Mercedes",
+        "%menu.list.ferrari"
+      ]
+    }
+  ]
+}

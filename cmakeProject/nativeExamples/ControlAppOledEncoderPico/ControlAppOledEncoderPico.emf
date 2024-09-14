@@ -1,0 +1,598 @@
+{
+  "version": "1.00",
+  "projectName": "Project description",
+  "author": "dave",
+  "items": [
+    {
+      "parentId": 0,
+      "type": "analogItem",
+      "defaultValue": "0",
+      "item": {
+        "maxValue": 255,
+        "offset": -180,
+        "divisor": 2,
+        "unitName": "dB",
+        "step": 1,
+        "name": "Volume",
+        "variableName": "Volume",
+        "id": 1,
+        "eepromAddress": -1,
+        "functionName": "onVolumeChanged",
+        "readOnly": false,
+        "localOnly": false,
+        "visible": true,
+        "staticDataInRAM": false
+      }
+    },
+    {
+      "parentId": 0,
+      "type": "enumItem",
+      "defaultValue": "0",
+      "item": {
+        "enumEntries": [
+          "Phono",
+          "CD",
+          "Aux"
+        ],
+        "name": "Channel",
+        "variableName": "Channel",
+        "id": 2,
+        "eepromAddress": -1,
+        "readOnly": false,
+        "localOnly": false,
+        "visible": true,
+        "staticDataInRAM": false
+      }
+    },
+    {
+      "parentId": 0,
+      "type": "boolItem",
+      "defaultValue": "false",
+      "item": {
+        "naming": "ON_OFF",
+        "name": "Mute",
+        "variableName": "Mute",
+        "id": 3,
+        "eepromAddress": -1,
+        "readOnly": false,
+        "localOnly": false,
+        "visible": true,
+        "staticDataInRAM": false
+      }
+    },
+    {
+      "parentId": 0,
+      "type": "boolItem",
+      "defaultValue": "false",
+      "item": {
+        "naming": "ON_OFF",
+        "name": "Direct",
+        "variableName": "Direct",
+        "id": 4,
+        "eepromAddress": -1,
+        "readOnly": false,
+        "localOnly": false,
+        "visible": true,
+        "staticDataInRAM": false
+      }
+    },
+    {
+      "parentId": 0,
+      "type": "subMenu",
+      "item": {
+        "secured": false,
+        "name": "Status",
+        "variableName": "Status",
+        "id": 5,
+        "eepromAddress": -1,
+        "functionName": "StatusAppeared",
+        "readOnly": false,
+        "localOnly": false,
+        "visible": true,
+        "staticDataInRAM": false
+      }
+    },
+    {
+      "parentId": 5,
+      "type": "analogItem",
+      "defaultValue": "0",
+      "item": {
+        "maxValue": 250,
+        "offset": -200,
+        "divisor": 10,
+        "unitName": "dB",
+        "step": 1,
+        "name": "Left VU",
+        "variableName": "LeftVU",
+        "id": 6,
+        "eepromAddress": -1,
+        "readOnly": true,
+        "localOnly": false,
+        "visible": true,
+        "staticDataInRAM": false
+      }
+    },
+    {
+      "parentId": 5,
+      "type": "analogItem",
+      "defaultValue": "0",
+      "item": {
+        "maxValue": 250,
+        "offset": -200,
+        "divisor": 10,
+        "unitName": "dB",
+        "step": 1,
+        "name": "RightVU",
+        "variableName": "RightVU",
+        "id": 7,
+        "eepromAddress": -1,
+        "readOnly": true,
+        "localOnly": false,
+        "visible": true,
+        "staticDataInRAM": false
+      }
+    },
+    {
+      "parentId": 5,
+      "type": "enumItem",
+      "defaultValue": "0",
+      "item": {
+        "enumEntries": [
+          "Standby",
+          "Warm Up",
+          "Active",
+          "Protect",
+          "Overheat"
+        ],
+        "name": "State",
+        "variableName": "State",
+        "id": 8,
+        "eepromAddress": -1,
+        "readOnly": true,
+        "localOnly": false,
+        "visible": true,
+        "staticDataInRAM": false
+      }
+    },
+    {
+      "parentId": 5,
+      "type": "floatItem",
+      "defaultValue": "0.0",
+      "item": {
+        "numDecimalPlaces": 3,
+        "name": "A0 Level",
+        "variableName": "A0Level",
+        "id": 9,
+        "eepromAddress": -1,
+        "readOnly": true,
+        "localOnly": false,
+        "visible": true,
+        "staticDataInRAM": false
+      }
+    },
+    {
+      "parentId": 0,
+      "type": "subMenu",
+      "item": {
+        "secured": false,
+        "name": "Runtimes",
+        "variableName": "Runtimes",
+        "id": 10,
+        "eepromAddress": -1,
+        "readOnly": false,
+        "localOnly": false,
+        "visible": true,
+        "staticDataInRAM": false
+      }
+    },
+    {
+      "parentId": 10,
+      "type": "textItem",
+      "defaultValue": "",
+      "item": {
+        "textLength": 5,
+        "itemType": "TIME_24H",
+        "name": "Time 24",
+        "variableName": "Time24",
+        "id": 11,
+        "eepromAddress": -1,
+        "readOnly": false,
+        "localOnly": false,
+        "visible": true,
+        "staticDataInRAM": false
+      }
+    },
+    {
+      "parentId": 10,
+      "type": "textItem",
+      "defaultValue": "",
+      "item": {
+        "textLength": 5,
+        "itemType": "TIME_12H",
+        "name": "Time 12",
+        "variableName": "Time12",
+        "id": 12,
+        "eepromAddress": -1,
+        "readOnly": false,
+        "localOnly": false,
+        "visible": true,
+        "staticDataInRAM": false
+      }
+    },
+    {
+      "parentId": 10,
+      "type": "textItem",
+      "defaultValue": "",
+      "item": {
+        "textLength": 5,
+        "itemType": "GREGORIAN_DATE",
+        "name": "Date Gr",
+        "variableName": "DateGr",
+        "id": 13,
+        "eepromAddress": -1,
+        "readOnly": false,
+        "localOnly": false,
+        "visible": true,
+        "staticDataInRAM": false
+      }
+    },
+    {
+      "parentId": 10,
+      "type": "actionMenu",
+      "item": {
+        "name": "Show Dialog",
+        "variableName": "ShowDialog",
+        "id": 14,
+        "eepromAddress": -1,
+        "functionName": "onShowDialog",
+        "readOnly": false,
+        "localOnly": false,
+        "visible": true,
+        "staticDataInRAM": false
+      }
+    },
+    {
+      "parentId": 10,
+      "type": "enumItem",
+      "defaultValue": "0",
+      "item": {
+        "enumEntries": [
+          "Item 0",
+          "Item 1"
+        ],
+        "name": "Dialog Active",
+        "variableName": "DialogActive",
+        "id": 15,
+        "eepromAddress": -1,
+        "readOnly": false,
+        "localOnly": false,
+        "visible": true,
+        "staticDataInRAM": false
+      }
+    },
+    {
+      "parentId": 0,
+      "type": "subMenu",
+      "item": {
+        "secured": false,
+        "name": "Dynamic",
+        "variableName": "Dynamic",
+        "id": 16,
+        "eepromAddress": -1,
+        "readOnly": false,
+        "localOnly": false,
+        "visible": true,
+        "staticDataInRAM": false
+      }
+    },
+    {
+      "parentId": 16,
+      "type": "enumItem",
+      "defaultValue": "0",
+      "item": {
+        "enumEntries": [
+          "Set 1",
+          "Set 2"
+        ],
+        "name": "Enable",
+        "variableName": "Enable",
+        "id": 17,
+        "eepromAddress": -1,
+        "functionName": "onEnableChange",
+        "readOnly": false,
+        "localOnly": false,
+        "visible": true,
+        "staticDataInRAM": false
+      }
+    },
+    {
+      "parentId": 16,
+      "type": "analogItem",
+      "defaultValue": "0",
+      "item": {
+        "maxValue": 255,
+        "offset": 0,
+        "divisor": 1,
+        "unitName": "Unit",
+        "step": 1,
+        "name": "Set 1A",
+        "variableName": "Set1A",
+        "id": 18,
+        "eepromAddress": -1,
+        "readOnly": false,
+        "localOnly": false,
+        "visible": true,
+        "staticDataInRAM": false
+      }
+    },
+    {
+      "parentId": 16,
+      "type": "floatItem",
+      "defaultValue": "0.0",
+      "item": {
+        "numDecimalPlaces": 3,
+        "name": "Set 1B",
+        "variableName": "Set1B",
+        "id": 19,
+        "eepromAddress": -1,
+        "readOnly": false,
+        "localOnly": false,
+        "visible": true,
+        "staticDataInRAM": false
+      }
+    },
+    {
+      "parentId": 16,
+      "type": "boolItem",
+      "defaultValue": "false",
+      "item": {
+        "naming": "CHECKBOX",
+        "name": "Set 1C",
+        "variableName": "Set1C",
+        "id": 20,
+        "eepromAddress": -1,
+        "readOnly": false,
+        "localOnly": false,
+        "visible": true,
+        "staticDataInRAM": false
+      }
+    },
+    {
+      "parentId": 16,
+      "type": "rgbItem",
+      "defaultValue": "#000000FF",
+      "item": {
+        "includeAlphaChannel": false,
+        "name": "Set 1D",
+        "variableName": "Set1D",
+        "id": 21,
+        "eepromAddress": -1,
+        "readOnly": false,
+        "localOnly": false,
+        "visible": true,
+        "staticDataInRAM": false
+      }
+    },
+    {
+      "parentId": 16,
+      "type": "actionMenu",
+      "item": {
+        "name": "Set 2A",
+        "variableName": "Set2A",
+        "id": 22,
+        "eepromAddress": -1,
+        "readOnly": false,
+        "localOnly": false,
+        "visible": true,
+        "staticDataInRAM": false
+      }
+    },
+    {
+      "parentId": 16,
+      "type": "boolItem",
+      "defaultValue": "false",
+      "item": {
+        "naming": "TRUE_FALSE",
+        "name": "Set 2B",
+        "variableName": "Set2B",
+        "id": 23,
+        "eepromAddress": -1,
+        "readOnly": false,
+        "localOnly": false,
+        "visible": true,
+        "staticDataInRAM": false
+      }
+    },
+    {
+      "parentId": 0,
+      "type": "runtimeList",
+      "item": {
+        "initialRows": 10,
+        "listCreationMode": "CUSTOM_RTCALL",
+        "name": "List Custom",
+        "variableName": "ListCustom",
+        "id": 24,
+        "eepromAddress": -1,
+        "functionName": "",
+        "readOnly": false,
+        "localOnly": false,
+        "visible": true,
+        "staticDataInRAM": false
+      }
+    },
+    {
+      "parentId": 0,
+      "type": "runtimeList",
+      "item": {
+        "initialRows": 7,
+        "listCreationMode": "FLASH_ARRAY",
+        "name": "Flash List",
+        "variableName": "FlashList",
+        "id": 25,
+        "eepromAddress": -1,
+        "functionName": "",
+        "readOnly": false,
+        "localOnly": false,
+        "visible": true,
+        "staticDataInRAM": false
+      }
+    }
+  ],
+  "codeOptions": {
+    "embeddedPlatform": "PICO_SDK",
+    "lastDisplayUuid": "61159C5B-F23A-4050-980F-A8FE114E2965",
+    "lastInputUuid": "6dd87e7d-e751-4912-a70d-91793b1d3d87",
+    "lastRemoteUuids": [
+      "DFE97583-1897-4F87-BEFA-10CB72C43F0E"
+    ],
+    "lastThemeUuid": "b186c809-d9ef-4ca8-9d4b-e4780a041ccc",
+    "applicationUUID": "3acc6301-dadd-4730-b142-9541180d2aa8",
+    "applicationName": "PicoSDK Oled",
+    "lastProperties": [
+      {
+        "name": "BUS_TYPE",
+        "latestValue": "SPI",
+        "subsystem": "DISPLAY"
+      },
+      {
+        "name": "SERIAL_BUS",
+        "latestValue": "spi_default",
+        "subsystem": "DISPLAY"
+      },
+      {
+        "name": "DISPLAY_VARIABLE",
+        "latestValue": "gfx",
+        "subsystem": "DISPLAY"
+      },
+      {
+        "name": "DISPLAY_TYPE",
+        "latestValue": "SSD_1306",
+        "subsystem": "DISPLAY"
+      },
+      {
+        "name": "DISPLAY_WIDTH",
+        "latestValue": "128",
+        "subsystem": "DISPLAY"
+      },
+      {
+        "name": "DISPLAY_HEIGHT",
+        "latestValue": "64",
+        "subsystem": "DISPLAY"
+      },
+      {
+        "name": "DISPLAY_I2C_ADDR",
+        "latestValue": "0x3c",
+        "subsystem": "DISPLAY"
+      },
+      {
+        "name": "DISPLAY_RESET_PIN",
+        "latestValue": "13",
+        "subsystem": "DISPLAY"
+      },
+      {
+        "name": "DISPLAY_CS_PIN",
+        "latestValue": "15",
+        "subsystem": "DISPLAY"
+      },
+      {
+        "name": "DISPLAY_RS_PIN",
+        "latestValue": "14",
+        "subsystem": "DISPLAY"
+      },
+      {
+        "name": "DISPLAY_SPI_FREQ",
+        "latestValue": "10000000",
+        "subsystem": "DISPLAY"
+      },
+      {
+        "name": "DISPLAY_ROTATION",
+        "latestValue": "0",
+        "subsystem": "DISPLAY"
+      },
+      {
+        "name": "UPDATES_PER_SEC",
+        "latestValue": "10",
+        "subsystem": "DISPLAY"
+      },
+      {
+        "name": "TEXT_ENCODING",
+        "latestValue": "ENCMODE_UTF8",
+        "subsystem": "DISPLAY"
+      },
+      {
+        "name": "SW_POLLING_MODE",
+        "latestValue": "SWITCHES_POLL_KEYS_ONLY",
+        "subsystem": "INPUT"
+      },
+      {
+        "name": "SWITCH_IODEVICE",
+        "latestValue": "devicePins",
+        "subsystem": "INPUT"
+      },
+      {
+        "name": "ENCODER_PIN_A",
+        "latestValue": "16",
+        "subsystem": "INPUT"
+      },
+      {
+        "name": "ENCODER_PIN_B",
+        "latestValue": "17",
+        "subsystem": "INPUT"
+      },
+      {
+        "name": "ENCODER_PIN_OK",
+        "latestValue": "21",
+        "subsystem": "INPUT"
+      },
+      {
+        "name": "ENCODER_BACK_PIN",
+        "latestValue": "-1",
+        "subsystem": "INPUT"
+      },
+      {
+        "name": "ENCODER_NEXT_PIN",
+        "latestValue": "-1",
+        "subsystem": "INPUT"
+      },
+      {
+        "name": "PULLUP_LOGIC",
+        "latestValue": "true",
+        "subsystem": "INPUT"
+      },
+      {
+        "name": "ENCODER_IS_QUARTER_CYCLE",
+        "latestValue": "false",
+        "subsystem": "INPUT"
+      }
+    ],
+    "namingRecursive": false,
+    "useCppMain": true,
+    "saveLocation": "PROJECT_TO_CURRENT_WITH_GENERATED",
+    "usingSizedEEPROMStorage": true,
+    "eepromDefinition": "",
+    "authenticatorDefinition": "",
+    "projectIoExpanders": [
+      "deviceIO:"
+    ],
+    "menuInMenuCollection": {
+      "menuDefinitions": []
+    },
+    "packageNamespace": "",
+    "appIsModular": false,
+    "listOfEmbeddedForms": []
+  },
+  "stringLists": [
+    {
+      "id": 25,
+      "listItems": [
+        "Ford Focus",
+        "Ford Escort",
+        "Ford Smax",
+        "Ford Fiesta",
+        "Ford Focus RS",
+        "Ford Escort RS",
+        "Escort Cosworth"
+      ]
+    }
+  ]
+}
