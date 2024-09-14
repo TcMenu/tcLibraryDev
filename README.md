@@ -14,6 +14,20 @@ Although mainly aimed at developers of tcMenu organisation and people building w
 4. Clone `AdafruitGFXNativePort` into the `mbed_lib` directory 
 5. Set up either `platformio.ini` with the right parameters for your board, or configure Cmake and import the `cmakeProject` directory into an IDE.
 
+## Required libraries in `cmakeProject/lib`
+
+* https://github.com/TcMenu/TaskManagerIO
+* https://github.com/TcMenu/tcMenuLib
+* https://github.com/TcMenu/IoAbstraction
+* https://github.com/TcMenu/tcUnicodeHelper
+* https://github.com/TcMenu/SimpleCollections
+* https://github.com/TcMenu/LiquidCrystalIO
+* https://github.com/TcMenu/TcMenuLog
+
+## Required libraries in `cmakeProject/mbed_lib`
+
+* https://github.com/TcMenu/Adafruit-GFX-mbed-fork
+
 ## PicoSDK Cmake specific notes
 
 See the readme file in the cmakeProject directory.
