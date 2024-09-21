@@ -1,4 +1,4 @@
-# TcMenu and IoAbstraction development and test project
+# TcMenu and IoAbstraction IDE/toolchain project
 
 ## Summary
 
@@ -30,4 +30,4 @@ Although this is mainly aimed at users and developers of tcMenu based applicatio
 
 ## PicoSDK Cmake specific notes
 
-See the readme file in the [cmakeProject] directory.
+See the readme file in the [cmakeProject/README.md] directory.
