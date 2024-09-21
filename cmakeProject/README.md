@@ -39,6 +39,10 @@ Here are the links to the libraries needed in the lib directory
 * https://github.com/TcMenu/LiquidCrystalIO
 * https://github.com/TcMenu/TcMenuLog
 
+Recommended libraries in cmakeProject/mbed_lib
+
+* https://github.com/TcMenu/Adafruit-GFX-mbed-fork provides an Adafruit_GFX compatibile graphics library.
+
 ### Using in PicoSDK
 
 As per all other PicoSDK applications, you need to set up the environment variables and ensure these libraries are available in the path. For the initial MVP we assume you have a local to project copy of these libraries similar to how the examples folder works, we'll sort this out properly after 4.2 and mobile app is released.
