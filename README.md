@@ -30,4 +30,4 @@ Although this is mainly aimed at users and developers of tcMenu based applicatio
 
 ## PicoSDK Cmake specific notes
 
-See the readme file in the [cmakeProject/README.md] directory.
+The [getting started guide is here](/cmakeProject/README.md).
