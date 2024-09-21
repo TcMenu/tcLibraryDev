@@ -2,9 +2,9 @@
 
 ## Summary
 
-This project is a shell that can be used to work with and build our libraries for either platformIo or PicoSDK with CMake. You can choose to use this, or take inspiration from it and roll your own core project.
+This project is a shell that can be used to work with and build our libraries for either platformIo or PicoSDK with CMake. You can choose to use this, or take inspiration from it and roll your own core project. To use with platformIO simply open in a suitable IDE in the top level directory, it has a `platformio.ini`. To use with CMake, simply open the `cmakeProject` directory with a suitable IDE.
 
-Although mainly aimed at developers of tcMenu organisation and people building with our libraries, it also serves as a getting started point for you to develop source and build both libraries within an IDE using platformIO or PicoSDK Cmake.
+Although this is mainly aimed at users and developers of tcMenu based applications, it also serves as a getting started point for you to develop source and build both libraries within an IDE using platformIO or PicoSDK Cmake.
 
 ## To set up:
 
@@ -30,4 +30,4 @@ Although mainly aimed at developers of tcMenu organisation and people building w
 
 ## PicoSDK Cmake specific notes
 
-See the readme file in the cmakeProject directory.
+See the readme file in the [cmakeProject] directory.
