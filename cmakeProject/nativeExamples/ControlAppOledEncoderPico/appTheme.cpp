@@ -3,7 +3,6 @@
 
 #include <graphics/TcThemeBuilder.h>
 #include "generated/ControlAppOledEncoderPico_menu.h"
-#include <Fonts/OpenSansRegular8pt.h>
 
 // Direct width=20, height=20, size=60
 const uint8_t directBitmapOn[] PROGMEM = {
@@ -37,31 +36,7 @@ const uint8_t speakerBitmapOff[] PROGMEM = {
 
 void setupTheme() {
 
-    color_t defaultItemPaletteMono[] = {WHITE, BLACK, WHITE, WHITE};
-    TcThemeBuilder themeBuilder(renderer);
-    themeBuilder.withSelectedColors(0, 1)
-        .dimensionsFromRenderer()
-        .withRenderingSettings(BaseGraphicalRenderer::TITLE_FIRST_ROW, false)
-        .enablingTcUnicode()
-        .withItemPadding(MenuPadding(1))
-        .withTitlePadding(MenuPadding(1))
-        .withStandardLowResCursorIcons()
-        .withPalette(defaultItemPaletteMono)
-        .withTcUnicodeFont(OpenSansRegular8pt)
-        .withSpacing(2);
-
-    themeBuilder.defaultItemProperties()
-        .withJustification(tcgfx::GridPosition::JUSTIFY_TITLE_LEFT_VALUE_RIGHT)
-        .apply();
-
-    themeBuilder.defaultActionProperties()
-            .withJustification(tcgfx::GridPosition::JUSTIFY_TITLE_LEFT_VALUE_RIGHT)
-            .apply();
-
-    themeBuilder.defaultTitleProperties()
-            .withBorder(MenuBorder(0, 0, 2, 0))
-            .withJustification(tcgfx::GridPosition::JUSTIFY_CENTER_NO_VALUE)
-            .apply();
+   TcThemeBuilder themeBuilder(renderer);
 
     themeBuilder.menuItemOverride(menuDirect)
             .onRowCol(3, 1, 2)

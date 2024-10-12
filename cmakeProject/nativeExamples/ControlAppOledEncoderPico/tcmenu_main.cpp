@@ -37,6 +37,7 @@ void setup() {
     stdio_init_all();
 
     setupMenu();
+
     setupTheme();
 
     setTitlePressedCallback([](int) {

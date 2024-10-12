@@ -445,7 +445,7 @@
     "lastRemoteUuids": [
       "DFE97583-1897-4F87-BEFA-10CB72C43F0E"
     ],
-    "lastThemeUuid": "b186c809-d9ef-4ca8-9d4b-e4780a041ccc",
+    "lastThemeUuid": "8D9B49C7-FD28-4533-9B00-21A4184BB0C9",
     "applicationUUID": "3acc6301-dadd-4730-b142-9541180d2aa8",
     "applicationName": "PicoSDK Oled",
     "lastProperties": [
@@ -563,6 +563,36 @@
         "name": "ENCODER_IS_QUARTER_CYCLE",
         "latestValue": "false",
         "subsystem": "INPUT"
+      },
+      {
+        "name": "ITEM_FONT",
+        "latestValue": "ada:OpenSansRegular7pt,0",
+        "subsystem": "THEME"
+      },
+      {
+        "name": "TITLE_FONT",
+        "latestValue": "ada:OpenSansRegular7pt,0",
+        "subsystem": "THEME"
+      },
+      {
+        "name": "TITLE_HEADER_PADDING",
+        "latestValue": "2",
+        "subsystem": "THEME"
+      },
+      {
+        "name": "TITLE_TO_ITEM_SPACING",
+        "latestValue": "2",
+        "subsystem": "THEME"
+      },
+      {
+        "name": "TITLE_SHOW_MODE",
+        "latestValue": "TITLE_FIRST_ROW",
+        "subsystem": "THEME"
+      },
+      {
+        "name": "USE_TC_UNICODE",
+        "latestValue": "true",
+        "subsystem": "THEME"
       }
     ],
     "namingRecursive": false,
@@ -578,8 +608,7 @@
       "menuDefinitions": []
     },
     "packageNamespace": "",
-    "appIsModular": false,
-    "listOfEmbeddedForms": []
+    "appIsModular": false
   },
   "stringLists": [
     {

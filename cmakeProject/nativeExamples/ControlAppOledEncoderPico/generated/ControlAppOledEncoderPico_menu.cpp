@@ -8,10 +8,12 @@
     use elsewhere.
  */
 
-// Generated for PicoSDK CMake by TcMenu 4.3.0-SNAPSHOT on 2024-05-27T09:37:52.926525800Z.
+// Generated for PicoSDK CMake by TcMenu 4.3.1 on 2024-10-05T14:43:02.812258100Z.
 
 #include <tcMenu.h>
 #include "ControlAppOledEncoderPico_menu.h"
+#include "../ThemeMonoBorderedBuilder.h"
+#include <Fonts/OpenSansRegular7pt.h>
 
 // Global variable declarations
 const  ConnectorLocalInfo applicationInfo = { "PicoSDK Oled", "3acc6301-dadd-4730-b142-9541180d2aa8" };
@@ -122,5 +124,6 @@ void setupMenu() {
     switches.init(internalDigitalIo(), SWITCHES_POLL_KEYS_ONLY, true);
     menuMgr.initForEncoder(&renderer, &menuVolume, 16, 17, 21);
     remoteServer.addConnection(&stdioConnection);
+    installMonoBorderTitleTheme(renderer, MenuFontDef(&OpenSansRegular7pt, 0), MenuFontDef(&OpenSansRegular7pt, 0), true, BaseGraphicalRenderer::TITLE_FIRST_ROW, true);
 }
 
