@@ -9,14 +9,8 @@ set(CMAKE_CXX_STANDARD 17)
 
 pico_sdk_init()
 
-add_subdirectory(lib/TcMenuLog/cmake)
-add_subdirectory(lib/SimpleCollections/cmake)
-add_subdirectory(lib/TaskManagerIO/cmake)
-add_subdirectory(lib/IoAbstraction/cmake)
-add_subdirectory(lib/tcMenu/cmake)
-add_subdirectory(lib/tcUnicodeHelper/cmake)
-add_subdirectory(lib/LiquidCrystalIO/cmake)
-add_subdirectory(mbed_lib/Adafruit-GFX-mbed-fork/cmake)
+include(libraries.cmake)
+includeLibraries()
 
 IF(NOT DEFINED "ENV{TC_CMAKE_EXCLUDE_EXAMPLES}")
     add_subdirectory(nativeExamples/UsingCollections)
