@@ -301,3 +301,4 @@ vs-readme.txt
 **/.pio
 .development
 cmake-build-*
+build

@@ -1,6 +1,7 @@
 ## Pico SDK build via CMake
 
-Use this directory to build using CMake for PicoSDK. You simply point a cmake compatible IDE at this directory and it should be able to load the project structure. Disclaimer only tried with CLion.
+Use this directory to build using CMake for PicoSDK. You simply point a cmake compatible IDE at this directory and it should be able to load the project structure. Disclaimer only tried with CLion and VSCode with the
+pico plugin and the cmake plugins respectivly.
 
 To use you'll need to set the following variables.
 
@@ -14,7 +15,7 @@ This build is Apache license. Consult each library for their license.
 
 ## Using our libraries in Arduino and PlatformIO
 
-Use the top level platformio.ini file for that purpose.
+Use the top level `platformio.ini` file for that purpose. 
 
 ## Working with Native tool chains in production
 
@@ -23,9 +24,10 @@ _Commercial users: Before asking any questions in the tcMenu discussion board ab
 We can support this toolchain on RP2040 PicoSDK, ESP-IDF, STM32Cube, Atmel AVR and SAMD. Please the the above link for more information.
 
 Environment variables needed for PicoSDK:
-
+    ```
     PICO_SDK_PATH=<your picosdk path>
     PICO_TOOLCHAIN_PATH=<path of arm toolchain>
+    ```
 
 ## How to use these libraries
 
@@ -38,14 +40,11 @@ Here are the links to the libraries needed in the lib directory
 * https://github.com/TcMenu/SimpleCollections
 * https://github.com/TcMenu/LiquidCrystalIO
 * https://github.com/TcMenu/TcMenuLog
-
-Recommended libraries in cmakeProject/mbed_lib
-
 * https://github.com/TcMenu/Adafruit-GFX-mbed-fork provides an Adafruit_GFX compatibile graphics library.
 
 ### Using in PicoSDK
 
-As per all other PicoSDK applications, you need to set up the environment variables and ensure these libraries are available in the path. For the initial MVP we assume you have a local to project copy of these libraries similar to how the examples folder works, we'll sort this out properly after 4.2 and mobile app is released.
+As per all other PicoSDK applications, you need to set up the environment variables and ensure these libraries are available in the path.
 
 # Current state of play for direct pico-sdk / outside Arduino use
 
@@ -66,8 +65,26 @@ As per all other PicoSDK applications, you need to set up the environment variab
 
 ## To Test
 
-* Check that AT24 EEPROMs are working properly.
-* The copy script and setup of the libraries.
+* Copy libraries.cmake to your project
+* Add the following to your `CMakeLists.txt` after `pico_sdk_init()`
+    ```
+    include(libraries.cmake)
+    includeLibraries()
+    ```
+* Add the following to your `CMakeLists.txt` in the `target_link_libraries`
+    ```
+    tcMenu
+    IoAbstraction
+    TaskManagerIO
+    tcUnicodeHelper
+    TcMenuLog
+    SimpleCollections
+    AdafruitGFXNativePort
+    ```
+    Leave `AdafruitGFXNativePort` out if not needed.
+* Build.
+* The libraries will be in `build/_deps`.
+
 
 ## Todo short term
 
