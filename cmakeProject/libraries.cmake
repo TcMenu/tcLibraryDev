@@ -13,8 +13,8 @@ include(FetchContent)
 # SimpleCollections
 
 
-SET(TCMENU_BASE_GIT_REPO "https://github.com/mwinters-stuff")
-# SET(TCMENU_BASE_GIT_REPO "https://github.com/TcMenu/tcMenuLib.git")
+#SET(TCMENU_BASE_GIT_REPO "https://github.com/mwinters-stuff")
+SET(TCMENU_BASE_GIT_REPO "https://github.com/TcMenu/")
 
 # Fetch the TcMenu git repo
 FetchContent_Declare(
