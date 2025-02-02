@@ -1,3 +1,5 @@
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+
 cmake_minimum_required(VERSION 3.26)
 
 include(pico_sdk_import.cmake)
@@ -23,3 +25,4 @@ IF(NOT DEFINED "ENV{TC_CMAKE_EXCLUDE_EXAMPLES}")
     add_subdirectory(nativeExamples/UsingMatrixKeyboard)
     add_subdirectory(nativeExamples/UnicodeHandlerTest)
 ENDIF ()
+
