@@ -11,10 +11,10 @@ include(FetchContent)
 # TcMenuLog
 # AdafruitGFXNativePort
 # SimpleCollections
+# LiquidCrystalIO
 
 
-#SET(TCMENU_BASE_GIT_REPO "https://github.com/mwinters-stuff")
-SET(TCMENU_BASE_GIT_REPO "https://github.com/TcMenu/")
+SET(TCMENU_BASE_GIT_REPO "https://github.com/TcMenu")
 
 # Fetch the TcMenu git repo
 FetchContent_Declare(
@@ -64,6 +64,14 @@ FetchContent_Declare(
     SOURCE_SUBDIR  cmake
 )
 
+# Fetch the LiquidCrystalIO git repo
+FetchContent_Declare(
+    LiquidCrystalIO
+    GIT_REPOSITORY ${TCMENU_BASE_GIT_REPO}/LiquidCrystalIO.git
+    GIT_TAG        main # Use a stable branch, tag, or commit hash
+    SOURCE_SUBDIR  cmake
+)
+
 # Fetch the SimpleCollections git repo
 FetchContent_Declare(
     SimpleCollections
@@ -72,6 +80,6 @@ FetchContent_Declare(
     SOURCE_SUBDIR  cmake
 )
 
-FetchContent_MakeAvailable(tcMenuLib IoAbstraction TaskManagerIO TcUnicodeHelper TcMenuLog AdafruitGFX SimpleCollections)
+FetchContent_MakeAvailable(tcMenuLib IoAbstraction TaskManagerIO TcUnicodeHelper TcMenuLog AdafruitGFX SimpleCollections LiquidCrystalIO)
 
 endfunction()
