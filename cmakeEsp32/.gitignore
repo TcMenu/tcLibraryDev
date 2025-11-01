@@ -1,0 +1,6 @@
+build/
+cmake-debug/
+components/
+managed_components/
+dependencies.lock
+.idea/
