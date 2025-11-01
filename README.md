@@ -6,7 +6,7 @@ This project is a shell that can be used to work with and build our libraries fo
 
 Although this is mainly aimed at users and developers of tcMenu based applications, it also serves as a getting started point for you to develop source and build both libraries within an IDE using platformIO or PicoSDK Cmake.
 
-## To set up:
+## Initial set up:
 
 1. Clone this repo
 2. Create a `lib` and `mbed_lib` directory under the `cmakeProject` directory (this makes it easy to host both options in one solution)
@@ -28,6 +28,14 @@ Although this is mainly aimed at users and developers of tcMenu based applicatio
 
 * https://github.com/TcMenu/Adafruit-GFX-mbed-fork
 
+## For use with platformIO
+
+Just import the platformio.ini into your IDE and build.
+
 ## PicoSDK Cmake specific notes
 
 The [getting started guide is here](/cmakeProject/README.md).
+
+## ESP32 IDF using CMake
+
+The [getting started guide is here](/cmakeEsp32/README.md).
