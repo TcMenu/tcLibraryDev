@@ -14,7 +14,9 @@ Although this is mainly aimed at users and developers of tcMenu based applicatio
 4. Clone `AdafruitGFXNativePort` into the `mbed_lib` directory 
 5. Set up either `platformio.ini` with the right parameters for your board, or configure Cmake and import the `cmakeProject` directory into an IDE.
 
-## Required libraries in `cmakeProject/lib`
+## Library Setup
+
+### Required libraries in `cmakeProject/lib`
 
 * https://github.com/TcMenu/TaskManagerIO
 * https://github.com/TcMenu/tcMenuLib
@@ -24,9 +26,27 @@ Although this is mainly aimed at users and developers of tcMenu based applicatio
 * https://github.com/TcMenu/LiquidCrystalIO
 * https://github.com/TcMenu/TcMenuLog
 
-## Required libraries in `cmakeProject/mbed_lib`
+### Required libraries in `cmakeProject/mbed_lib`
 
 * https://github.com/TcMenu/Adafruit-GFX-mbed-fork
+
+### Commands to execute in order to prepare
+
+From the `cmakeProject` directory
+
+    mkdir lib
+    cd lib
+    git clone https://github.com/TcMenu/TaskManagerIO.git
+    git clone https://github.com/TcMenu/IoAbstraction.git
+    git clone https://github.com/TcMenu/tcMenuLib.git tcMenu
+    git clone https://github.com/TcMenu/tcUnicodeHelper.git
+    git clone https://github.com/TcMenu/SimpleCollections.git
+    git clone https://github.com/TcMenu/LiquidCrystalIO.git
+    git clone https://github.com/TcMenu/TcMenuLog.git
+
+    cd ..
+    mkdir mbed_lib
+    git clone https://github.com/TcMenu/Adafruit-GFX-mbed-fork.git
 
 ## For use with platformIO
 
