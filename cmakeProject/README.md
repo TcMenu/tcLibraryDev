@@ -31,6 +31,8 @@ Environment variables needed for PicoSDK:
 
 ## How to use these libraries
 
+CMake Variable `USE_LOCAL_LIBRARIES` defines if you want to check out libraries manually into the `lib` directory (I.E. you want to manage the library repos yourself. If this is not set, they will be pulled automatically.
+
 Here are the links to the libraries needed in the lib directory
 
 * https://github.com/TcMenu/TaskManagerIO
@@ -41,6 +43,10 @@ Here are the links to the libraries needed in the lib directory
 * https://github.com/TcMenu/LiquidCrystalIO
 * https://github.com/TcMenu/TcMenuLog
 * https://github.com/TcMenu/Adafruit-GFX-mbed-fork provides an Adafruit_GFX compatibile graphics library.
+
+### Examples that are included
+
+There's quite a few examples included in the `nativeExamples` directory. These are included in the CMake project by default unless you specify `TC_CMAKE_EXCLUDE_EXAMPLES` to exclude them.
 
 ### Using in PicoSDK
 
