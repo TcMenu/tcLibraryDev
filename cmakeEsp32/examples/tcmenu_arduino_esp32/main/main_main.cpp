@@ -3,7 +3,7 @@
 * an ESP32S2 with I2C OLED and an encoder on pins 5,6,7.
 *
 * This sketch was built using TcMenu Designer UI. You can use round trip adjustments using that UI.
-* See https://tcmenu.github.io/documentation/arduino-libraries/tc-menu/
+* See https://www.thecoderscorner.com/products/arduino-libraries/tc-menu/
 */
 
 #include "main_menu.h"
