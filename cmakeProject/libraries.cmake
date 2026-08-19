@@ -16,7 +16,7 @@ function (includeLibraries)
         add_subdirectory(${CMAKE_SOURCE_DIR}/lib/tcUnicodeHelper/cmake TcUnicodeHelper)
         add_subdirectory(${CMAKE_SOURCE_DIR}/lib/LiquidCrystalIO/cmake LiquidCrystalIO)
 
-        add_subdirectory(${CMAKE_SOURCE_DIR}/mbed_libs/Adafruit-GFX-mbed-fork/cmake AdafruitGFX)
+        add_subdirectory(${CMAKE_SOURCE_DIR}/mbed_lib/Adafruit-GFX-mbed-fork/cmake AdafruitGFX)
     else()
         message(STATUS "Auto fetch TcLibs into _deps folder, to use local libs set: -DUSE_LOCAL_LIBRARIES=ON ")
 
