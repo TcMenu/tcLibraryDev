@@ -18,7 +18,7 @@ const char* strChannelEnumEntries[] = { "Phono", "CD", "Aux" };
 const char* strStateEnumEntries[] = { "Standby", "Warm Up", "Active", "Protect", "Overheat" };
 const char* strDialogActiveEnumEntries[] = { "Item 0", "Item 1" };
 const char* strEnableEnumEntries[] = { "Set 1", "Set 2" };
-const char* strFlashListListItems[] = {  };
+const char* strFlashListListItems[] = {  "Items1", "Items2" };
 
 void buildMenu(TcMenuBuilder& builder) {
     builder.usingDynamicEEPROMStorage()
@@ -53,7 +53,7 @@ void buildMenu(TcMenuBuilder& builder) {
             .boolItem(MENU_SET2_B_ID, "Set 2B", DONT_SAVE, NAMING_TRUE_FALSE, NoMenuFlags, false, nullptr)
             .endSub()
         .listItemRtCustom(MENU_LIST_CUSTOM_ID, "List Custom", 10, fnListCustomRtCall, NoMenuFlags, nullptr)
-        .listItemFlash(MENU_FLASH_LIST_ID, "Flash List", 7, strFlashListListItems, NoMenuFlags, nullptr);
+        .listItemFlash(MENU_FLASH_LIST_ID, "Flash List", 2, strFlashListListItems, NoMenuFlags, nullptr);
 }
 
 
@@ -142,10 +142,12 @@ void CALLBACK_FUNCTION onEnableChange(int id) {
 //  1. List Docs - https://www.thecoderscorner.com/products/arduino-libraries/tc-menu/menu-item-types/list-menu-item/
 //  2. ScrollChoice Docs - https://www.thecoderscorner.com/products/arduino-libraries/tc-menu/menu-item-types/scrollchoice-menu-item/
 int CALLBACK_FUNCTION fnListCustomRtCall(RuntimeMenuItem* item, uint8_t row, RenderFnMode mode, char* buffer, int bufferSize) {
-    switch(mode) {
-    default:
-        return defaultRtListCallback(item, row, mode, buffer, bufferSize);
+    if (row < LIST_PARENT_ITEM_POS && (mode == RENDERFN_NAME || mode == RENDERFN_VALUE)) {
+        buffer[0]=0;
+        fastltoa(buffer, row, 5, NOT_PADDED, bufferSize);
+        return true;
     }
+    return defaultRtListCallback(item, row, mode, buffer, bufferSize);
 }
 
 void CALLBACK_FUNCTION StatusAppeared(int id) {
