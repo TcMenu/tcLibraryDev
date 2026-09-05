@@ -5,12 +5,9 @@ set(CMAKE_C_STANDARD 11)
 set(CMAKE_CXX_STANDARD 17)
 
 add_executable(ControlAppOledEncoderPico
-        generated/ControlAppOledEncoderPico_menu.cpp
-        generated/tcMenuAdaFruitGfxMono.cpp
+        PicoSDKOled_menu.cpp
         tcmenu_main.cpp
         appTheme.cpp
-        generated/StdioTransport.h
-        generated/StdioTransport.cpp
 )
 
 pico_enable_stdio_usb(ControlAppOledEncoderPico 1)

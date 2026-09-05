@@ -2,7 +2,7 @@
 #define TCMENU_THEME_MONO_BORDER
 
 #include <graphics/TcThemeBuilder.h>
-#include "generated/ControlAppOledEncoderPico_menu.h"
+#include "PicoSDKOled_menu.h"
 
 // Direct width=20, height=20, size=60
 const uint8_t directBitmapOn[] PROGMEM = {
@@ -38,12 +38,12 @@ void setupTheme() {
 
    TcThemeBuilder themeBuilder(renderer);
 
-    themeBuilder.menuItemOverride(menuDirect)
+    themeBuilder.menuItemOverride(getMenuDirect())
             .onRowCol(3, 1, 2)
             .withImageXbmp(Coord(20, 20), directBitmapOff, directBitmapOn)
             .apply();
 
-    themeBuilder.menuItemOverride(menuMute)
+    themeBuilder.menuItemOverride(getMenuMute())
             .onRowCol(3, 2, 2)
             .withImageXbmp(Coord(20, 20), speakerBitmapOff, speakerBitmapOn)
             .apply();
