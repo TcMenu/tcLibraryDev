@@ -10,7 +10,6 @@ function (includeLibraries)
         # Use local libraries
         add_subdirectory(${CMAKE_SOURCE_DIR}/lib/TaskManagerIO/cmake TaskManagerIO)
         add_subdirectory(${CMAKE_SOURCE_DIR}/lib/IoAbstraction/cmake IoAbstraction)
-        add_subdirectory(${CMAKE_SOURCE_DIR}/lib/SimpleCollections/cmake SimpleCollections)
         add_subdirectory(${CMAKE_SOURCE_DIR}/lib/tcMenu/cmake tcMenuLib)
         add_subdirectory(${CMAKE_SOURCE_DIR}/lib/TcMenuLog/cmake TcMenuLog)
         add_subdirectory(${CMAKE_SOURCE_DIR}/lib/tcUnicodeHelper/cmake TcUnicodeHelper)
@@ -29,7 +28,6 @@ function (includeLibraries)
         # tcUnicodeHelper
         # TcMenuLog
         # AdafruitGFXNativePort
-        # SimpleCollections
         # LiquidCrystalIO
 
 
@@ -91,14 +89,6 @@ function (includeLibraries)
             SOURCE_SUBDIR  cmake
         )
 
-        # Fetch the SimpleCollections git repo
-        FetchContent_Declare(
-            SimpleCollections
-            GIT_REPOSITORY ${TCMENU_BASE_GIT_REPO}/SimpleCollections.git
-            GIT_TAG        main # Use a stable branch, tag, or commit hash
-            SOURCE_SUBDIR  cmake
-        )
-
-        FetchContent_MakeAvailable(tcMenuLib IoAbstraction TaskManagerIO TcUnicodeHelper TcMenuLog AdafruitGFX SimpleCollections LiquidCrystalIO)
+        FetchContent_MakeAvailable(tcMenuLib IoAbstraction TaskManagerIO TcUnicodeHelper TcMenuLog AdafruitGFX LiquidCrystalIO)
     endif ()
 endfunction()

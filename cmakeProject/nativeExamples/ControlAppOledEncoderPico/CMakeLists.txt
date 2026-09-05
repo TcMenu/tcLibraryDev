@@ -24,5 +24,5 @@ target_link_libraries(
         ControlAppOledEncoderPico
         pico_stdlib pico_sync hardware_i2c hardware_spi hardware_adc hardware_pwm
         pico_unique_id
-        SimpleCollections TaskManagerIO IoAbstraction tcMenu tcUnicodeHelper AdafruitGFXNativePort
+        TaskManagerIO IoAbstraction tcMenu tcUnicodeHelper AdafruitGFXNativePort
 )

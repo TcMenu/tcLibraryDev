@@ -15,7 +15,6 @@ include(libraries.cmake)
 includeLibraries()
 
 IF(NOT DEFINED "ENV{TC_CMAKE_EXCLUDE_EXAMPLES}")
-    add_subdirectory(nativeExamples/UsingCollections)
     add_subdirectory(nativeExamples/UsingTaskManager)
     add_subdirectory(nativeExamples/UsingIoAbstraction)
     add_subdirectory(nativeExamples/Using1602I2C)

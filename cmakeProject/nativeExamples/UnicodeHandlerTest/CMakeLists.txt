@@ -20,5 +20,5 @@ pico_add_extra_outputs(UnicodeHandlerTest)
 
 target_link_libraries(UnicodeHandlerTest
         pico_stdlib pico_sync hardware_i2c hardware_spi hardware_adc hardware_pwm
-        SimpleCollections TaskManagerIO IoAbstraction tcUnicodeHelper LiquidCrystalIO AdafruitGFXNativePort
+        TaskManagerIO IoAbstraction tcUnicodeHelper LiquidCrystalIO AdafruitGFXNativePort
 )

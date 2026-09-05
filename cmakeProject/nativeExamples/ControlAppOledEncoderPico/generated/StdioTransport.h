@@ -12,7 +12,7 @@ namespace tcremote {
     private:
         SCCircularBuffer inputBuffer;
     public:
-        explicit StdioTransport(int readBufferSize) : inputBuffer(readBufferSize), TagValueTransport(TVAL_UNBUFFERED) {}
+        explicit StdioTransport(int readBufferSize);
 
         void flush() override { stdio_flush(); }
 

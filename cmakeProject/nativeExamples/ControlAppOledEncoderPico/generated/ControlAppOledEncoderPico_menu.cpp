@@ -15,6 +15,8 @@
 #include "../ThemeMonoBorderedBuilder.h"
 #include <Fonts/OpenSansRegular7pt.h>
 
+#include "StateMachineEncoder.h"
+
 // Global variable declarations
 const  ConnectorLocalInfo applicationInfo = { "PicoSDK Oled", "3acc6301-dadd-4730-b142-9541180d2aa8" };
 TcMenuRemoteServer remoteServer(applicationInfo);
@@ -122,7 +124,16 @@ void setupMenu() {
     gfxDrawable.setGraphics(gfx);
     gfxDrawable.setFontHandler(gfx->getFontHandler());
     switches.init(internalDigitalIo(), SWITCHES_POLL_KEYS_ONLY, true);
-    menuMgr.initForEncoder(&renderer, &menuVolume, 16, 17, 21);
+    //menuMgr.initForEncoder(&renderer, &menuVolume, 16, 17, 21);
+    StateRotaryEncoderBuilder encBuild;
+    if (!encBuild.withEncoderPins(16, 17)
+        .withCallback([](const int value) {menuMgr.valueChanged(value); })
+        .interruptOnBothPins()
+        .build()) {
+        serlogF(SER_ERROR, "TcMenu setupMenu: Failed");
+    }
+    switches.onRelease(21, [](pinid_t /*key*/, const bool held) { menuMgr.onMenuSelect(held); });
+    menuMgr.initWithoutInput(&renderer, &menuVolume);
     remoteServer.addConnection(&stdioConnection);
     installMonoBorderTitleTheme(renderer, MenuFontDef(&OpenSansRegular7pt, 0), MenuFontDef(&OpenSansRegular7pt, 0), true, BaseGraphicalRenderer::TITLE_FIRST_ROW, true);
 }

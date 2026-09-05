@@ -10,7 +10,7 @@ Although this is mainly aimed at users and developers of tcMenu based applicatio
 
 1. Clone this repo
 2. Create a `lib` and `mbed_lib` directory under the `cmakeProject` directory (this makes it easy to host both options in one solution)
-3. Clone `IoAbstraction`, `LiquidCrystalIO`, `TaskManagerIO`, `tcMenu`, `SimpleCollections`, `TcMenuLog` and `tcUnicodeHelper` into the `lib` directory
+3. Clone `IoAbstraction`, `LiquidCrystalIO`, `TaskManagerIO`, `tcMenu`, `TcMenuLog` and `tcUnicodeHelper` into the `lib` directory
 4. Clone `AdafruitGFXNativePort` into the `mbed_lib` directory 
 5. Set up either `platformio.ini` with the right parameters for your board, or configure Cmake and import the `cmakeProject` directory into an IDE.
 
@@ -22,7 +22,6 @@ Although this is mainly aimed at users and developers of tcMenu based applicatio
 * https://github.com/TcMenu/tcMenuLib
 * https://github.com/TcMenu/IoAbstraction
 * https://github.com/TcMenu/tcUnicodeHelper
-* https://github.com/TcMenu/SimpleCollections
 * https://github.com/TcMenu/LiquidCrystalIO
 * https://github.com/TcMenu/TcMenuLog
 
@@ -40,7 +39,6 @@ From the `cmakeProject` directory
     git clone https://github.com/TcMenu/IoAbstraction.git
     git clone https://github.com/TcMenu/tcMenuLib.git tcMenu
     git clone https://github.com/TcMenu/tcUnicodeHelper.git
-    git clone https://github.com/TcMenu/SimpleCollections.git
     git clone https://github.com/TcMenu/LiquidCrystalIO.git
     git clone https://github.com/TcMenu/TcMenuLog.git
 

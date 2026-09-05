@@ -39,7 +39,6 @@ Here are the links to the libraries needed in the lib directory
 * https://github.com/TcMenu/tcMenuLib
 * https://github.com/TcMenu/IoAbstraction
 * https://github.com/TcMenu/tcUnicodeHelper
-* https://github.com/TcMenu/SimpleCollections
 * https://github.com/TcMenu/LiquidCrystalIO
 * https://github.com/TcMenu/TcMenuLog
 * https://github.com/TcMenu/Adafruit-GFX-mbed-fork provides an Adafruit_GFX compatibile graphics library.
@@ -60,7 +59,6 @@ As per all other PicoSDK applications, you need to set up the environment variab
 * Wire I2C interface with IoAbstraction for PicoSDK
 * SPI interface within IoAbstraction for PicoSDK
 * TaskManagerIO fully working with PicoSDK
-* SimpleCollections fully working with PicoSDK
 * SCCircular buffer tested with interrupts on PicoSDK.
 * Unicode helper library fully working with PicoSDK
 * Liquid Crystal including I2C backpack is working
@@ -84,7 +82,6 @@ As per all other PicoSDK applications, you need to set up the environment variab
     TaskManagerIO
     tcUnicodeHelper
     TcMenuLog
-    SimpleCollections
     AdafruitGFXNativePort
     ```
     Leave `AdafruitGFXNativePort` out if not needed.

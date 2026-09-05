@@ -21,5 +21,5 @@ target_link_libraries(
         ControlAppOledKeyboardWifi
         pico_stdlib pico_sync hardware_i2c hardware_spi hardware_adc hardware_pwm
         pico_cyw43_arch_lwip_poll pico_mbedtls pico_lwip_mbedtls pico_unique_id
-        SimpleCollections TaskManagerIO IoAbstraction tcMenu tcUnicodeHelper AdafruitGFXNativePort
+        TaskManagerIO IoAbstraction tcMenu tcUnicodeHelper AdafruitGFXNativePort
 )

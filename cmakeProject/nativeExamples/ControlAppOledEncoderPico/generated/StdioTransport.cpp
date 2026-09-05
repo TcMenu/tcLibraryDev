@@ -21,6 +21,9 @@ void StdioTransport::close() {
     currentField.fieldType = FVAL_PROCESSING_AWAITINGMSG;
 }
 
+StdioTransport::StdioTransport(int readBufferSize) : TagValueTransport(TVAL_UNBUFFERED), inputBuffer(readBufferSize){
+}
+
 int StdioTransport::writeChar(char data) {
     putchar_raw(data);
     return 1;
