@@ -52,9 +52,17 @@ From the `cmakeProject` directory
 
 Just import the platformio.ini into your IDE and build.
 
+## Unit testing
+
+The unit testing runs natively on Linux or macOS.
+
+This configuration switch in the top level `CMakeLists.txt` enable unit testing: `-DBUILD_NATIVE_TESTS=ON`
+
 ## PicoSDK Cmake specific notes
 
 The [getting started guide is here](/cmakeProject/README.md).
+
+Variable `USE_LOCAL_LIBRARIES` when `ON` will use only local libraries. 
 
 ## ESP32 IDF using CMake
 
