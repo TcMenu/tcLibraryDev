@@ -1,3 +1,5 @@
+[![Native C++ Tests](https://github.com/TcMenu/tcLibraryDev/actions/workflows/native-tests.yml/badge.svg)](https://github.com/TcMenu/tcLibraryDev/actions/workflows/native-tests.yml)
+
 # TcMenu and IoAbstraction IDE/toolchain project
 
 ## Summary
