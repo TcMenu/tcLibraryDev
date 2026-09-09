@@ -20,9 +20,7 @@ jobs:
     - name: Configure CMake
       # Assuming 'cmakeProject' is the subdirectory containing your root CMakeLists.txt
       run: >
-        cmake -S cmakeProject -B cmakeProject/build
-        -DBUILD_NATIVE_TESTS=ON
-        -DUSE_LOCAL_LIBRARIES=ON
+        cmake -S cmakeProject -B cmakeProject/build -DBUILD_NATIVE_TESTS=ON -DUSE_LOCAL_LIBRARIES=OFF
 
     - name: Build tests
       run: cmake --build cmakeProject/build --parallel 4
