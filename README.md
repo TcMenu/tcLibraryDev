@@ -18,6 +18,8 @@ Although this is mainly aimed at users and developers of tcMenu based applicatio
 
 ## Library Setup
 
+You have two options, you can either install the libraries as shown below, or you can set build `USE_LOCAL_LIBRARIES` to `OFF` and CMake will automatically check out the libraries below. 
+
 ### Required libraries in `cmakeProject/lib`
 
 * https://github.com/TcMenu/TaskManagerIO
