@@ -1,3 +1,5 @@
+[![Native C++ Tests](https://github.com/TcMenu/tcLibraryDev/actions/workflows/native-tests.yml/badge.svg)](https://github.com/TcMenu/tcLibraryDev/actions/workflows/native-tests.yml)
+
 ## Pico SDK build via CMake
 
 Use this directory to build using CMake for PicoSDK. You simply point a cmake compatible IDE at this directory and it should be able to load the project structure. Disclaimer only tried with CLion and VSCode with the
