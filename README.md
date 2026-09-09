@@ -18,6 +18,8 @@ Although this is mainly aimed at users and developers of tcMenu based applicatio
 
 ## Library Setup
 
+You have two options, you can either install the libraries as shown below, or you can set build `USE_LOCAL_LIBRARIES` to `OFF` and CMake will automatically check out the libraries below. 
+
 ### Required libraries in `cmakeProject/lib`
 
 * https://github.com/TcMenu/TaskManagerIO
@@ -52,9 +54,17 @@ From the `cmakeProject` directory
 
 Just import the platformio.ini into your IDE and build.
 
+## Unit testing
+
+The unit testing runs natively on Linux or macOS.
+
+This configuration switch in the top level `CMakeLists.txt` enable unit testing: `-DBUILD_NATIVE_TESTS=ON`
+
 ## PicoSDK Cmake specific notes
 
 The [getting started guide is here](/cmakeProject/README.md).
+
+Variable `USE_LOCAL_LIBRARIES` when `ON` will use only local libraries. 
 
 ## ESP32 IDF using CMake
 
