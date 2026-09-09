@@ -8,11 +8,11 @@ function (includeLibraries)
         message(STATUS "Using local library sources from lib/ directory")
 
         # Use local libraries
+        add_subdirectory(${CMAKE_SOURCE_DIR}/lib/TcMenuLog/cmake TcMenuLog)
         add_subdirectory(${CMAKE_SOURCE_DIR}/lib/TaskManagerIO/cmake TaskManagerIO)
         add_subdirectory(${CMAKE_SOURCE_DIR}/lib/IoAbstraction/cmake IoAbstraction)
-        add_subdirectory(${CMAKE_SOURCE_DIR}/lib/tcMenu/cmake tcMenuLib)
-        add_subdirectory(${CMAKE_SOURCE_DIR}/lib/TcMenuLog/cmake TcMenuLog)
         add_subdirectory(${CMAKE_SOURCE_DIR}/lib/tcUnicodeHelper/cmake TcUnicodeHelper)
+        add_subdirectory(${CMAKE_SOURCE_DIR}/lib/tcMenu/cmake tcMenuLib)
         add_subdirectory(${CMAKE_SOURCE_DIR}/lib/LiquidCrystalIO/cmake LiquidCrystalIO)
 
         add_subdirectory(${CMAKE_SOURCE_DIR}/mbed_lib/Adafruit-GFX-mbed-fork/cmake AdafruitGFX)

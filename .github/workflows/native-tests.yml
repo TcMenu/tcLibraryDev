@@ -1,0 +1,33 @@
+name: Native C++ Tests
+
+on:
+  push:
+    branches: [ "main", "master" ]
+  pull_request:
+    branches: [ "main", "master" ]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest # You can change this to macos-latest if you specifically need Apple clang
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      with:
+        # If the local libraries in the `lib/` folder are submodules, this ensures they are fetched
+        submodules: recursive 
+
+    - name: Configure CMake
+      # Assuming 'cmakeProject' is the subdirectory containing your root CMakeLists.txt
+      run: >
+        cmake -S cmakeProject -B cmakeProject/build
+        -DBUILD_NATIVE_TESTS=ON
+        -DUSE_LOCAL_LIBRARIES=ON
+
+    - name: Build tests
+      run: cmake --build cmakeProject/build --parallel 4
+
+    - name: Run tests
+      working-directory: cmakeProject/build
+      # ctest will automatically find and run the tests registered with add_test()
+      run: ctest --output-on-failure
