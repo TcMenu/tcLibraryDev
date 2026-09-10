@@ -4,21 +4,23 @@
 
 ## Summary
 
-This project is a shell that can be used to work with and build our libraries for either platformIo or PicoSDK with CMake. You can choose to use this, or take inspiration from it and roll your own core project. To use with platformIO simply open in a suitable IDE in the top level directory, it has a `platformio.ini`. To use with CMake, simply open the `cmakeProject` directory with a suitable IDE.
+## Summary
+
+This project is the developer start point to work with TcMenu in a professional environment, and it has four main modes of operation:
+
+1. **Local library development**, for those who prefer to have the library source local (often using PlatformIO).
+2. **Pico SDK for CMake** using local libraries. [README.md](cmakeProject/README.md)
+3. **Pico SDK for CMake** using auto-downloaded libraries. [README.md](cmakeProject/README.md)
+4. **ESP32 CMake SDK** based setup. [cmakeEsp32](cmakeEsp32/README.md)
+5. **STM32 Examples** require local libraries so do this first and then see https://github.com/TcMenu/stm32-examples for the rest.
+
+You can choose to use this shell directly, or take inspiration from it and roll your own core project. To use with PlatformIO simply open the top-level directory in a suitable IDE, as it has a `platformio.ini`. To use with CMake, simply open the `cmakeProject` or `cmakeEsp32` directory with a suitable IDE.
 
 Although this is mainly aimed at users and developers of tcMenu based applications, it also serves as a getting started point for you to develop source and build both libraries within an IDE using platformIO or PicoSDK Cmake.
 
-## Initial set up:
-
-1. Clone this repo
-2. Create a `lib` and `mbed_lib` directory under the `cmakeProject` directory (this makes it easy to host both options in one solution)
-3. Clone `IoAbstraction`, `LiquidCrystalIO`, `TaskManagerIO`, `tcMenu`, `TcMenuLog` and `tcUnicodeHelper` into the `lib` directory
-4. Clone `AdafruitGFXNativePort` into the `mbed_lib` directory 
-5. Set up either `platformio.ini` with the right parameters for your board, or configure Cmake and import the `cmakeProject` directory into an IDE.
-
 ## Library Setup
 
-You have two options, you can either install the libraries as shown below, or you can set build `USE_LOCAL_LIBRARIES` to `OFF` and CMake will automatically check out the libraries below. 
+NOTE: For PicoSDK, you have two options, you can either install the libraries as shown below, or you can set build `USE_LOCAL_LIBRARIES` to `OFF` and CMake will automatically check out the libraries below. 
 
 ### Required libraries in `cmakeProject/lib`
 
@@ -56,15 +58,16 @@ Just import the platformio.ini into your IDE and build.
 
 ## Unit testing
 
-The unit testing runs natively on Linux or macOS.
+The unit testing runs natively on the host platform. We've made an IoAbstraction platform for it that minimally mocks GPIO, I2C and SPI.
 
-This configuration switch in the top level `CMakeLists.txt` enable unit testing: `-DBUILD_NATIVE_TESTS=ON`
+To run the tests, in the top level `CMakeLists.txt` enable unit testing: `-DBUILD_NATIVE_TESTS=ON`. This the project to unit testing mode turning off other board specific code.
 
 ## PicoSDK Cmake specific notes
 
 The [getting started guide is here](/cmakeProject/README.md).
 
-Variable `USE_LOCAL_LIBRARIES` when `ON` will use only local libraries. 
+When the local libraries flag is on `-DUSE_LOCAL_LIBRARIES=ON` it requires libraries be installed as above. 
+When the local libraries flag is off `-DUSE_LOCAL_LIBRARIES=OFF` CMake will download the libraries.
 
 ## ESP32 IDF using CMake
 
