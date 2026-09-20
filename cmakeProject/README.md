@@ -47,29 +47,14 @@ Here are the links to the libraries needed in the lib directory
 
 ### Examples that are included
 
-There's quite a few examples included in the `nativeExamples` directory. These are included in the CMake project by default unless you specify `TC_CMAKE_EXCLUDE_EXAMPLES` to exclude them.
+There are quite a few examples included in the `nativeExamples` directory. These are included in the CMake project by default unless you specify `TC_CMAKE_EXCLUDE_EXAMPLES` to exclude them.
+
+* We also support [STM32Cube directly with CMake](https://github.com/tcmenu/stm32-examples) too
+* Also see the [ESP32-IDF examples area](https://github.com/TcMenu/tcLibraryDev/blob/main/cmakeEsp32/)
 
 ### Using in PicoSDK
 
 As per all other PicoSDK applications, you need to set up the environment variables and ensure these libraries are available in the path.
-
-# Current state of play for direct pico-sdk / outside Arduino use
-
-## Working
-
-* IoAbstraction rotary encoders and switches without interrupts
-* Wire I2C interface with IoAbstraction for PicoSDK
-* SPI interface within IoAbstraction for PicoSDK
-* TaskManagerIO fully working with PicoSDK
-* SCCircular buffer tested with interrupts on PicoSDK.
-* Unicode helper library fully working with PicoSDK
-* Liquid Crystal including I2C backpack is working
-* SPI Wrapper is working
-* Adafruit Fork I2C OLED working with PicoSDK
-* SPI Adafruit fork test with PicoSDK
-* PWM and Analog Input are working properly.
-
-## To Test
 
 * Copy libraries.cmake to your project
 * Add the following to your `CMakeLists.txt` after `pico_sdk_init()`
@@ -86,16 +71,19 @@ As per all other PicoSDK applications, you need to set up the environment variab
     TcMenuLog
     AdafruitGFXNativePort
     ```
-    Leave `AdafruitGFXNativePort` out if not needed.
 * Build.
 * The libraries will be in `build/_deps`.
 
+Here are my CMake options that I tend to use:
 
-## Todo short term
+```
+Environment variables:
+PICO_SDK_PATH=$HOME\pico\pico-sdk;PICO_TOOLCHAIN_PATH=$HOME\pico\arm-gnu-toolchain-12.3.rel1-mingw-w64-i686-arm-none-eabi
 
-* Test rotary encoders and switches with interrupts not working on PicoSDK
-* Test rotary encoders/switches/LCD on other than 8574 IoExpanders and with interrupts.
-* USB remote support for PicoSDK
-* WiFi/LwIP remote support for PicoSDK
-* Adafruit Fork I2C/SPI retest with mbed.
-* Better way to create fonts
+Command options:
+-DPICOTOOL_FORCE_FETCH_FROM_GIT=ON
+```
+
+## Running the unit tests
+
+Add this to your build flags: `-DBUILD_NATIVE_TESTS=ON`, it turns off embedded toolchains and enables native tests.

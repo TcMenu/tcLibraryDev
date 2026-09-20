@@ -29,6 +29,11 @@ Example where `TC_LIBRARY_DEV_PATH` is the path to the tcMenu library dev projec
     generateCmake.py -l ${TC_LIBRARY_DEV_PATH}/cmakeProject/lib -o ./components
     generateCmake.py -l ${TC_LIBRARY_DEV_PATH}/cmakeProject/mbed_libs -o ./components
 
+## Windows specific build
+
+If you are using Windows, sourcing the ESP-IDF environment then you can add the following script to your target toolchain
+instead of the expressif one, it logs the output to the console to help get started. [clion-esp-exports.bat]
+
 ## Preparing the project to build
 
 Now setup the project to build with the ESP-IDF build system. Follow the regular ESP-IDF instructions for building
@@ -81,3 +86,17 @@ Below is structure of the project folder with the Arduino libraries.
 │   └── main.cpp
 └── README.md                  This is the file you are currently reading
 ```
+
+## Extra Notes
+
+If you need a clean rebuild, delete the cmake output and build folders, then run:
+
+```
+idf.py fullclean
+idf.py set-target esp32s2
+idf.py reconfigure
+```
+
+Once finished, reload the cmake project.
+
+To build from CLI: `idf.py build`
