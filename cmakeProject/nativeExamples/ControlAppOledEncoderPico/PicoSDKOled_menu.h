@@ -181,7 +181,7 @@ using namespace tcremote;
 #include <tcMenu.h>
 
 
-#include <tcMenuBuilder.h>
+#include <TcMenuBuilder.h>
 #include "Adafruit_SSD1306.h"
 #include <StateMachineEncoder.h>
 #include <RemoteConnector.h>
