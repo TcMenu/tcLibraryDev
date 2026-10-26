@@ -6,13 +6,14 @@
 
 ## Summary
 
-This project is the developer start point to work with TcMenu in a professional environment, and it has four main modes of operation:
+This project is the developer start point to work with TcMenu in a professional environment, below are the ways that you can use it:
 
-1. **Local library development**, for those who prefer to have the library source local (often using PlatformIO).
-2. **Pico SDK for CMake** using local libraries. [README.md](cmakeProject/README.md)
-3. **Pico SDK for CMake** using auto-downloaded libraries. [README.md](cmakeProject/README.md)
-4. **ESP32 CMake SDK** based setup. [cmakeEsp32](cmakeEsp32/README.md)
-5. **STM32 Examples** require local libraries so do this first and then see https://github.com/TcMenu/stm32-examples for the rest.
+1. **Local library development**, for those who prefer to have the library source local.
+2. **PlatformIO project** the root directory contains a PlatformIO starter project for local libraries.
+3. **Pico SDK for CMake** using local libraries. [README.md](cmakeProject/README.md)
+4. **Pico SDK for CMake** using auto-downloaded libraries. [README.md](cmakeProject/README.md)
+5. **ESP32 IDF5 for CMake** with scripts and two examples. [cmakeEsp32](cmakeEsp32/README.md)
+6. **STM32Cube Examples** require local libraries so do this first and then see https://github.com/TcMenu/stm32-examples for the rest.
 
 You can choose to use this shell directly, or take inspiration from it and roll your own core project. To use with PlatformIO simply open the top-level directory in a suitable IDE, as it has a `platformio.ini`. To use with CMake, simply open the `cmakeProject` or `cmakeEsp32` directory with a suitable IDE.
 
@@ -72,3 +73,8 @@ When the local libraries flag is off `-DUSE_LOCAL_LIBRARIES=OFF` CMake will down
 ## ESP32 IDF using CMake
 
 The [getting started guide is here](/cmakeEsp32/README.md).
+
+## STM32Cube with CMake
+
+* Follow the steps above to check out the libraries locally
+* Clone the examples repository which includes two examples and instructions to get started: https://github.com/TcMenu/stm32-examples
