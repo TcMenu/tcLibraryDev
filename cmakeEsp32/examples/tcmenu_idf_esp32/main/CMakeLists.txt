@@ -8,5 +8,5 @@ idf_component_register(
         esp_timer
         log
         driver
-        TaskManagerIO
+        TaskManagerIO IoAbstraction
 )
