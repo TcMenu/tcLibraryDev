@@ -1,12 +1,19 @@
 [![Native C++ Tests](https://github.com/TcMenu/tcLibraryDev/actions/workflows/native-tests.yml/badge.svg)](https://github.com/TcMenu/tcLibraryDev/actions/workflows/native-tests.yml)
 
-# TcMenu and IoAbstraction IDE/toolchain project
+# TcMenu Native Development Environment
+
+This repository provides example projects, build support and integration for using tcMenu and related libraries outside the Arduino ecosystem. Supported environments include:
+
+- PlatformIO
+- Raspberry Pi Pico SDK
+- ESP-IDF
+- STM32Cube
+- Arduino (almost all boards should work properly)
+- mbed 6.0 (archived but probably workable for most cases)
 
 ## Summary
 
-## Summary
-
-This project is the developer start point to work with TcMenu in a professional environment, below are the ways that you can use it:
+The goal is to make tcMenu libraries usable from native vendor toolchains while maintaining source compatibility with Arduino. Below are the ways you can get TcMenu working quickly in a professional environment:
 
 1. **Local library development**, for those who prefer to have the library source local.
 2. **PlatformIO project** the root directory contains a PlatformIO starter project for local libraries.
