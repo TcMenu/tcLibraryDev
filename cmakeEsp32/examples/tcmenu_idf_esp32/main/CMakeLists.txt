@@ -1,6 +1,6 @@
 idf_component_register(
     SRCS
-        "main_main.cpp"
+        "main_main.cpp" "ESP32NativeProject_main.cpp" "ESP32NativeProject_menu.cpp"
     INCLUDE_DIRS
         "."
     REQUIRES

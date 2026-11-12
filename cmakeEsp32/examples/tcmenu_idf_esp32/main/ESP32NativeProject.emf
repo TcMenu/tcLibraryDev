@@ -1,0 +1,391 @@
+{
+  "version": "1.00",
+  "projectName": "ESP 32 Native Project",
+  "author": "dave",
+  "items": [
+    {
+      "parentId": 0,
+      "type": "analogItem",
+      "defaultValue": "0",
+      "item": {
+        "maxValue": 255,
+        "offset": 0,
+        "divisor": 1,
+        "unitName": "tms",
+        "step": 0,
+        "name": "Count",
+        "variableName": "",
+        "id": 4,
+        "eepromAddress": -1,
+        "functionName": "",
+        "readOnly": true,
+        "localOnly": false,
+        "visible": true,
+        "staticDataInRAM": false
+      }
+    },
+    {
+      "parentId": 0,
+      "type": "actionMenu",
+      "item": {
+        "name": "Add",
+        "variableName": "",
+        "id": 5,
+        "eepromAddress": -1,
+        "functionName": "tcAdded_onAddToCount",
+        "readOnly": false,
+        "localOnly": false,
+        "visible": true,
+        "staticDataInRAM": false
+      }
+    },
+    {
+      "parentId": 0,
+      "type": "subMenu",
+      "item": {
+        "secured": false,
+        "name": "Value Items",
+        "variableName": "",
+        "id": 6,
+        "eepromAddress": -1,
+        "functionName": "",
+        "readOnly": false,
+        "localOnly": false,
+        "visible": true,
+        "staticDataInRAM": false
+      }
+    },
+    {
+      "parentId": 6,
+      "type": "analogItem",
+      "defaultValue": "0",
+      "item": {
+        "maxValue": 1000,
+        "offset": 0,
+        "divisor": 10,
+        "unitName": "",
+        "step": 0,
+        "name": "Tenths",
+        "variableName": "",
+        "id": 7,
+        "eepromAddress": 32,
+        "functionName": "onTenthsChanged",
+        "readOnly": false,
+        "localOnly": false,
+        "visible": true,
+        "staticDataInRAM": false
+      }
+    },
+    {
+      "parentId": 6,
+      "type": "enumItem",
+      "defaultValue": "0",
+      "item": {
+        "enumEntries": [
+          "Spanner",
+          "Hammer",
+          "Router"
+        ],
+        "name": "Choices",
+        "variableName": "",
+        "id": 8,
+        "eepromAddress": 32,
+        "functionName": "onChoicesChanged",
+        "readOnly": false,
+        "localOnly": false,
+        "visible": true,
+        "staticDataInRAM": false
+      }
+    },
+    {
+      "parentId": 6,
+      "type": "boolItem",
+      "defaultValue": "false",
+      "item": {
+        "naming": "YES_NO",
+        "name": "Yes Or No",
+        "variableName": "",
+        "id": 9,
+        "eepromAddress": 32,
+        "functionName": "",
+        "readOnly": false,
+        "localOnly": false,
+        "visible": true,
+        "staticDataInRAM": false
+      }
+    },
+    {
+      "parentId": 0,
+      "type": "subMenu",
+      "item": {
+        "secured": false,
+        "name": "Runtime Items",
+        "variableName": "",
+        "id": 10,
+        "eepromAddress": -1,
+        "functionName": "",
+        "readOnly": false,
+        "localOnly": false,
+        "visible": true,
+        "staticDataInRAM": false
+      }
+    },
+    {
+      "parentId": 10,
+      "type": "largeNumItem",
+      "defaultValue": "0",
+      "item": {
+        "digitsAllowed": 6,
+        "decimalPlaces": 3,
+        "negativeAllowed": false,
+        "name": "Large +ve",
+        "variableName": "largeVe",
+        "id": 11,
+        "eepromAddress": 32,
+        "functionName": "",
+        "readOnly": false,
+        "localOnly": false,
+        "visible": true,
+        "staticDataInRAM": false
+      }
+    },
+    {
+      "parentId": 10,
+      "type": "textItem",
+      "defaultValue": "",
+      "item": {
+        "textLength": 10,
+        "itemType": "PLAIN_TEXT",
+        "name": "Text",
+        "variableName": "",
+        "id": 12,
+        "eepromAddress": 32,
+        "functionName": "",
+        "readOnly": false,
+        "localOnly": false,
+        "visible": true,
+        "staticDataInRAM": false
+      }
+    },
+    {
+      "parentId": 10,
+      "type": "textItem",
+      "defaultValue": "",
+      "item": {
+        "textLength": 10,
+        "itemType": "TIME_24H",
+        "name": "Time Item",
+        "variableName": "",
+        "id": 13,
+        "eepromAddress": -1,
+        "functionName": "",
+        "readOnly": false,
+        "localOnly": false,
+        "visible": true,
+        "staticDataInRAM": false
+      }
+    },
+    {
+      "parentId": 10,
+      "type": "textItem",
+      "defaultValue": "",
+      "item": {
+        "textLength": 10,
+        "itemType": "GREGORIAN_DATE",
+        "name": "Date Item",
+        "variableName": "",
+        "id": 14,
+        "eepromAddress": -1,
+        "functionName": "",
+        "readOnly": false,
+        "localOnly": false,
+        "visible": true,
+        "staticDataInRAM": false
+      }
+    }
+  ],
+  "codeOptions": {
+    "embeddedPlatform": "PICO_SDK",
+    "lastDisplayUuid": "61159C5B-F23A-4050-980F-A8FE114E2965",
+    "lastInputUuid": "89cd7f70-0457-4884-97c2-0db904ccb0ba",
+    "lastRemoteUuids": [
+      "2c101fec-1f7d-4ff3-8d2b-992ad41e7fcb"
+    ],
+    "lastThemeUuid": "396ED4DF-AD7B-4951-A848-A9E5838A549B",
+    "applicationUUID": "0b6c50de-e53f-4d62-b5c1-d04411891bc2",
+    "applicationName": "ESP32 Native Menu",
+    "lastProperties": [
+      {
+        "name": "NAT_CORE_SEPARATOR_DISP",
+        "latestValue": "",
+        "subsystem": "DISPLAY"
+      },
+      {
+        "name": "DISPLAY_TYPE",
+        "latestValue": "SSD_1306",
+        "subsystem": "DISPLAY"
+      },
+      {
+        "name": "BUS_TYPE",
+        "latestValue": "I2C",
+        "subsystem": "DISPLAY"
+      },
+      {
+        "name": "SERIAL_BUS",
+        "latestValue": "wireRef",
+        "subsystem": "DISPLAY"
+      },
+      {
+        "name": "DISPLAY_WIDTH",
+        "latestValue": "128",
+        "subsystem": "DISPLAY"
+      },
+      {
+        "name": "DISPLAY_HEIGHT",
+        "latestValue": "128",
+        "subsystem": "DISPLAY"
+      },
+      {
+        "name": "DISPLAY_VARIABLE",
+        "latestValue": "gfx",
+        "subsystem": "DISPLAY"
+      },
+      {
+        "name": "NAT_PINS_SEPARATOR_DISP",
+        "latestValue": "",
+        "subsystem": "DISPLAY"
+      },
+      {
+        "name": "DISPLAY_I2C_ADDR",
+        "latestValue": "60",
+        "subsystem": "DISPLAY"
+      },
+      {
+        "name": "DISPLAY_RESET_PIN",
+        "latestValue": "-1",
+        "subsystem": "DISPLAY"
+      },
+      {
+        "name": "DISPLAY_CS_PIN",
+        "latestValue": "-1",
+        "subsystem": "DISPLAY"
+      },
+      {
+        "name": "DISPLAY_DC_PIN",
+        "latestValue": "-1",
+        "subsystem": "DISPLAY"
+      },
+      {
+        "name": "NAT_STD_SEPARATOR_DISP",
+        "latestValue": "",
+        "subsystem": "DISPLAY"
+      },
+      {
+        "name": "DISPLAY_ROTATION",
+        "latestValue": "0",
+        "subsystem": "DISPLAY"
+      },
+      {
+        "name": "UPDATES_PER_SEC",
+        "latestValue": "2",
+        "subsystem": "DISPLAY"
+      },
+      {
+        "name": "TEXT_ENCODING",
+        "latestValue": "ENCMODE_UTF8",
+        "subsystem": "DISPLAY"
+      },
+      {
+        "name": "SPACING_SEPARATOR_DISP",
+        "latestValue": "",
+        "subsystem": "THEME"
+      },
+      {
+        "name": "TITLE_PADDING",
+        "latestValue": "2",
+        "subsystem": "THEME"
+      },
+      {
+        "name": "ITEM_PADDING",
+        "latestValue": "2",
+        "subsystem": "THEME"
+      },
+      {
+        "name": "TITLE_TO_ITEM_SPACING",
+        "latestValue": "2",
+        "subsystem": "THEME"
+      },
+      {
+        "name": "TITLE_SHOW_MODE",
+        "latestValue": "TITLE_ALWAYS",
+        "subsystem": "THEME"
+      },
+      {
+        "name": "THEME_ACTION_ROUND_CORNER",
+        "latestValue": "0",
+        "subsystem": "THEME"
+      },
+      {
+        "name": "THEME_TITLE_ROUND_CORNER",
+        "latestValue": "2",
+        "subsystem": "THEME"
+      },
+      {
+        "name": "THEME_INVERSE_SELECT",
+        "latestValue": "true",
+        "subsystem": "THEME"
+      },
+      {
+        "name": "DISPLAY_WHITE_TXT_BLACK_BG",
+        "latestValue": "true",
+        "subsystem": "THEME"
+      },
+      {
+        "name": "FONT_SEPARATOR_DISP",
+        "latestValue": "",
+        "subsystem": "THEME"
+      },
+      {
+        "name": "THEME_ITEM_FONT",
+        "latestValue": "tca:OpenSansRegular7pt,0",
+        "subsystem": "THEME"
+      },
+      {
+        "name": "THEME_TITLE_FONT",
+        "latestValue": "tca:OpenSansRegular8pt,0",
+        "subsystem": "THEME"
+      },
+      {
+        "name": "USE_TC_UNICODE",
+        "latestValue": "true",
+        "subsystem": "THEME"
+      },
+      {
+        "name": "NAT_PLATFORM_SEPARATOR_DISP",
+        "latestValue": "",
+        "subsystem": "DISPLAY"
+      },
+      {
+        "name": "DISPLAY_PLATFORM",
+        "latestValue": "CMAKE",
+        "subsystem": "DISPLAY"
+      }
+    ],
+    "namingRecursive": false,
+    "useCppMain": true,
+    "saveLocation": "ONE_SINGLE_FILE_MENU_MAIN",
+    "useDynamicMenus": true,
+    "usingSizedEEPROMStorage": false,
+    "eepromSaveMode": "DYNAMIC_WRITE_BY_ID",
+    "eepromDefinition": "",
+    "authenticatorDefinition": "",
+    "projectIoExpanders": [
+      "deviceIO:"
+    ],
+    "menuInMenuCollection": {
+      "menuDefinitions": []
+    }
+  },
+  "stringLists": [],
+  "projectFileName": "ESP32NativeProject"
+}
