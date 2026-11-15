@@ -37,7 +37,7 @@
 #include <BaseRenderers.h>
 #include <tcUnicodeHelper.h>
 #include <Adafruit_GFX.h>
-#include <oled/AdafruitSSD1306I2c.h>
+#include <oled/TcAdaSH1107SPI.h>
 #include <graphics/GfxMenuConfig.h>
 #include <BaseDialog.h>
 #include <graphics/BaseGraphicalRenderer.h>
@@ -143,7 +143,8 @@ protected:
 
 
 #include <TcMenuBuilder.h>
-#include "oled/AdafruitSSD1306I2c.h"
+#include "oled/TcAdaSH1107SPI.h"
+#include <StateMachineEncoder.h>
 #include <tcUnicodeHelper.h>
 #include <EditableLargeNumberMenuItem.h>
 #include <IoAbstraction.h>
@@ -151,8 +152,8 @@ protected:
 
 // variables we declare that you may need to access
 extern const PROGMEM ConnectorLocalInfo applicationInfo;
-extern WireType wireRef;
-extern AdafruitSSD1306I2c* gfx;
+extern spi_device_handle_t spiBus;
+extern TcAdaSH1107SPI* gfx;
 extern AdafruitDrawable gfxDrawable;
 extern GraphicsDeviceRenderer renderer;
 extern const UnicodeFont OpenSansRegular7pt[];

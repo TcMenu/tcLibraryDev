@@ -205,9 +205,9 @@
     }
   ],
   "codeOptions": {
-    "embeddedPlatform": "PICO_SDK",
+    "embeddedPlatform": "ESP32_IDF_CMAKE",
     "lastDisplayUuid": "61159C5B-F23A-4050-980F-A8FE114E2965",
-    "lastInputUuid": "89cd7f70-0457-4884-97c2-0db904ccb0ba",
+    "lastInputUuid": "6c2be130-bf74-42ad-834c-ac2edd7b3f90",
     "lastRemoteUuids": [
       "2c101fec-1f7d-4ff3-8d2b-992ad41e7fcb"
     ],
@@ -222,17 +222,17 @@
       },
       {
         "name": "DISPLAY_TYPE",
-        "latestValue": "SSD_1306",
+        "latestValue": "SH_1107",
         "subsystem": "DISPLAY"
       },
       {
         "name": "BUS_TYPE",
-        "latestValue": "I2C",
+        "latestValue": "SPI",
         "subsystem": "DISPLAY"
       },
       {
         "name": "SERIAL_BUS",
-        "latestValue": "wireRef",
+        "latestValue": "spiBus",
         "subsystem": "DISPLAY"
       },
       {
@@ -267,12 +267,12 @@
       },
       {
         "name": "DISPLAY_CS_PIN",
-        "latestValue": "-1",
+        "latestValue": "6",
         "subsystem": "DISPLAY"
       },
       {
         "name": "DISPLAY_DC_PIN",
-        "latestValue": "-1",
+        "latestValue": "7",
         "subsystem": "DISPLAY"
       },
       {
@@ -287,7 +287,7 @@
       },
       {
         "name": "UPDATES_PER_SEC",
-        "latestValue": "2",
+        "latestValue": "5",
         "subsystem": "DISPLAY"
       },
       {
@@ -368,6 +368,61 @@
       {
         "name": "DISPLAY_PLATFORM",
         "latestValue": "CMAKE",
+        "subsystem": "DISPLAY"
+      },
+      {
+        "name": "SEPARATOR_INTENC_MAIN_SEPARATOR_DISP",
+        "latestValue": "",
+        "subsystem": "INPUT"
+      },
+      {
+        "name": "ENCODER_APIN",
+        "latestValue": "5",
+        "subsystem": "INPUT"
+      },
+      {
+        "name": "ENCODER_BPIN",
+        "latestValue": "4",
+        "subsystem": "INPUT"
+      },
+      {
+        "name": "ENCODER_SEL_PIN",
+        "latestValue": "3",
+        "subsystem": "INPUT"
+      },
+      {
+        "name": "ENCODER_INT_PIN",
+        "latestValue": "-1",
+        "subsystem": "INPUT"
+      },
+      {
+        "name": "ENCODER_INT_MODE",
+        "latestValue": "BOTH",
+        "subsystem": "INPUT"
+      },
+      {
+        "name": "ENCODER_TYPE",
+        "latestValue": "FULL_CYCLE",
+        "subsystem": "INPUT"
+      },
+      {
+        "name": "SEPARATOR_SWITCHES_INTENC_SEPARATOR_DISP",
+        "latestValue": "",
+        "subsystem": "INPUT"
+      },
+      {
+        "name": "SWITCHES_INIT_MODE",
+        "latestValue": "INTERRUPT",
+        "subsystem": "INPUT"
+      },
+      {
+        "name": "SWITCHES_BUTTON_PULLUP",
+        "latestValue": "true",
+        "subsystem": "INPUT"
+      },
+      {
+        "name": "DISPLAY_SPI_FREQ",
+        "latestValue": "10000000",
         "subsystem": "DISPLAY"
       }
     ],
