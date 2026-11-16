@@ -1,89 +1,124 @@
+# tcMenu CMake Embedded & Native Build Framework
+
 [![Native C++ Tests](https://github.com/TcMenu/tcLibraryDev/actions/workflows/native-tests.yml/badge.svg)](https://github.com/TcMenu/tcLibraryDev/actions/workflows/native-tests.yml)
 
-## Pico SDK build via CMake
+This directory provides CMake integration for building **tcMenu** and **The Coders Corner** libraries across embedded targets (**Raspberry Pi Pico / RP2040**, **ESP32 / ESP-IDF**, **STM32Cube**) and native host platforms.
 
-Use this directory to build using CMake for PicoSDK. You simply point a cmake compatible IDE at this directory and it should be able to load the project structure. Disclaimer only tried with CLion and VSCode with the
-pico plugin and the cmake plugins respectivly.
+---
 
-To use you'll need to set the following variables.
+### Supported Platforms & Frameworks
 
-## The Coders Corner libraries
+* **Raspberry Pi Pico (PicoSDK)**: Native CMake build with examples located in `nativeExamples/`.
+* **ESP32 (ESP-IDF)**: See the [ESP32 CMake & ESP-IDF directory](https://github.com/TcMenu/tcLibraryDev/blob/main/cmakeEsp32/).
+* **STM32Cube**: See our [STM32 CMake Examples](https://github.com/tcmenu/stm32-examples).
+* **Arduino / PlatformIO**: Use the top-level `platformio.ini` file in the repository root.
+* **Native Host (x86_64 / ARM64)**: Unit testing with Unity (`-DBUILD_NATIVE_TESTS=ON`).
 
-TcMenu organisation made this library available for you to use. It takes significant effort to keep all our libraries current and working on a wide range of boards. Please consider making at least a one off donation via the sponsor button if you find it useful. In forks, please keep text to here intact.
+---
 
-## License
+### Prerequisites (PicoSDK)
 
-This build is Apache license. Consult each library for their license. 
+Configure the required environment variables for your toolchain before running CMake:
 
-## Using our libraries in Arduino and PlatformIO
+**Linux / macOS:**
+```bash
+export PICO_SDK_PATH=/path/to/pico-sdk
+export PICO_TOOLCHAIN_PATH=/path/to/arm-none-eabi-toolchain
+```
 
-Use the top level `platformio.ini` file for that purpose. 
+**Windows (PowerShell):**
+```powershell
+$env:PICO_SDK_PATH = "C:\pico\pico-sdk"
+$env:PICO_TOOLCHAIN_PATH = "C:\pico\arm-gnu-toolchain"
+```
 
-## Working with Native tool chains in production
+---
 
-_Commercial users: Before asking any questions in the tcMenu discussion board about this project, please make a donation commensurate with your companies funds_. This configuration will not be maintained unless we get enough donations.
+### Quick Start: Building for Raspberry Pi Pico
 
-We can support this toolchain on RP2040 PicoSDK, ESP-IDF, STM32Cube, Atmel AVR and SAMD. Please the the above link for more information.
+#### 1. Automatic Dependency Fetching Mode
+To automatically download all library dependencies via CMake `FetchContent`, set `USE_LOCAL_LIBRARIES=OFF`:
 
-Environment variables needed for PicoSDK:
-    ```
-    PICO_SDK_PATH=<your picosdk path>
-    PICO_TOOLCHAIN_PATH=<path of arm toolchain>
-    ```
+```bash
+# Configure and build
+cmake -B build -DUSE_LOCAL_LIBRARIES=OFF
+cmake --build build
+```
 
-## How to use these libraries
+Optional: To force fetching `picotool` from git during build, add `-DPICOTOOL_FORCE_FETCH_FROM_GIT=ON`.
 
-CMake Variable `USE_LOCAL_LIBRARIES` defines if you want to check out libraries manually into the `lib` directory (I.E. you want to manage the library repos yourself. If this is not set, they will be pulled automatically.
+#### 2. Local Libraries Mode
+If you prefer managing local repository clones in `lib/` and `mbed_lib/` (the default mode `USE_LOCAL_LIBRARIES=ON`):
 
-Here are the links to the libraries needed in the lib directory
+```bash
+cmake -B build -DUSE_LOCAL_LIBRARIES=ON
+cmake --build build
+```
 
-* https://github.com/TcMenu/TaskManagerIO
-* https://github.com/TcMenu/tcMenuLib
-* https://github.com/TcMenu/IoAbstraction
-* https://github.com/TcMenu/tcUnicodeHelper
-* https://github.com/TcMenu/LiquidCrystalIO
-* https://github.com/TcMenu/TcMenuLog
-* https://github.com/TcMenu/Adafruit-GFX-mbed-fork provides an Adafruit_GFX compatibile graphics library.
+Required repositories for local mode:
+* [TaskManagerIO](https://github.com/TcMenu/TaskManagerIO) (clone into `lib/TaskManagerIO`)
+* [tcMenuLib](https://github.com/TcMenu/tcMenuLib) (clone into `lib/tcMenu`)
+* [IoAbstraction](https://github.com/TcMenu/IoAbstraction) (clone into `lib/IoAbstraction`)
+* [tcUnicodeHelper](https://github.com/TcMenu/tcUnicodeHelper) (clone into `lib/tcUnicodeHelper`)
+* [LiquidCrystalIO](https://github.com/TcMenu/LiquidCrystalIO) (clone into `lib/LiquidCrystalIO`)
+* [TcMenuLog](https://github.com/TcMenu/TcMenuLog) (clone into `lib/TcMenuLog`)
+* [Adafruit-GFX-mbed-fork](https://github.com/TcMenu/Adafruit-GFX-mbed-fork) (clone into `mbed_lib/Adafruit-GFX-mbed-fork`)
 
-### Examples that are included
+---
 
-There are quite a few examples included in the `nativeExamples` directory. These are included in the CMake project by default unless you specify `TC_CMAKE_EXCLUDE_EXAMPLES` to exclude them.
+### Included Examples
 
-* We also support [STM32Cube directly with CMake](https://github.com/tcmenu/stm32-examples) too
-* Also see the [ESP32-IDF examples area](https://github.com/TcMenu/tcLibraryDev/blob/main/cmakeEsp32/)
+Examples in `nativeExamples/` are built automatically unless `-DTC_CMAKE_EXCLUDE_EXAMPLES=ON` is specified.
 
-### Using in PicoSDK
+| Example | Target | Description / Peripherals |
+| :--- | :--- | :--- |
+| `UsingTaskManager` | Pico / RP2040 | TaskManagerIO scheduling and coroutines via Serial |
+| `UsingIoAbstraction` | Pico / RP2040 | Multi-IO abstraction and digital pin management |
+| `Using1602I2C` | Pico / RP2040 | LiquidCrystal 16x2 display over I2C |
+| `UsingSSD1306Oled` | Pico / RP2040 | SSD1306 OLED display using Adafruit-GFX |
+| `UsingMatrixKeyboard` | Pico / RP2040 | Matrix keypad input using IoAbstraction |
+| `UnicodeHandlerTest` | Pico / RP2040 | tcUnicodeHelper UTF-8 rendering verification |
+| `ControlAppOledEncoderPico` | Pico / RP2040 | Complete tcMenu application: SSD1306 OLED + Rotary Encoder |
+| `ControlAppOledKeyboardWifi` | Pico W / RP2040 | Complete tcMenu application: SSD1306 OLED + Keypad + Wi-Fi |
 
-As per all other PicoSDK applications, you need to set up the environment variables and ensure these libraries are available in the path.
+---
 
-* Copy libraries.cmake to your project
-* Add the following to your `CMakeLists.txt` after `pico_sdk_init()`
-    ```
-    include(libraries.cmake)
-    includeLibraries()
-    ```
-* Add the following to your `CMakeLists.txt` in the `target_link_libraries`
-    ```
+### Integrating tcMenu into Your Own PicoSDK Project
+
+1. Copy `libraries.cmake` into your project directory.
+2. In your `CMakeLists.txt`, include and invoke `includeLibraries()` after `pico_sdk_init()`:
+
+```cmake
+include(libraries.cmake)
+includeLibraries()
+
+target_link_libraries(your_target_name
     tcMenu
     IoAbstraction
     TaskManagerIO
     tcUnicodeHelper
     TcMenuLog
     AdafruitGFXNativePort
-    ```
-* Build.
-* The libraries will be in `build/_deps`.
-
-Here are my CMake options that I tend to use:
-
-```
-Environment variables:
-PICO_SDK_PATH=$HOME\pico\pico-sdk;PICO_TOOLCHAIN_PATH=$HOME\pico\arm-gnu-toolchain-12.3.rel1-mingw-w64-i686-arm-none-eabi
-
-Command options:
--DPICOTOOL_FORCE_FETCH_FROM_GIT=ON
+    LiquidCrystalIO
+)
 ```
 
-## Running the unit tests
+---
 
-Add this to your build flags: `-DBUILD_NATIVE_TESTS=ON`, it turns off embedded toolchains and enables native tests.
+### Running Native Unit Tests
+
+You can build and run unit tests on your host machine without embedded hardware:
+
+```bash
+cmake -B build-tests -DBUILD_NATIVE_TESTS=ON
+cmake --build build-tests
+ctest --test-dir build-tests --output-on-failure
+```
+
+---
+
+### Sponsorship & Support
+
+TcMenu and its accompanying libraries are open-source under the Apache-2.0 license. Developing and maintaining these libraries across diverse hardware targets requires substantial effort. 
+
+If you use these libraries in commercial products or need dedicated support, please consider sponsoring development via GitHub Sponsors or contacting [The Coders Corner](https://www.thecoderscorner.com).
